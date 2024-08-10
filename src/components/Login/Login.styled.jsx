@@ -1,4 +1,4 @@
-//Registration.styled.jsx;
+//Login.styled.jsx
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -52,7 +52,7 @@ export const InputContainer = styled.div`
   flex-direction: column;
   gap: 8px;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 72px;
 `;
 
 export const Input = styled.input`
@@ -76,15 +76,15 @@ export const Input = styled.input`
 
 export const EyeIcon = styled.img`
   position: absolute;
-  top: 38%;
+  top: 31%;
   right: 57px;
-  transform: translateY(-60%);
+  transform: translateY(-35%);
   width: 18px;
   height: 18px;
   cursor: pointer;
 `;
 
-export const RegBlock = styled.div`
+export const LoginBlock = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -93,7 +93,7 @@ export const RegBlock = styled.div`
   width: 100%;
 `;
 
-export const RegistrationButton = styled.button`
+export const LoginButton = styled.button`
   width: 140px;
   height: 42px;
   background-color: var(--white);
