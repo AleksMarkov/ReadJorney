@@ -4,13 +4,12 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from 'components/App';
 import './index.css';
-// import GlobalStyles from "GlobalStyles";
-// import "./assets/theme/themeHome.css";
+import GlobalStyles from 'GlobalStyles';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter basename="/ReadJorney">
-      {/* <GlobalStyles /> */}
+      <GlobalStyles />
       <App />
     </BrowserRouter>
   </React.StrictMode>
