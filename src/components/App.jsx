@@ -1,16 +1,25 @@
-export const App = () => {
+//App.jsx
+import React, { Suspense, lazy } from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import Loader from './Loader/Loader';
+
+// const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
+// const TeachersPage = lazy(() => import('../pages/TeachersPage/TeachersPage'));
+// const FavoritesPage = lazy(() => import('../pages/FavoritesPage/FavoritesPage'));
+
+document.documentElement.setAttribute('data-theme', 'yellow');
+
+const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        {/* <Route path="/" element={<HomePage />} />
+        <Route path="/teachers" element={<TeachersPage />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="*" element={<Navigate to="/" />} /> */}
+      </Routes>
+    </Suspense>
   );
 };
+
+export default App;
