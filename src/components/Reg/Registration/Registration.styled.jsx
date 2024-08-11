@@ -162,3 +162,12 @@ export const PhoneImage = styled.img`
   background-color: var(--lightblack);
   border-radius: 44px 44px 0px 0px;
 `;
+
+export const ErrorMessage = styled.p`
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: -0.02em;
+  color: #e90516;
+  text-align: left;
+`;

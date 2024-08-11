@@ -1,6 +1,9 @@
 //RegistrationTablet.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import registrationSchema from '../../../schemas/registrationSchema';
 import {
   Container,
   TitleContainer,
@@ -13,6 +16,7 @@ import {
   RegBlock,
   RegistrationButton,
   LinkText,
+  ErrorMessage,
 } from './RegistrationTablet.styled.jsx';
 import logotablet from '../../../assets/svg/Logotablet.svg';
 import eyeOff from '../../../assets/svg/eyeOff.svg';
@@ -21,9 +25,21 @@ import eyeOn from '../../../assets/svg/eyeOn.svg';
 const RegistrationTablet = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(registrationSchema),
+  });
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const onSubmit = data => {
+    // Отправка данных на бэкэнд
+    console.log(data);
   };
 
   return (
@@ -33,31 +49,41 @@ const RegistrationTablet = () => {
         <Title>
           Expand your mind, reading <span>a book</span>
         </Title>
-        <InputContainer>
-          <InputWrapper>
-            <Input type="text" placeholder="Name:" />
-          </InputWrapper>
-          <InputWrapper>
-            <Input type="email" placeholder="Mail:" />
-          </InputWrapper>
-          <InputWrapper>
-            <Input
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Password:"
-            />
-            <EyeIcon
-              src={showPassword ? eyeOn : eyeOff}
-              alt="Toggle Password Visibility"
-              onClick={togglePasswordVisibility}
-            />
-          </InputWrapper>
-        </InputContainer>
-        <RegBlock>
-          <RegistrationButton>Registration</RegistrationButton>
-          <LinkText onClick={() => navigate('/login')}>
-            Already have an account?
-          </LinkText>
-        </RegBlock>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <InputContainer>
+            <InputWrapper>
+              <Input type="text" placeholder="Name:" {...register('name')} />
+            </InputWrapper>
+            {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
+            <InputWrapper>
+              <Input type="email" placeholder="Mail:" {...register('email')} />
+            </InputWrapper>
+            {errors.email && (
+              <ErrorMessage>{errors.email.message}</ErrorMessage>
+            )}
+            <InputWrapper>
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Password:"
+                {...register('password')}
+              />
+              <EyeIcon
+                src={showPassword ? eyeOn : eyeOff}
+                alt="Toggle Password Visibility"
+                onClick={togglePasswordVisibility}
+              />
+            </InputWrapper>
+            {errors.password && (
+              <ErrorMessage>{errors.password.message}</ErrorMessage>
+            )}
+          </InputContainer>
+          <RegBlock>
+            <RegistrationButton type="submit">Registration</RegistrationButton>
+            <LinkText onClick={() => navigate('/login')}>
+              Already have an account?
+            </LinkText>
+          </RegBlock>
+        </form>
       </TitleContainer>
     </Container>
   );
