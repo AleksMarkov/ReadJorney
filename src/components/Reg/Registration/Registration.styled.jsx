@@ -1,46 +1,46 @@
-//RegistrationDesk.styled.jsx
+//Registration.styled.jsx;
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  //   position: relative;
-  width: 1280px;
-  height: 800px;
+  position: relative;
+  width: 375px;
+  height: 812px;
   background-color: var(--black);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  padding: 32px;
-  gap: 16px;
+  padding: 20px;
+  gap: 10px;
 `;
 
 export const TitleContainer = styled.div`
-  width: 600px;
-  height: 736px;
+  width: 335px;
+  height: 411px;
   display: flex;
   flex-direction: column;
   border-radius: 30px;
   background-color: var(--lightblack);
   align-items: left;
-  padding: 40px 64px;
+  padding: 20px;
 `;
 
 export const MobLogo = styled.img`
-  width: 182px;
+  width: 42px;
   height: 17px;
   color: var(--white);
-  margin-bottom: 107px;
+  margin-bottom: 40px;
 `;
 
 export const Title = styled.h1`
-  width: 444px;
-  height: 180px;
-  font-size: 64px;
+  width: 295px;
+  height: 64px;
+  font-size: 32px;
   font-weight: 700;
-  line-height: 60px;
+  line-height: 32px;
   letter-spacing: 0.02em;
   text-align: left;
   color: var(--white);
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 
   span {
     color: rgba(227, 227, 227, 0.3);
@@ -50,9 +50,16 @@ export const Title = styled.h1`
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 8px;
   width: 100%;
-  margin-bottom: 82px;
+  margin-bottom: 20px;
+`;
+
+export const InputWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
 `;
 
 export const Input = styled.input`
@@ -60,14 +67,9 @@ export const Input = styled.input`
   height: 44px;
   background-color: var(--darkgray);
   border-radius: 12px;
-  padding: 14px;
+  padding: 14px 50px 14px 14px; /* Добавляем padding справа для EyeIcon */
   color: var(--white);
   border: none;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  letter-spacing: -0.02em;
-  text-align: left;
 
   &::placeholder {
     color: var(--lightgray);
@@ -81,11 +83,9 @@ export const Input = styled.input`
 
 export const EyeIcon = styled.img`
   position: absolute;
-  top: 82%;
-  right: 585px;
-  transform: translateY(-65%);
-  width: 20px;
-  height: 20px;
+  right: 15px; /* 15 пикселей от правого края поля */
+  width: 18px;
+  height: 18px;
   cursor: pointer;
 `;
 
@@ -94,19 +94,19 @@ export const RegBlock = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 14px;
   width: 100%;
 `;
 
 export const RegistrationButton = styled.button`
-  width: 225px;
-  height: 52px;
+  width: 140px;
+  height: 42px;
   background-color: var(--white);
   border-radius: 30px;
-  padding: 16px;
-  font-size: 20px;
+  padding: 12px;
+  font-size: 14px;
   font-weight: 700;
-  line-height: 20px;
+  line-height: 18px;
   letter-spacing: 0.02em;
   text-align: center;
   color: var(--lightblack);
@@ -122,9 +122,9 @@ export const RegistrationButton = styled.button`
 `;
 
 export const LinkText = styled.p`
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 14px;
   letter-spacing: -0.02em;
   text-align: right;
   text-decoration: underline;
@@ -137,21 +137,23 @@ export const LinkText = styled.p`
 `;
 
 export const PhoneMockup = styled.div`
-  width: 600px;
-  height: 736px;
+  width: 335px;
+  height: 351px;
   display: flex;
   flex-direction: column;
   border-radius: 30px;
   background-color: var(--lightblack);
-  padding: 40px 0px;
+  padding: 20px 20px 0px 20px;
 
   justify-content: start;
   align-items: center;
 `;
 
 export const PhoneImage = styled.img`
-  width: 405px;
-  height: 720px;
+  width: 251px;
+  height: 351px;
   opacity: 0px;
   object-fit: cover;
+  background-color: var(--lightblack);
+  border-radius: 44px 44px 0px 0px;
 `;

@@ -6,6 +6,7 @@ import {
   MobLogo,
   Title,
   InputContainer,
+  InputWrapper,
   Input,
   EyeIcon,
   RegBlock,
@@ -14,10 +15,10 @@ import {
   PhoneMockup,
   PhoneImage,
 } from './RegistrationDesk.styled.jsx';
-import logotablet from '../../assets/svg/Logotablet.svg';
-import eyeOff from '../../assets/svg/eyeOff.svg';
-import eyeOn from '../../assets/svg/eyeOn.svg';
-import phoneMockup from '../../assets/images/phoneMockup.png';
+import logotablet from '../../../assets/svg/Logotablet.svg';
+import eyeOff from '../../../assets/svg/eyeOff.svg';
+import eyeOn from '../../../assets/svg/eyeOn.svg';
+import iphonedesk from '../../../assets/images/iPhone.jpg';
 
 const RegistrationDesk = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,17 +35,23 @@ const RegistrationDesk = () => {
           Expand your mind, reading <span>a book</span>
         </Title>
         <InputContainer>
-          <Input type="text" placeholder="Name:" />
-          <Input type="email" placeholder="Mail:" />
-          <Input
-            type={showPassword ? 'text' : 'password'}
-            placeholder="Password:"
-          />
-          <EyeIcon
-            src={showPassword ? eyeOn : eyeOff}
-            alt="Toggle Password Visibility"
-            onClick={togglePasswordVisibility}
-          />
+          <InputWrapper>
+            <Input type="text" placeholder="Name:" />
+          </InputWrapper>
+          <InputWrapper>
+            <Input type="email" placeholder="Mail:" />
+          </InputWrapper>
+          <InputWrapper>
+            <Input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password:"
+            />
+            <EyeIcon
+              src={showPassword ? eyeOn : eyeOff}
+              alt="Toggle Password Visibility"
+              onClick={togglePasswordVisibility}
+            />
+          </InputWrapper>
         </InputContainer>
         <RegBlock>
           <RegistrationButton>Registration</RegistrationButton>
@@ -52,7 +59,7 @@ const RegistrationDesk = () => {
         </RegBlock>
       </TitleContainer>
       <PhoneMockup>
-        <PhoneImage src={phoneMockup} alt="Phone Mockup" />
+        <PhoneImage src={iphonedesk} alt="Phone Mockup" />
       </PhoneMockup>
     </Container>
   );

@@ -6,6 +6,7 @@ import {
   MobLogo,
   Title,
   InputContainer,
+  InputWrapper,
   Input,
   EyeIcon,
   RegBlock,
@@ -14,10 +15,10 @@ import {
   PhoneMockup,
   PhoneImage,
 } from './Registration.styled.jsx';
-import logomob from '../../assets/svg/Logomobile.svg';
-import eyeOff from '../../assets/svg/eyeOff.svg';
-import eyeOn from '../../assets/svg/eyeOn.svg';
-import phoneMockup from '../../assets/images/phoneMockup.png';
+import logomob from '../../../assets/svg/Logomobile.svg';
+import eyeOff from '../../../assets/svg/eyeOff.svg';
+import eyeOn from '../../../assets/svg/eyeOn.svg';
+import phoneMockup from '../../../assets/images/phoneMockup.jpg';
 
 const Registration = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -35,17 +36,23 @@ const Registration = () => {
           reading <span>a book</span>
         </Title>
         <InputContainer>
-          <Input type="text" placeholder="Name:" />
-          <Input type="email" placeholder="Mail:" />
-          <Input
-            type={showPassword ? 'text' : 'password'}
-            placeholder="Password:"
-          />
-          <EyeIcon
-            src={showPassword ? eyeOn : eyeOff}
-            alt="Toggle Password Visibility"
-            onClick={togglePasswordVisibility}
-          />
+          <InputWrapper>
+            <Input type="text" placeholder="Name:" />
+          </InputWrapper>
+          <InputWrapper>
+            <Input type="email" placeholder="Mail:" />
+          </InputWrapper>
+          <InputWrapper>
+            <Input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password:"
+            />
+            <EyeIcon
+              src={showPassword ? eyeOn : eyeOff}
+              alt="Toggle Password Visibility"
+              onClick={togglePasswordVisibility}
+            />
+          </InputWrapper>
         </InputContainer>
         <RegBlock>
           <RegistrationButton>Registration</RegistrationButton>
