@@ -1,18 +1,20 @@
-//RegistrationTablet.styled.jsx
+//LoginDesk.styled.jsx
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 768px;
-  height: 1024px;
+  width: 1280px;
+  height: 800px;
   background-color: var(--black);
   display: flex;
+  flex-direction: row;
   align-items: center;
   padding: 32px;
+  gap: 16px;
 `;
 
 export const TitleContainer = styled.div`
-  width: 704px;
-  height: 960px;
+  width: 600px;
+  height: 736px;
   display: flex;
   flex-direction: column;
   border-radius: 30px;
@@ -21,11 +23,11 @@ export const TitleContainer = styled.div`
   padding: 40px 64px;
 `;
 
-export const MobLogo = styled.img`
+export const Logo = styled.img`
   width: 182px;
   height: 17px;
   color: var(--white);
-  margin-bottom: 157px;
+  margin-bottom: 107px;
 `;
 
 export const Title = styled.h1`
@@ -48,7 +50,7 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 14px;
-  width: 472px;
+  width: 100%;
   margin-bottom: 82px;
 `;
 
@@ -61,15 +63,15 @@ export const InputWrapper = styled.div`
 
 export const Input = styled.input`
   width: 100%;
-  height: 50px;
+  height: 44px;
   background-color: var(--darkgray);
   border-radius: 12px;
   padding: 14px 50px 14px 14px;
   color: var(--white);
   border: none;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 16px;
   letter-spacing: -0.02em;
   text-align: left;
 
@@ -89,10 +91,9 @@ export const EyeIcon = styled.img`
   width: 20px;
   height: 20px;
   cursor: pointer;
-  z-index: 10;
 `;
 
-export const RegBlock = styled.div`
+export const LoginBlock = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -101,7 +102,7 @@ export const RegBlock = styled.div`
   width: 100%;
 `;
 
-export const RegistrationButton = styled.button`
+export const LoginButton = styled.button`
   width: 225px;
   height: 52px;
   background-color: var(--white);
@@ -137,4 +138,25 @@ export const LinkText = styled.p`
   &:hover {
     color: var(--white);
   }
+`;
+
+export const PhoneMockup = styled.div`
+  width: 600px;
+  height: 736px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+  background-color: var(--lightblack);
+  padding: 40px 0px;
+
+  justify-content: start;
+  align-items: center;
+`;
+
+export const PhoneImage = styled.img`
+  width: 403px;
+  height: 720px;
+  object-fit: cover;
+  background-color: var(--black);
+  border-radius: 68px 68px 0px 0px;
 `;

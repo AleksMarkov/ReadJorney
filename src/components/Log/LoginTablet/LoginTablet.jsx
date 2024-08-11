@@ -1,27 +1,24 @@
-//Registration.jsx;
+//LoginTablet.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
   TitleContainer,
-  MobLogo,
+  Logo,
   Title,
   InputContainer,
   InputWrapper,
   Input,
   EyeIcon,
-  RegBlock,
-  RegistrationButton,
+  LoginBlock,
+  LoginButton,
   LinkText,
-  PhoneMockup,
-  PhoneImage,
-} from './Registration.styled.jsx';
-import logomob from '../../../assets/svg/Logomobile.svg';
+} from './LoginTablet.styled';
+import logotablet from '../../../assets/svg/Logotablet.svg';
 import eyeOff from '../../../assets/svg/eyeOff.svg';
 import eyeOn from '../../../assets/svg/eyeOn.svg';
-import phoneMockup from '../../../assets/images/phoneMockup.jpg';
 
-const Registration = () => {
+const LoginTablet = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -32,15 +29,11 @@ const Registration = () => {
   return (
     <Container>
       <TitleContainer>
-        <MobLogo src={logomob} alt="logo mobile" />
+        <Logo src={logotablet} alt="logo tablet" />
         <Title>
-          Expand your mind, <br />
-          reading <span>a book</span>
+          Expand your mind, reading <span>a book</span>
         </Title>
         <InputContainer>
-          <InputWrapper>
-            <Input type="text" placeholder="Name:" />
-          </InputWrapper>
           <InputWrapper>
             <Input type="email" placeholder="Mail:" />
           </InputWrapper>
@@ -56,18 +49,15 @@ const Registration = () => {
             />
           </InputWrapper>
         </InputContainer>
-        <RegBlock>
-          <RegistrationButton>Registration</RegistrationButton>
-          <LinkText onClick={() => navigate('/login')}>
-            Already have an account?
+        <LoginBlock>
+          <LoginButton>Log in</LoginButton>
+          <LinkText onClick={() => navigate('/registration')}>
+            Don't have an account?
           </LinkText>
-        </RegBlock>
+        </LoginBlock>
       </TitleContainer>
-      <PhoneMockup>
-        <PhoneImage src={phoneMockup} alt="Phone Mockup" />
-      </PhoneMockup>
     </Container>
   );
 };
 
-export default Registration;
+export default LoginTablet;

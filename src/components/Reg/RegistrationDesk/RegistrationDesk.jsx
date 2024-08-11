@@ -1,5 +1,6 @@
 //RegistrationDesk.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
   TitleContainer,
@@ -22,6 +23,7 @@ import iphonedesk from '../../../assets/images/iPhone.jpg';
 
 const RegistrationDesk = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -55,7 +57,9 @@ const RegistrationDesk = () => {
         </InputContainer>
         <RegBlock>
           <RegistrationButton>Registration</RegistrationButton>
-          <LinkText>Already have an account?</LinkText>
+          <LinkText onClick={() => navigate('/login')}>
+            Already have an account?
+          </LinkText>
         </RegBlock>
       </TitleContainer>
       <PhoneMockup>

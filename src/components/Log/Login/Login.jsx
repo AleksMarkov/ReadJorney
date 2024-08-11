@@ -1,5 +1,6 @@
 //Login.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
   TitleContainer,
@@ -14,13 +15,14 @@ import {
   PhoneMockup,
   PhoneImage,
 } from './Login.styled.jsx';
-import logomob from '../../assets/svg/Logomobile.svg';
-import eyeOff from '../../assets/svg/eyeOff.svg';
-import eyeOn from '../../assets/svg/eyeOn.svg';
-import phoneMockup from '../../assets/images/phoneMockup.png';
+import logomob from '../../../assets/svg/Logomobile.svg';
+import eyeOff from '../../../assets/svg/eyeOff.svg';
+import eyeOn from '../../../assets/svg/eyeOn.svg';
+import phoneMockup from '../../../assets/images/phoneMockup.png';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -48,7 +50,9 @@ const Login = () => {
         </InputContainer>
         <LoginBlock>
           <LoginButton>Log in</LoginButton>
-          <LinkText>Don't have an account?</LinkText>
+          <LinkText onClick={() => navigate('/registration')}>
+            Don't have an account?
+          </LinkText>
         </LoginBlock>
       </TitleContainer>
       <PhoneMockup>

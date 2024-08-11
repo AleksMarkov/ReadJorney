@@ -1,46 +1,43 @@
-//Login.styled.jsx
+//LoginTablet.styled.jsx;
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  position: relative;
-  width: 375px;
-  height: 812px;
+  width: 768px;
+  height: 1024px;
   background-color: var(--black);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding: 20px;
-  gap: 10px;
+  padding: 32px;
 `;
 
 export const TitleContainer = styled.div`
-  width: 335px;
-  height: 411px;
+  width: 704px;
+  height: 960px;
   display: flex;
   flex-direction: column;
   border-radius: 30px;
   background-color: var(--lightblack);
   align-items: left;
-  padding: 20px;
+  padding: 40px 64px;
 `;
 
-export const MobLogo = styled.img`
-  width: 42px;
+export const Logo = styled.img`
+  width: 182px;
   height: 17px;
   color: var(--white);
-  margin-bottom: 40px;
+  margin-bottom: 157px;
 `;
 
 export const Title = styled.h1`
-  width: 295px;
-  height: 64px;
-  font-size: 32px;
+  width: 444px;
+  height: 180px;
+  font-size: 64px;
   font-weight: 700;
-  line-height: 32px;
+  line-height: 60px;
   letter-spacing: 0.02em;
   text-align: left;
   color: var(--white);
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 
   span {
     color: rgba(227, 227, 227, 0.3);
@@ -50,19 +47,31 @@ export const Title = styled.h1`
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 14px;
+  width: 472px;
+  margin-bottom: 82px;
+`;
+
+export const InputWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
   width: 100%;
-  margin-bottom: 72px;
 `;
 
 export const Input = styled.input`
   width: 100%;
-  height: 44px;
+  height: 50px;
   background-color: var(--darkgray);
   border-radius: 12px;
-  padding: 14px;
+  padding: 14px 50px 14px 14px;
   color: var(--white);
   border: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
 
   &::placeholder {
     color: var(--lightgray);
@@ -76,12 +85,11 @@ export const Input = styled.input`
 
 export const EyeIcon = styled.img`
   position: absolute;
-  top: 31%;
-  right: 57px;
-  transform: translateY(-35%);
-  width: 18px;
-  height: 18px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
+  z-index: 10;
 `;
 
 export const LoginBlock = styled.div`
@@ -89,19 +97,19 @@ export const LoginBlock = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  gap: 14px;
+  gap: 20px;
   width: 100%;
 `;
 
 export const LoginButton = styled.button`
-  width: 140px;
-  height: 42px;
+  width: 225px;
+  height: 52px;
   background-color: var(--white);
   border-radius: 30px;
-  padding: 12px;
-  font-size: 14px;
+  padding: 16px;
+  font-size: 20px;
   font-weight: 700;
-  line-height: 18px;
+  line-height: 20px;
   letter-spacing: 0.02em;
   text-align: center;
   color: var(--lightblack);
@@ -117,9 +125,9 @@ export const LoginButton = styled.button`
 `;
 
 export const LinkText = styled.p`
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 14px;
+  line-height: 18px;
   letter-spacing: -0.02em;
   text-align: right;
   text-decoration: underline;
@@ -129,24 +137,4 @@ export const LinkText = styled.p`
   &:hover {
     color: var(--white);
   }
-`;
-
-export const PhoneMockup = styled.div`
-  width: 335px;
-  height: 351px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 30px;
-  background-color: var(--lightblack);
-  padding: 0px 20px 0px 20px;
-
-  justify-content: start;
-  align-items: center;
-`;
-
-export const PhoneImage = styled.img`
-  width: 255px;
-  height: 351px;
-  opacity: 0px;
-  object-fit: cover;
 `;

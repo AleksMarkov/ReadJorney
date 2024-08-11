@@ -1,5 +1,6 @@
 //RegistrationTablet.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
   TitleContainer,
@@ -19,6 +20,7 @@ import eyeOn from '../../../assets/svg/eyeOn.svg';
 
 const RegistrationTablet = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -52,7 +54,9 @@ const RegistrationTablet = () => {
         </InputContainer>
         <RegBlock>
           <RegistrationButton>Registration</RegistrationButton>
-          <LinkText>Already have an account?</LinkText>
+          <LinkText onClick={() => navigate('/login')}>
+            Already have an account?
+          </LinkText>
         </RegBlock>
       </TitleContainer>
     </Container>
