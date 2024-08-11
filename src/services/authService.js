@@ -9,7 +9,7 @@ const authService = {
       const response = await axios.post(`${BASE_URL}/users/signup`, userData);
       return response.data;
     } catch (error) {
-      console.error('Signup error:', error.response.data);
+      console.error('Signup error:', error.response?.data);
       throw error;
     }
   },
@@ -19,7 +19,7 @@ const authService = {
       const response = await axios.post(`${BASE_URL}/users/signin`, userData);
       return response.data;
     } catch (error) {
-      console.error('Signin error:', error.response.data);
+      console.error('Signup error:', error.response?.data);
       throw error;
     }
   },

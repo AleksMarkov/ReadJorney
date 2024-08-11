@@ -36,8 +36,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // import authService from '../services/authService';
-
   const signin = async userData => {
     try {
       const data = await authService.signin(userData);
@@ -49,16 +47,6 @@ export const AuthProvider = ({ children }) => {
       throw error;
     }
   };
-
-  //   const signin = async userData => {
-  //     try {
-  //       const data = await authService.signin(userData);
-  //       localStorage.setItem('token', data.token);
-  //       setUser(data);
-  //     } catch (error) {
-  //       console.error('Signin error:', error);
-  //     }
-  //   };
 
   const signout = async () => {
     const token = localStorage.getItem('token');

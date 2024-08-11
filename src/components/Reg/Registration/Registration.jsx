@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AuthContext } from '../../../context/AuthContext';
 import registrationSchema from '../../../schemas/registrationSchema';
+import Notification from '../../Notification/Notification';
 import {
   Container,
   TitleContainer,
@@ -29,6 +30,7 @@ import phoneMockup from '../../../assets/images/phoneMockup.jpg';
 const Registration = () => {
   const { signup } = useContext(AuthContext); // Make sure this is not undefined
   const [showPassword, setShowPassword] = useState(false);
+  const [notification, setNotification] = useState(null); // For showing error messages
   const navigate = useNavigate();
   const {
     register,
@@ -48,11 +50,20 @@ const Registration = () => {
       navigate('/recommended'); // Redirect to a protected route after signup
     } catch (error) {
       console.error('Signup failed:', error);
+      setNotification(
+        error.response?.data?.message || 'Signup failed. Please try again.'
+      );
     }
   };
 
   return (
     <Container>
+      {notification && (
+        <Notification
+          message={notification}
+          onClose={() => setNotification(null)}
+        />
+      )}
       <TitleContainer>
         <MobLogo src={logomob} alt="logo mobile" />
         <Title>

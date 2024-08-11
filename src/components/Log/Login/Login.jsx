@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import loginSchema from '../../../schemas/loginSchema';
 import { AuthContext } from '../../../context/AuthContext';
+import Notification from '../../Notification/Notification';
 import {
   Container,
   TitleContainer,
@@ -28,6 +29,7 @@ import phoneMockup from '../../../assets/images/phoneMockup.png';
 const Login = () => {
   const { signin } = useContext(AuthContext); // Get the signin function from AuthContext
   const [showPassword, setShowPassword] = useState(false);
+  const [notification, setNotification] = useState(null); // For showing error messages
   const navigate = useNavigate();
   const {
     register,
@@ -47,12 +49,20 @@ const Login = () => {
       navigate('/recommended'); // Redirect to a protected route after login
     } catch (error) {
       console.error('Login failed:', error);
-      // Optionally display an error message to the user
+      setNotification(
+        error.response?.data?.message || 'Login failed. Please try again.'
+      );
     }
   };
 
   return (
     <Container>
+      {notification && (
+        <Notification
+          message={notification}
+          onClose={() => setNotification(null)}
+        />
+      )}
       <TitleContainer>
         <MobLogo src={logomob} alt="logo mobile" />
         <Title>
