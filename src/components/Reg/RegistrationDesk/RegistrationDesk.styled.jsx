@@ -69,9 +69,9 @@ export const Input = styled.input`
   padding: 14px 50px 14px 14px; /* Добавляем padding справа для EyeIcon */
   color: var(--white);
   border: none;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 16px;
+  line-height: 18px;
   letter-spacing: -0.02em;
   text-align: left;
 

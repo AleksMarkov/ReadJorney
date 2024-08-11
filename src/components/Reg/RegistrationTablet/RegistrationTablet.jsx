@@ -1,9 +1,10 @@
 //RegistrationTablet.jsx
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import registrationSchema from '../../../schemas/registrationSchema';
+import { AuthContext } from '../../../context/AuthContext';
 import {
   Container,
   TitleContainer,
@@ -23,6 +24,7 @@ import eyeOff from '../../../assets/svg/eyeOff.svg';
 import eyeOn from '../../../assets/svg/eyeOn.svg';
 
 const RegistrationTablet = () => {
+  const { signup } = useContext(AuthContext); // Get the signup function from AuthContext
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const {
@@ -37,9 +39,14 @@ const RegistrationTablet = () => {
     setShowPassword(!showPassword);
   };
 
-  const onSubmit = data => {
-    // Отправка данных на бэкэнд
-    console.log(data);
+  const onSubmit = async data => {
+    try {
+      await signup(data); // Send signup data to backend
+      navigate('/recommended'); // Redirect to a protected route after signup
+    } catch (error) {
+      console.error('Signup failed:', error);
+      // Optionally display an error message to the user
+    }
   };
 
   return (

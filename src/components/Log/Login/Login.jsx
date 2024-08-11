@@ -1,9 +1,10 @@
 //Login.jsx
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import loginSchema from '../../../schemas/loginSchema';
+import { AuthContext } from '../../../context/AuthContext';
 import {
   Container,
   TitleContainer,
@@ -25,6 +26,7 @@ import eyeOn from '../../../assets/svg/eyeOn.svg';
 import phoneMockup from '../../../assets/images/phoneMockup.png';
 
 const Login = () => {
+  const { signin } = useContext(AuthContext); // Get the signin function from AuthContext
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const {
@@ -39,9 +41,14 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  const onSubmit = data => {
-    // Отправка данных на бэкэнд
-    console.log(data);
+  const onSubmit = async data => {
+    try {
+      await signin(data); // Send login data to backend
+      navigate('/recommended'); // Redirect to a protected route after login
+    } catch (error) {
+      console.error('Login failed:', error);
+      // Optionally display an error message to the user
+    }
   };
 
   return (

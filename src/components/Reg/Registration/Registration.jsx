@@ -1,8 +1,9 @@
 //Registration.jsx;
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { AuthContext } from '../../../context/AuthContext';
 import registrationSchema from '../../../schemas/registrationSchema';
 import {
   Container,
@@ -26,6 +27,7 @@ import eyeOn from '../../../assets/svg/eyeOn.svg';
 import phoneMockup from '../../../assets/images/phoneMockup.jpg';
 
 const Registration = () => {
+  const { signup } = useContext(AuthContext); // Make sure this is not undefined
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const {
@@ -40,9 +42,13 @@ const Registration = () => {
     setShowPassword(!showPassword);
   };
 
-  const onSubmit = data => {
-    // Отправка данных на бэкэнд
-    console.log(data);
+  const onSubmit = async data => {
+    try {
+      await signup(data);
+      navigate('/recommended'); // Redirect to a protected route after signup
+    } catch (error) {
+      console.error('Signup failed:', error);
+    }
   };
 
   return (
