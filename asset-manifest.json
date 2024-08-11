@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/ReadJorney/static/css/main.03b7374c.css",
-    "main.js": "/ReadJorney/static/js/main.8f3fca2b.js",
-    "static/js/862.19d178fc.chunk.js": "/ReadJorney/static/js/862.19d178fc.chunk.js",
-    "static/js/297.ad71b6dc.chunk.js": "/ReadJorney/static/js/297.ad71b6dc.chunk.js",
-    "static/js/424.71e9d6e2.chunk.js": "/ReadJorney/static/js/424.71e9d6e2.chunk.js",
+    "main.js": "/ReadJorney/static/js/main.b64b6696.js",
+    "static/js/259.4f8429be.chunk.js": "/ReadJorney/static/js/259.4f8429be.chunk.js",
+    "static/js/309.0b6538db.chunk.js": "/ReadJorney/static/js/309.0b6538db.chunk.js",
+    "static/js/424.10c7635e.chunk.js": "/ReadJorney/static/js/424.10c7635e.chunk.js",
     "static/media/iPhone.jpg": "/ReadJorney/static/media/iPhone.d6f371be7cbf18c03067.jpg",
     "static/media/phoneMockup.png": "/ReadJorney/static/media/phoneMockup.e08349f2920a9e3749cc.png",
     "static/media/phoneMockup.jpg": "/ReadJorney/static/media/phoneMockup.ae95921291576374d3cc.jpg",
@@ -18,13 +18,13 @@
     "static/media/login.svg": "/ReadJorney/static/media/login.f8fd3ec0758e20fbdd87f353900ab072.svg",
     "static/media/usermenu.svg": "/ReadJorney/static/media/usermenu.db223cd27c1047cd6e43bac542d68496.svg",
     "main.03b7374c.css.map": "/ReadJorney/static/css/main.03b7374c.css.map",
-    "main.8f3fca2b.js.map": "/ReadJorney/static/js/main.8f3fca2b.js.map",
-    "862.19d178fc.chunk.js.map": "/ReadJorney/static/js/862.19d178fc.chunk.js.map",
-    "297.ad71b6dc.chunk.js.map": "/ReadJorney/static/js/297.ad71b6dc.chunk.js.map",
-    "424.71e9d6e2.chunk.js.map": "/ReadJorney/static/js/424.71e9d6e2.chunk.js.map"
+    "main.b64b6696.js.map": "/ReadJorney/static/js/main.b64b6696.js.map",
+    "259.4f8429be.chunk.js.map": "/ReadJorney/static/js/259.4f8429be.chunk.js.map",
+    "309.0b6538db.chunk.js.map": "/ReadJorney/static/js/309.0b6538db.chunk.js.map",
+    "424.10c7635e.chunk.js.map": "/ReadJorney/static/js/424.10c7635e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.03b7374c.css",
-    "static/js/main.8f3fca2b.js"
+    "static/js/main.b64b6696.js"
   ]
 }
