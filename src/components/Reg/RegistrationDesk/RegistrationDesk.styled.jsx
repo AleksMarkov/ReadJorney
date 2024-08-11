@@ -66,7 +66,7 @@ export const Input = styled.input`
   height: 44px;
   background-color: var(--darkgray);
   border-radius: 12px;
-  padding: 14px 50px 14px 14px; /* Добавляем padding справа для EyeIcon */
+  padding: 14px 50px 14px 14px;
   color: var(--white);
   border: none;
   font-size: 14px;
@@ -87,7 +87,7 @@ export const Input = styled.input`
 
 export const EyeIcon = styled.img`
   position: absolute;
-  right: 15px; /* 15 пикселей от правого края поля */
+  right: 15px;
   width: 20px;
   height: 20px;
   cursor: pointer;
@@ -157,7 +157,7 @@ export const PhoneImage = styled.img`
   width: 403px;
   height: 720px;
   object-fit: cover;
-  background-color: var(--black); /* Фон изображения теперь черный */
+  background-color: var(--black);
   border-radius: 68px 68px 0px 0px;
 `;
 

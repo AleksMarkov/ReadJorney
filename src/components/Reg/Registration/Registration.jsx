@@ -28,9 +28,9 @@ import eyeOn from '../../../assets/svg/eyeOn.svg';
 import phoneMockup from '../../../assets/images/phoneMockup.jpg';
 
 const Registration = () => {
-  const { signup } = useContext(AuthContext); // Make sure this is not undefined
+  const { signup } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
-  const [notification, setNotification] = useState(null); // For showing error messages
+  const [notification, setNotification] = useState(null);
   const navigate = useNavigate();
   const {
     register,
@@ -47,7 +47,7 @@ const Registration = () => {
   const onSubmit = async data => {
     try {
       await signup(data);
-      navigate('/recommended'); // Redirect to a protected route after signup
+      navigate('/recommended');
     } catch (error) {
       console.error('Signup failed:', error);
       setNotification(

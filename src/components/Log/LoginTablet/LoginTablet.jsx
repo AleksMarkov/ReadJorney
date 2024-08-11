@@ -25,9 +25,9 @@ import eyeOff from '../../../assets/svg/eyeOff.svg';
 import eyeOn from '../../../assets/svg/eyeOn.svg';
 
 const LoginTablet = () => {
-  const { signin } = useContext(AuthContext); // Get the signin function from AuthContext
+  const { signin } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
-  const [notification, setNotification] = useState(null); // For showing error messages
+  const [notification, setNotification] = useState(null);
   const navigate = useNavigate();
   const {
     register,
@@ -43,8 +43,8 @@ const LoginTablet = () => {
 
   const onSubmit = async data => {
     try {
-      await signin(data); // Send login data to backend
-      navigate('/recommended'); // Redirect to a protected route after login
+      await signin(data);
+      navigate('/recommended');
     } catch (error) {
       console.error('Login failed:', error);
       setNotification(

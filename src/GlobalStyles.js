@@ -73,18 +73,11 @@ a {
 }
 
 img {
-  // display: block;
-  // max-width: 100%;
-  // height: auto;
+
 }
 
 button {
-  // border: none;
-  // font: inherit;
-  // color: inherit;
-  // background-color: transparent;
-  // cursor: pointer;
-  // padding: 0;
+
 }
 
 textarea {

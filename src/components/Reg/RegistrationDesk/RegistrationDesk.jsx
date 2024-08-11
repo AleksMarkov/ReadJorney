@@ -28,9 +28,9 @@ import eyeOn from '../../../assets/svg/eyeOn.svg';
 import iphonedesk from '../../../assets/images/iPhone.jpg';
 
 const RegistrationDesk = () => {
-  const { signup } = useContext(AuthContext); // Get the signup function from AuthContext
+  const { signup } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
-  const [notification, setNotification] = useState(null); // For showing error messages
+  const [notification, setNotification] = useState(null);
   const navigate = useNavigate();
   const {
     register,
@@ -46,8 +46,8 @@ const RegistrationDesk = () => {
 
   const onSubmit = async data => {
     try {
-      await signup(data); // Send signup data to backend
-      navigate('/recommended'); // Redirect to a protected route after signup
+      await signup(data);
+      navigate('/recommended');
     } catch (error) {
       console.error('Signup failed:', error);
       setNotification(

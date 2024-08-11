@@ -66,7 +66,6 @@ export const Input = styled.input`
   width: 100%;
   height: 44px;
   background-color: var(--darkgray);
-  // padding: 14px 50px 14px 14px;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
