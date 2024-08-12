@@ -132,7 +132,7 @@ export const SidebarSection = styled.div`
 
 export const FiltersSection = styled.div`
   width: 313px;
-  height: 197px;
+  height: 216px;
   background-color: var(--lightblack);
   display: flex;
   flex-direction: column;
@@ -148,6 +148,7 @@ export const FilteText = styled.div`
   text-align: left;
   color: var(--white);
   margin-left: 14px;
+  margin-top: 20px;
 `;
 
 export const InputWrapper = styled.div`
@@ -199,16 +200,6 @@ export const ApplyButton = styled.button`
   margin-top: 12px;
 `;
 
-export const RecommendedSection = styled.div`
-  width: 847px;
-  height: 651px;
-
-  background: #1f1f1f;
-  border-radius: 30px;
-
-  padding: 16px;
-`;
-
 export const BookList = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -254,6 +245,7 @@ export const WorkoutSection = styled.div`
   justify-content: flex-start;
   align-items: start;
   gap: 20px;
+  background-color: var(--darkgray);
 `;
 
 export const WorkoutTitle = styled.h3`
@@ -267,30 +259,28 @@ export const WorkoutTitle = styled.h3`
 `;
 
 export const WorkoutStep = styled.div`
-  width: 253px;
+  width: 252px;
   height: 54px;
   display: flex;
   gap: 12px;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  //   margin-bottom: 20px;
 `;
 
 export const WorkoutIcon = styled.div`
   width: 44px;
   height: 44px;
-  background: #f9f9f9;
+  background-color: var(--white);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Gilroy';
   font-weight: 700;
   color: var(--lightblack);
 `;
 
-export const WorkoutDescription = styled.p`
+export const WorkoutDescription = styled.div`
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
@@ -298,22 +288,115 @@ export const WorkoutDescription = styled.p`
   text-align: left;
   color: var(--white);
   flex: 1;
+
+  span {
+    color: var(--lightgray);
+  }
+`;
+
+export const MyLibraryBlok = styled.div`
+  width: 273px;
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const MyLibraryLink = styled.a`
-  font-family: 'Gilroy';
   font-size: 14px;
-  color: #686868;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
   text-decoration: underline;
   cursor: pointer;
+  color: var(--lightgray);
+  background-color: var(--lightblack);
+
+  &:hover {
+    color: var(--white);
+    cursor: pointer;
+  }
+`;
+
+export const Arrow = styled.img`
+  width: 24px;
+  height: 24px;
+  color: var(--white);
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const Quoteoftheday = styled.div`
+  width: 313px;
+  height: 83px;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  gap: 12px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--darkgray);
+
+  &.emoji-books::before {
+    content: '📚';
+    font-size: 40px;
+    line-height: 40px;
+    display: inline-block;
+  }
+
+  p {
+    width: 219px;
+    height: 54px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: var(--lightgray);
+    // overflow: hidden;
+    // white-space: nowrap;
+    // text-overflow: ellipsis;
+  }
+
+  span {
+    color: var(--white);
+  }
+`;
+
+export const RecommendedSection = styled.div`
+  width: 847px;
+  height: 651px;
+  background-color: var(--lightblack);
+  border-radius: 30px;
+  padding: 40px;
+`;
+
+export const RecommendedBlock = styled.div`
+  width: 767px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+`;
+
+export const RecomText = styled.div`
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: 0.02em;
+  text-align: left;
+  color: var(--white);
 `;
 
 export const ArrowNavigation = styled.div`
   display: flex;
   gap: 8px;
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
 `;
 
 export const ArrowButton = styled.button`
@@ -322,7 +405,15 @@ export const ArrowButton = styled.button`
   border: 1px solid rgba(249, 249, 249, 0.2);
   border-radius: 50%;
   background: none;
-  color: #f9f9f9;
-  font-size: 18px;
+  color: var(--white);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1); /* Этот фильтр сделает иконки белыми */
+  }
 `;

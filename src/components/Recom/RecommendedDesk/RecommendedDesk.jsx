@@ -29,11 +29,19 @@ import {
   WorkoutStep,
   WorkoutIcon,
   WorkoutDescription,
+  MyLibraryBlok,
   MyLibraryLink,
+  Arrow,
+  Quoteoftheday,
+  RecommendedBlock,
+  RecomText,
   ArrowNavigation,
   ArrowButton,
 } from './RecommendedDesk.styled';
 import logotablet from '../../../assets/svg/Logotablet.svg';
+import leftarrow from '../../../assets/svg/login.svg';
+import chevronleft from '../../../assets/svg/chevron-left.svg';
+import chevronright from '../../../assets/svg/chevron-right.svg';
 
 const RecommendedDesk = () => {
   return (
@@ -71,23 +79,42 @@ const RecommendedDesk = () => {
             <WorkoutStep>
               <WorkoutIcon>1</WorkoutIcon>
               <WorkoutDescription>
-                Create a personal library: add the books you intend to read to
-                it.
+                Create a personal library:{' '}
+                <span>add the books you intend to read to it.</span>
               </WorkoutDescription>
             </WorkoutStep>
             <WorkoutStep>
               <WorkoutIcon>2</WorkoutIcon>
               <WorkoutDescription>
-                Create your first workout: define a goal, choose a period, start
-                training.
+                Create your first workout:{' '}
+                <span>define a goal, choose a period, start training.</span>
               </WorkoutDescription>
             </WorkoutStep>
-            <MyLibraryLink>My library</MyLibraryLink>
+            <MyLibraryBlok>
+              <MyLibraryLink>My library</MyLibraryLink>
+              <Arrow src={leftarrow} alt="left arrow" />
+            </MyLibraryBlok>
           </WorkoutSection>
+          <Quoteoftheday className="emoji-books">
+            <p>
+              "Books are <span>windows</span> to the world, and reading is a
+              journey into the unknown."
+            </p>
+          </Quoteoftheday>
         </SidebarSection>
         <RecommendedSection>
-          <h2>Recommended</h2>
-          <BookList>
+          <RecommendedBlock>
+            <RecomText>Recommended</RecomText>
+            <ArrowNavigation>
+              <ArrowButton>
+                <img src={chevronleft} alt="Previous" />
+              </ArrowButton>
+              <ArrowButton>
+                <img src={chevronright} alt="Next" />
+              </ArrowButton>
+            </ArrowNavigation>
+          </RecommendedBlock>
+          {/* <BookList>
             <BookItem>
               <BookCover src="/path/to/image1.png" alt="Lovers of Justice" />
               <BookTitle>Lovers of Justice</BookTitle>
@@ -98,12 +125,7 @@ const RecommendedDesk = () => {
               <BookTitle>It doesn't hurt</BookTitle>
               <BookAuthor>Kateryna Babkina</BookAuthor>
             </BookItem>
-            {/* Add other book items similarly */}
-          </BookList>
-          <ArrowNavigation>
-            <ArrowButton>◀</ArrowButton>
-            <ArrowButton>▶</ArrowButton>
-          </ArrowNavigation>
+          </BookList> */}
         </RecommendedSection>
       </BodySection>
     </Container>
