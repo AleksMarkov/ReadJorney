@@ -25,9 +25,9 @@ import {
   BookAuthor,
   NavigationDots,
 } from './Recommended.styled.jsx';
-import logoImage from '../../assets/svg/Logomobile.svg';
-import userMenuIcon from '../../assets/svg/usermenu.svg';
-import arrowIcon from '../../assets/svg/login.svg';
+import logoImage from '../../../assets/svg/Logomobile.svg';
+import userMenuIcon from '../../../assets/svg/usermenu.svg';
+import arrowIcon from '../../../assets/svg/login.svg';
 
 const Recommended = () => {
   return (
