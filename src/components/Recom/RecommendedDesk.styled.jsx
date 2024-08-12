@@ -62,7 +62,12 @@ export const MenuSection = styled.div`
   }
 
   @media (max-width: 768px) {
-    display: none;
+    margin-top: 240px;
+    width: 75px;
+    height: 60px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
   }
 `;
 
@@ -585,8 +590,19 @@ export const RecommendedSection = styled.div`
 `;
 
 export const RecommendedBlock = styled.div`
-  width: 767px;
-  height: 40px;
+export const PopupMenuItem = styled.div
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: var(--white);
+  padding: 10px 0;
+  cursor: pointer;
+
+  &:hover {
+    color: #4f92f7;
+  }
+;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -648,5 +664,105 @@ export const ArrowButton = styled.button`
     width: 20px;
     height: 20px;
     filter: brightness(0) invert(1);
+  }
+`;
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /
+  display: ${props => (props.isVisible ? 'block' : 'none')};
+  z-index: 999;
+
+  @media (min-width: 769px) {
+    display: none;
+  } 
+`;
+
+export const PopupMenu = styled.div`
+  position: absolute;
+  top: 0;
+  left: 155px;
+  width: 200px;
+  height: 100%; /* Высота 100% */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Разделение элементов */
+  align-items: center;
+  background-color: var(--darkgray);
+  padding: 40px 20px;
+  display: ${props =>
+    props.isVisible
+      ? 'flex'
+      : 'none'}; /* Изменение на flex для flex-контейнера */
+  z-index: 1000;
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+`;
+
+export const PopupMenuItem = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: var(--white);
+  padding: 10px 0;
+  cursor: pointer;
+
+  &:hover {
+    color: #4f92f7;
+  }
+`;
+
+export const PopupMenuButton = styled.div`
+  width: 91px;
+  height: 38px;
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  border-radius: 30px;
+  padding: 10px;
+  color: var(--white);
+  background-color: var(--lightblack);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-top: auto; /* Добавлено */
+
+  &:hover {
+    color: var(--lightblack);
+    background-color: var(--white);
+    border: 1px solid rgba(249, 249, 249, 0.2);
+  }
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+`;
+
+export const CloseButton = styled.div`
+  position: absolute;
+  top: 34px;
+  right: 40px;
+  width: 28px;
+  height: 28px;
+  color: var(--white);
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    color: var(--white);
+  }
+
+  @media (min-width: 769px) {
+    display: none;
   }
 `;

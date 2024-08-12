@@ -1,5 +1,5 @@
 //RecommendedDesk.jsx
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Container,
@@ -38,6 +38,11 @@ import {
   ArrowNavigation,
   ArrowButton,
   UserMenu,
+  PopupMenu,
+  PopupMenuItem,
+  CloseButton,
+  Overlay,
+  PopupMenuButton,
 } from './RecommendedDesk.styled';
 import logoImage from '../../assets/svg/Logomobile.svg';
 import logotablet from '../../assets/svg/Logotablet.svg';
@@ -45,8 +50,37 @@ import leftarrow from '../../assets/svg/login.svg';
 import chevronleft from '../../assets/svg/chevron-left.svg';
 import chevronright from '../../assets/svg/chevron-right.svg';
 import usermenu from '../../assets/svg/usermenu.svg';
+import closeIcon from '../../assets/svg/x-close.svg';
 
 const RecommendedDesk = () => {
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const popupRef = useRef(null);
+
+  const toggleMenuVisibility = () => {
+    setIsMenuVisible(!isMenuVisible);
+  };
+
+  const handleClickOutside = event => {
+    if (popupRef.current && !popupRef.current.contains(event.target)) {
+      setIsMenuVisible(false);
+    }
+  };
+
+  const handleKeyDown = event => {
+    if (event.key === 'Escape') {
+      setIsMenuVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
     <Container>
       <HeaderSection>
@@ -63,9 +97,33 @@ const RecommendedDesk = () => {
           <UserIcon>I</UserIcon>
           <UserName>Ilona Ratushniak</UserName>
           <LogoutButton>Log out</LogoutButton>
-          <UserMenu src={usermenu} alt="user menu" />
+          <UserMenu
+            src={usermenu}
+            alt="user menu"
+            onClick={toggleMenuVisibility}
+          />
         </UserSection>
       </HeaderSection>
+
+      <Overlay isVisible={isMenuVisible} onClick={toggleMenuVisibility} />
+
+      <PopupMenu ref={popupRef} isVisible={isMenuVisible}>
+        <CloseButton onClick={toggleMenuVisibility}>
+          <img src={closeIcon} alt="Close" />
+        </CloseButton>
+        <MenuSection>
+          <Link to="#home">
+            <GetButton>Home</GetButton>
+          </Link>
+          <Link to="#my-library">
+            <GetButton>My Library</GetButton>
+          </Link>
+        </MenuSection>
+        {/* <PopupMenuItem>Home</PopupMenuItem>
+        <PopupMenuItem>My library</PopupMenuItem> */}
+        <PopupMenuButton>Log out</PopupMenuButton>
+      </PopupMenu>
+
       <BodySection>
         <SidebarSection>
           <FiltersSection>
@@ -118,18 +176,6 @@ const RecommendedDesk = () => {
               </ArrowButton>
             </ArrowNavigation>
           </RecommendedBlock>
-          {/* <BookList>
-            <BookItem>
-              <BookCover src="/path/to/image1.png" alt="Lovers of Justice" />
-              <BookTitle>Lovers of Justice</BookTitle>
-              <BookAuthor>Yuri Andrukhovych</BookAuthor>
-            </BookItem>
-            <BookItem>
-              <BookCover src="/path/to/image2.png" alt="It doesn't hurt" />
-              <BookTitle>It doesn't hurt</BookTitle>
-              <BookAuthor>Kateryna Babkina</BookAuthor>
-            </BookItem>
-          </BookList> */}
         </RecommendedSection>
       </BodySection>
     </Container>
