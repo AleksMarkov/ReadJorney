@@ -52,10 +52,13 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('token');
     try {
       await authService.signout(token);
-      localStorage.removeItem('token');
-      setUser(null);
     } catch (error) {
       console.error('Signout error:', error);
+      throw error;
+    } finally {
+      localStorage.removeItem('token');
+      localStorage.removeItem('refreshToken');
+      setUser(null);
     }
   };
 

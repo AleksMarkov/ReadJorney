@@ -1,6 +1,7 @@
 //RecommendedDesk.jsx
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import {
   Container,
   HeaderSection,
@@ -19,11 +20,6 @@ import {
   InputWrapper,
   Input,
   ApplyButton,
-  BookList,
-  BookItem,
-  BookCover,
-  BookTitle,
-  BookAuthor,
   WorkoutSection,
   WorkoutTitle,
   WorkoutStep,
@@ -39,7 +35,6 @@ import {
   ArrowButton,
   UserMenu,
   PopupMenu,
-  PopupMenuItem,
   CloseButton,
   Overlay,
   PopupMenuButton,
@@ -52,9 +47,17 @@ import chevronright from '../../assets/svg/chevron-right.svg';
 import usermenu from '../../assets/svg/usermenu.svg';
 import closeIcon from '../../assets/svg/x-close.svg';
 
+import { AuthContext } from '../../context/AuthContext';
+import { clearScreenSize } from '../../redux/screenSizeSlice'; // Пример очистки состояния
+import Notification from '../Notification/Notification';
+
 const RecommendedDesk = () => {
+  const { signout } = useContext(AuthContext);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [notification, setNotification] = useState(null);
   const popupRef = useRef(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const toggleMenuVisibility = () => {
     setIsMenuVisible(!isMenuVisible);
@@ -72,6 +75,19 @@ const RecommendedDesk = () => {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await signout();
+      dispatch(clearScreenSize());
+      localStorage.clear();
+      navigate('/login');
+    } catch (error) {
+      setNotification(
+        error.response?.data?.message || 'Logout failed. Please try again.'
+      );
+    }
+  };
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('keydown', handleKeyDown);
@@ -83,6 +99,12 @@ const RecommendedDesk = () => {
 
   return (
     <Container>
+      {notification && (
+        <Notification
+          message={notification}
+          onClose={() => setNotification(null)}
+        />
+      )}
       <HeaderSection>
         <MobLogo src={logotablet} mobileSrc={logoImage} alt="logo" />
         <MenuSection>
@@ -96,7 +118,7 @@ const RecommendedDesk = () => {
         <UserSection>
           <UserIcon>I</UserIcon>
           <UserName>Ilona Ratushniak</UserName>
-          <LogoutButton>Log out</LogoutButton>
+          <LogoutButton onClick={handleLogout}>Log out</LogoutButton>
           <UserMenu
             src={usermenu}
             alt="user menu"
@@ -119,9 +141,7 @@ const RecommendedDesk = () => {
             <GetButton>My Library</GetButton>
           </Link>
         </MenuSection>
-        {/* <PopupMenuItem>Home</PopupMenuItem>
-        <PopupMenuItem>My library</PopupMenuItem> */}
-        <PopupMenuButton>Log out</PopupMenuButton>
+        <PopupMenuButton onClick={handleLogout}>Log out</PopupMenuButton>
       </PopupMenu>
 
       <BodySection>

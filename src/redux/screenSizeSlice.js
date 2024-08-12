@@ -11,4 +11,8 @@ export const screenSizeSlice = createSlice({
 
 export const { setScreenSize } = screenSizeSlice.actions;
 
+export const clearScreenSize = () => dispatch => {
+  dispatch(setScreenSize(window.innerWidth));
+};
+
 export default screenSizeSlice.reducer;

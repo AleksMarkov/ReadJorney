@@ -1,6 +1,6 @@
 //App.jsx
 import React, { Suspense, lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Loader from './Loader/Loader';
 
 const Reg = lazy(() => import('./Reg/Reg'));
@@ -14,8 +14,7 @@ const App = () => {
         <Route path="/registration" element={<Reg />} />
         <Route path="/login" element={<Log />} />
         <Route path="/recommended" element={<RecommendedDesk />} />
-
-        {/* <Route path="*" element={<Navigate to="/" />} /> */}
+        <Route path="*" element={<Navigate to="/registration" />} />
       </Routes>
     </Suspense>
   );

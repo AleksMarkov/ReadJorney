@@ -350,41 +350,6 @@ export const ApplyButton = styled.button`
   }
 `;
 
-export const BookList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-`;
-
-export const BookItem = styled.div`
-  width: 137px;
-  height: 248px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const BookCover = styled.img`
-  width: 137px;
-  height: 208px;
-  border-radius: 8px;
-`;
-
-export const BookTitle = styled.p`
-  font-weight: 700;
-  font-size: 14px;
-  color: #f9f9f9;
-  text-align: center;
-`;
-
-export const BookAuthor = styled.p`
-  font-family: 'Gilroy';
-  font-weight: 500;
-  font-size: 10px;
-  color: #686868;
-  text-align: center;
-`;
-
 export const WorkoutSection = styled.div`
   width: 313px;
   height: 272px;
@@ -702,21 +667,6 @@ export const PopupMenu = styled.div`
 
   @media (min-width: 769px) {
     display: none;
-  }
-`;
-
-export const PopupMenuItem = styled.div`
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 18px;
-  letter-spacing: -0.02em;
-  text-align: left;
-  color: var(--white);
-  padding: 10px 0;
-  cursor: pointer;
-
-  &:hover {
-    color: #4f92f7;
   }
 `;
 
