@@ -1,11 +1,10 @@
 {
   "files": {
     "main.css": "/ReadJorney/static/css/main.03b7374c.css",
-    "main.js": "/ReadJorney/static/js/main.5564384d.js",
+    "main.js": "/ReadJorney/static/js/main.4a124eac.js",
     "static/js/125.2d96fc42.chunk.js": "/ReadJorney/static/js/125.2d96fc42.chunk.js",
     "static/js/517.509b8161.chunk.js": "/ReadJorney/static/js/517.509b8161.chunk.js",
-    "static/js/348.45926242.chunk.js": "/ReadJorney/static/js/348.45926242.chunk.js",
-    "static/js/124.a8e16b08.chunk.js": "/ReadJorney/static/js/124.a8e16b08.chunk.js",
+    "static/js/146.22871cc4.chunk.js": "/ReadJorney/static/js/146.22871cc4.chunk.js",
     "static/js/143.2a8b8a7c.chunk.js": "/ReadJorney/static/js/143.2a8b8a7c.chunk.js",
     "static/media/iPhone.jpg": "/ReadJorney/static/media/iPhone.d6f371be7cbf18c03067.jpg",
     "static/media/phoneMockup.png": "/ReadJorney/static/media/phoneMockup.e08349f2920a9e3749cc.png",
@@ -16,19 +15,21 @@
     "static/media/eyeOff.svg": "/ReadJorney/static/media/eyeOff.fb258c3dc42a2491e5c37f761a1f8242.svg",
     "index.html": "/ReadJorney/index.html",
     "static/media/eyeOn.svg": "/ReadJorney/static/media/eyeOn.c382ea11686a760a94eee2f48cf66c7b.svg",
+    "static/media/chevron-left.svg": "/ReadJorney/static/media/chevron-left.1a862de1df03b0ff06984581f9917a98.svg",
+    "static/media/chevron-right.svg": "/ReadJorney/static/media/chevron-right.d63ffa474bf88a2160a2dae0a182027d.svg",
     "static/media/Logomobile.svg": "/ReadJorney/static/media/Logomobile.92c04be856eadc763b09ef164b5c46d1.svg",
     "static/media/login.svg": "/ReadJorney/static/media/login.f8fd3ec0758e20fbdd87f353900ab072.svg",
+    "static/media/x-close.svg": "/ReadJorney/static/media/x-close.dfdd8a3ce6d5134ecd24cc92f1672d18.svg",
     "static/media/usermenu.svg": "/ReadJorney/static/media/usermenu.db223cd27c1047cd6e43bac542d68496.svg",
     "main.03b7374c.css.map": "/ReadJorney/static/css/main.03b7374c.css.map",
-    "main.5564384d.js.map": "/ReadJorney/static/js/main.5564384d.js.map",
+    "main.4a124eac.js.map": "/ReadJorney/static/js/main.4a124eac.js.map",
     "125.2d96fc42.chunk.js.map": "/ReadJorney/static/js/125.2d96fc42.chunk.js.map",
     "517.509b8161.chunk.js.map": "/ReadJorney/static/js/517.509b8161.chunk.js.map",
-    "348.45926242.chunk.js.map": "/ReadJorney/static/js/348.45926242.chunk.js.map",
-    "124.a8e16b08.chunk.js.map": "/ReadJorney/static/js/124.a8e16b08.chunk.js.map",
+    "146.22871cc4.chunk.js.map": "/ReadJorney/static/js/146.22871cc4.chunk.js.map",
     "143.2a8b8a7c.chunk.js.map": "/ReadJorney/static/js/143.2a8b8a7c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.03b7374c.css",
-    "static/js/main.5564384d.js"
+    "static/js/main.4a124eac.js"
   ]
 }
