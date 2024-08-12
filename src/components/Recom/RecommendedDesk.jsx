@@ -37,17 +37,20 @@ import {
   RecomText,
   ArrowNavigation,
   ArrowButton,
+  UserMenu,
 } from './RecommendedDesk.styled';
-import logotablet from '../../../assets/svg/Logotablet.svg';
-import leftarrow from '../../../assets/svg/login.svg';
-import chevronleft from '../../../assets/svg/chevron-left.svg';
-import chevronright from '../../../assets/svg/chevron-right.svg';
+import logoImage from '../../assets/svg/Logomobile.svg';
+import logotablet from '../../assets/svg/Logotablet.svg';
+import leftarrow from '../../assets/svg/login.svg';
+import chevronleft from '../../assets/svg/chevron-left.svg';
+import chevronright from '../../assets/svg/chevron-right.svg';
+import usermenu from '../../assets/svg/usermenu.svg';
 
 const RecommendedDesk = () => {
   return (
     <Container>
       <HeaderSection>
-        <MobLogo src={logotablet} alt="logo mobile" />
+        <MobLogo src={logotablet} mobileSrc={logoImage} alt="logo" />
         <MenuSection>
           <Link to="#home">
             <GetButton>Home</GetButton>
@@ -60,6 +63,7 @@ const RecommendedDesk = () => {
           <UserIcon>I</UserIcon>
           <UserName>Ilona Ratushniak</UserName>
           <LogoutButton>Log out</LogoutButton>
+          <UserMenu src={usermenu} alt="user menu" />
         </UserSection>
       </HeaderSection>
       <BodySection>

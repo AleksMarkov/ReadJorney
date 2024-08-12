@@ -11,6 +11,17 @@ export const Container = styled.div`
   align-items: center;
   padding: 32px;
   gap: 16px;
+
+  @media (max-width: 1440px) {
+    width: 768px;
+    height: 1169px;
+  }
+  @media (max-width: 768px) {
+    width: 375px;
+    height: 983px;
+    padding: 20px;
+    gap: 10px;
+  }
 `;
 
 export const HeaderSection = styled.div`
@@ -23,6 +34,17 @@ export const HeaderSection = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 16px;
+
+  @media (max-width: 1440px) {
+    width: 704px;
+    height: 74px;
+  }
+
+  @media (max-width: 768px) {
+    width: 335px;
+    height: 57px;
+    padding: 11px 20px;
+  }
 `;
 
 export const MenuSection = styled.div`
@@ -33,6 +55,15 @@ export const MenuSection = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 1440px) {
+    width: 147px;
+    gap: 32px;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const GetButton = styled.div`
@@ -53,12 +84,29 @@ export const MobLogo = styled.img`
   width: 182px;
   height: 17px;
   color: var(--white);
+
+  @media (max-width: 1440px) {
+    width: 42px;
+    content: url(${props => props.mobileSrc});
+  }
 `;
 
 export const UserSection = styled.div`
+  width: 400px;
+  height: 42px;
   display: flex;
+  justify-content: end;
   align-items: center;
   gap: 8px;
+
+  @media (max-width: 1440px) {
+    width: 175px;
+    gap: 16px;
+  }
+
+  @media (max-width: 768px) {
+    gap: 10px;
+  }
 `;
 
 export const UserIcon = styled.div`
@@ -76,6 +124,12 @@ export const UserIcon = styled.div`
   letter-spacing: -0.02em;
   text-align: center;
   color: var(--white);
+
+  @media (max-width: 768px) {
+    line-height: 16px;
+    width: 35px;
+    height: 35px;
+  }
 `;
 
 export const UserName = styled.div`
@@ -86,6 +140,10 @@ export const UserName = styled.div`
   text-align: center;
   color: var(--white);
   margin-right: 8px;
+
+  @media (max-width: 1440px) {
+    display: none;
+  }
 `;
 
 export const LogoutButton = styled.div`
@@ -106,28 +164,72 @@ export const LogoutButton = styled.div`
     background-color: var(--white);
     border: 1px solid rgba(249, 249, 249, 0.2);
   }
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+export const UserMenu = styled.img`
+  @media (min-width: 769px) {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+    color: var(--white);
+  }
 `;
 
 export const BodySection = styled.div`
-  width: 1280px;
+  width: 1216px;
   height: 700px;
   background-color: var(--black);
   display: flex;
   flex-direction: row;
   gap: 16px;
+
+  @media (max-width: 1440px) {
+    width: 704px;
+    height: 1015px;
+    flex-direction: column;
+  }
+
+  @media (max-width: 768px) {
+    width: 335px;
+    height: 876px;
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 export const SidebarSection = styled.div`
-  gap: 20px;
   width: 353px;
   height: 651px;
   background-color: var(--lightblack);
   border-radius: 30px;
   padding: 20px;
+  gap: 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: left;
+
+  @media (max-width: 1440px) {
+    width: 704px;
+    height: 336px;
+    flex-direction: row;
+    padding: 32px;
+    gap: 32px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 335px;
+    height: 484px;
+    padding: 20px;
+    gap: 20px;
+  }
 `;
 
 export const FiltersSection = styled.div`
@@ -139,6 +241,11 @@ export const FiltersSection = styled.div`
   justify-content: flex-start;
   align-items: left;
   gap: 8px;
+
+  @media (max-width: 1440px) {
+    width: 295px;
+    height: 244px;
+  }
 `;
 export const FilteText = styled.div`
   font-size: 14px;
@@ -149,6 +256,17 @@ export const FilteText = styled.div`
   color: var(--white);
   margin-left: 14px;
   margin-top: 20px;
+
+  @media (max-width: 1440px) {
+    margin-top: 0px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 12px;
+    margin-top: 0px;
+  }
 `;
 
 export const InputWrapper = styled.div`
@@ -181,6 +299,19 @@ export const Input = styled.input`
     border: 1px solid rgba(249, 249, 249, 0.1);
     outline: none;
   }
+
+  @media (max-width: 1440px) {
+    width: 295px;
+  }
+  @media (max-width: 768px) {
+    width: 295px;
+    height: 44px;
+    padding: 14px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.02em;
+  }
 `;
 
 export const ApplyButton = styled.button`
@@ -198,6 +329,20 @@ export const ApplyButton = styled.button`
   font-weight: 700;
   cursor: pointer;
   margin-top: 12px;
+
+  @media (max-width: 1440px) {
+  }
+
+  @media (max-width: 768px) {
+    width: 90px;
+    height: 38px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: 0.02em;
+    text-align: left;
+  }
 `;
 
 export const BookList = styled.div`
@@ -246,6 +391,15 @@ export const WorkoutSection = styled.div`
   align-items: start;
   gap: 20px;
   background-color: var(--darkgray);
+
+  @media (max-width: 1440px) {
+    height: 272px;
+  }
+  @media (max-width: 768px) {
+    width: 295px;
+    height: 2250px;
+    gap: 20px;
+  }
 `;
 
 export const WorkoutTitle = styled.h3`
@@ -256,6 +410,14 @@ export const WorkoutTitle = styled.h3`
   color: var(--white);
   text-align: left;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    margin-bottom: 0px;
+  }
 `;
 
 export const WorkoutStep = styled.div`
@@ -266,6 +428,10 @@ export const WorkoutStep = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+
+  @media (max-width: 768px) {
+    width: 255px;
+  }
 `;
 
 export const WorkoutIcon = styled.div`
@@ -276,8 +442,23 @@ export const WorkoutIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
   font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  text-align: center;
+
   color: var(--lightblack);
+
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
 `;
 
 export const WorkoutDescription = styled.div`
@@ -292,6 +473,14 @@ export const WorkoutDescription = styled.div`
   span {
     color: var(--lightgray);
   }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: left;
+  }
 `;
 
 export const MyLibraryBlok = styled.div`
@@ -301,6 +490,10 @@ export const MyLibraryBlok = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 768px) {
+    width: 244px;
+  }
 `;
 
 export const MyLibraryLink = styled.a`
@@ -366,6 +559,10 @@ export const Quoteoftheday = styled.div`
   span {
     color: var(--white);
   }
+
+  @media (max-width: 1440px) {
+    display: none;
+  }
 `;
 
 export const RecommendedSection = styled.div`
@@ -374,6 +571,17 @@ export const RecommendedSection = styled.div`
   background-color: var(--lightblack);
   border-radius: 30px;
   padding: 40px;
+
+  @media (max-width: 1440px) {
+    width: 704px;
+    height: 663px;
+  }
+
+  @media (max-width: 768px) {
+    width: 335px;
+    height: 382px;
+    padding: 20px;
+  }
 `;
 
 export const RecommendedBlock = styled.div`
@@ -383,6 +591,15 @@ export const RecommendedBlock = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: start;
+
+  @media (max-width: 1440px) {
+    width: 624px;
+  }
+
+  @media (max-width: 768px) {
+    width: 295px;
+    height: 32px;
+  }
 `;
 
 export const RecomText = styled.div`
@@ -392,6 +609,11 @@ export const RecomText = styled.div`
   letter-spacing: 0.02em;
   text-align: left;
   color: var(--white);
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+    line-height: 20px;
+  }
 `;
 
 export const ArrowNavigation = styled.div`
@@ -411,9 +633,20 @@ export const ArrowButton = styled.button`
   justify-content: center;
   align-items: center;
 
+  @media (max-width: 768px) {
+    width: 32px;
+    height: 32px;
+
+    img {
+      width: 16px;
+      height: 16px;
+      filter: brightness(0) invert(1);
+    }
+  }
+
   img {
     width: 20px;
     height: 20px;
-    filter: brightness(0) invert(1); /* Этот фильтр сделает иконки белыми */
+    filter: brightness(0) invert(1);
   }
 `;
