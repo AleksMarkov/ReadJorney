@@ -166,7 +166,7 @@ export const LogoutButton = styled.div`
 
   &:hover {
     color: var(--lightblack);
-    background-color: var(--white);
+    background-color: var (--white);
     border: 1px solid rgba(249, 249, 249, 0.2);
   }
   @media (max-width: 768px) {
@@ -252,6 +252,7 @@ export const FiltersSection = styled.div`
     height: 244px;
   }
 `;
+
 export const FilteText = styled.div`
   font-size: 14px;
   font-weight: 500;
@@ -437,7 +438,7 @@ export const WorkoutDescription = styled.div`
   line-height: 18px;
   letter-spacing: -0.02em;
   text-align: left;
-  color: var(--white);
+  color: var (--white);
   flex: 1;
 
   span {
@@ -521,9 +522,6 @@ export const Quoteoftheday = styled.div`
     letter-spacing: -0.02em;
     text-align: left;
     color: var(--lightgray);
-    // overflow: hidden;
-    // white-space: nowrap;
-    // text-overflow: ellipsis;
   }
 
   span {
@@ -540,46 +538,37 @@ export const RecommendedSection = styled.div`
   height: 651px;
   background-color: var(--lightblack);
   border-radius: 30px;
-  padding: 40px;
+  padding: 40px 40px 27px 40px;
 
   @media (max-width: 1440px) {
     width: 704px;
     height: 663px;
+    padding: 40px;
   }
 
   @media (max-width: 768px) {
     width: 335px;
     height: 382px;
-    padding: 20px;
+    padding: 40px 20px;
   }
 `;
 
 export const RecommendedBlock = styled.div`
-export const PopupMenuItem = styled.div
-  font-weight: 500;
-  line-height: 18px;
-  letter-spacing: -0.02em;
-  text-align: left;
-  color: var(--white);
-  padding: 10px 0;
-  cursor: pointer;
-
-  &:hover {
-    color: #4f92f7;
-  }
-;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: start;
+  margin-bottom: 27px;
 
   @media (max-width: 1440px) {
     width: 624px;
+    margin-bottom: 20px;
   }
 
   @media (max-width: 768px) {
     width: 295px;
     height: 32px;
+    margin-bottom: 22px;
   }
 `;
 
@@ -638,13 +627,13 @@ export const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /
+  background-color: rgba(0, 0, 0, 0.6);
   display: ${props => (props.isVisible ? 'block' : 'none')};
   z-index: 999;
 
   @media (min-width: 769px) {
     display: none;
-  } 
+  }
 `;
 
 export const PopupMenu = styled.div`
@@ -652,17 +641,14 @@ export const PopupMenu = styled.div`
   top: 0;
   left: 155px;
   width: 200px;
-  height: 100%; /* Высота 100% */
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Разделение элементов */
+  justify-content: space-between;
   align-items: center;
   background-color: var(--darkgray);
   padding: 40px 20px;
-  display: ${props =>
-    props.isVisible
-      ? 'flex'
-      : 'none'}; /* Изменение на flex для flex-контейнера */
+  display: ${props => (props.isVisible ? 'flex' : 'none')};
   z-index: 1000;
 
   @media (min-width: 769px) {
@@ -684,7 +670,7 @@ export const PopupMenuButton = styled.div`
   line-height: 18px;
   letter-spacing: 0.02em;
   text-align: center;
-  margin-top: auto; /* Добавлено */
+  margin-top: auto;
 
   &:hover {
     color: var(--lightblack);
@@ -715,4 +701,77 @@ export const CloseButton = styled.div`
   @media (min-width: 769px) {
     display: none;
   }
+`;
+
+export const BookList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 20px;
+  row-gap: 27px;
+
+  @media (max-width: 1440px) {
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 25px;
+    // row-gap: 27px;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 21px;
+    // row-gap: 27px;
+  }
+`;
+
+export const BookItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--lightblack);
+  text-align: center;
+`;
+
+export const BookCover = styled.img`
+  width: 137px;
+  height: 208px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 8px;
+`;
+export const BookBlock = styled.div`
+  width: 137px;
+  height: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  @media (max-width: 1440px) {
+    height: 31px;
+  }
+  @media (max-width: 768px) {
+    height: 32px;
+  }
+`;
+export const BookTitle = styled.div`
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: var(--white);
+  width: 137px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export const BookAuthor = styled.div`
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: var(--lightgray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

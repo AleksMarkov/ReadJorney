@@ -8,14 +8,18 @@ import './index.css';
 import GlobalStyles from 'GlobalStyles';
 import store from './redux/store';
 import { AuthProvider } from './context/AuthContext';
+import { BookProvider } from './context/BookContext'; // Import BookProvider
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter basename="/ReadJorney">
         <AuthProvider>
-          <GlobalStyles />
-          <App />
+          <BookProvider>
+            {' '}
+            <GlobalStyles />
+            <App />
+          </BookProvider>
         </AuthProvider>
       </BrowserRouter>
     </Provider>

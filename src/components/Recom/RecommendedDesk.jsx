@@ -33,11 +33,17 @@ import {
   RecomText,
   ArrowNavigation,
   ArrowButton,
+  BookList,
+  BookItem,
+  BookCover,
+  BookTitle,
+  BookAuthor,
   UserMenu,
   PopupMenu,
   CloseButton,
   Overlay,
   PopupMenuButton,
+  BookBlock,
 } from './RecommendedDesk.styled';
 import logoImage from '../../assets/svg/Logomobile.svg';
 import logotablet from '../../assets/svg/Logotablet.svg';
@@ -48,11 +54,13 @@ import usermenu from '../../assets/svg/usermenu.svg';
 import closeIcon from '../../assets/svg/x-close.svg';
 
 import { AuthContext } from '../../context/AuthContext';
-import { clearScreenSize } from '../../redux/screenSizeSlice'; // Пример очистки состояния
+import { BookContext } from '../../context/BookContext';
+import { clearScreenSize } from '../../redux/screenSizeSlice';
 import Notification from '../Notification/Notification';
 
 const RecommendedDesk = () => {
-  const { signout } = useContext(AuthContext);
+  const { signout, user } = useContext(AuthContext);
+  const { recommendedBooks, loading } = useContext(BookContext);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [notification, setNotification] = useState(null);
   const popupRef = useRef(null);
@@ -117,7 +125,7 @@ const RecommendedDesk = () => {
         </MenuSection>
         <UserSection>
           <UserIcon>I</UserIcon>
-          <UserName>Ilona Ratushniak</UserName>
+          <UserName>{user?.name || 'User'}</UserName>
           <LogoutButton onClick={handleLogout}>Log out</LogoutButton>
           <UserMenu
             src={usermenu}
@@ -126,9 +134,7 @@ const RecommendedDesk = () => {
           />
         </UserSection>
       </HeaderSection>
-
       <Overlay isVisible={isMenuVisible} onClick={toggleMenuVisibility} />
-
       <PopupMenu ref={popupRef} isVisible={isMenuVisible}>
         <CloseButton onClick={toggleMenuVisibility}>
           <img src={closeIcon} alt="Close" />
@@ -143,7 +149,6 @@ const RecommendedDesk = () => {
         </MenuSection>
         <PopupMenuButton onClick={handleLogout}>Log out</PopupMenuButton>
       </PopupMenu>
-
       <BodySection>
         <SidebarSection>
           <FiltersSection>
@@ -196,6 +201,21 @@ const RecommendedDesk = () => {
               </ArrowButton>
             </ArrowNavigation>
           </RecommendedBlock>
+          <BookList>
+            {loading ? (
+              <p>Loading...</p>
+            ) : (
+              recommendedBooks.map(book => (
+                <BookItem key={book._id}>
+                  <BookCover src={book.imageUrl} alt={book.title} />
+                  <BookBlock>
+                    <BookTitle>{book.title}</BookTitle>
+                    <BookAuthor>{book.author}</BookAuthor>
+                  </BookBlock>
+                </BookItem>
+              ))
+            )}
+          </BookList>
         </RecommendedSection>
       </BodySection>
     </Container>
