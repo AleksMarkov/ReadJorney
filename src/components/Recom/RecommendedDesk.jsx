@@ -78,7 +78,12 @@ const RecommendedDesk = () => {
   const bookLS = useSelector(selectBookLS);
   const screenSize = useScreenSize();
 
-  // Determine the number of books to display based on screen size
+  // Filter input states
+  const [filterTitle, setFilterTitle] = useState('');
+  const [filterAuthor, setFilterAuthor] = useState('');
+  const [filteredBooks, setFilteredBooks] = useState(bookLS);
+
+  // Memoize getDisplayCount to avoid re-creating it on every render
   const getDisplayCount = useCallback(() => {
     if (screenSize >= 320 && screenSize <= 767) {
       return 2;
@@ -90,27 +95,45 @@ const RecommendedDesk = () => {
     return 10;
   }, [screenSize]);
 
-  const [visibleStart, setVisibleStart] = useState(0);
-  const [visibleEnd, setVisibleEnd] = useState(getDisplayCount());
-
   useEffect(() => {
     setVisibleStart(0);
     setVisibleEnd(getDisplayCount());
   }, [getDisplayCount]);
+
+  useEffect(() => {
+    // Update filteredBooks when bookLS or filters change
+    const filtered = bookLS.filter(book => {
+      return (
+        (filterTitle === '' ||
+          book.title.toLowerCase().includes(filterTitle.toLowerCase())) &&
+        (filterAuthor === '' ||
+          book.author.toLowerCase().includes(filterAuthor.toLowerCase()))
+      );
+    });
+    setFilteredBooks(filtered);
+  }, [bookLS, filterTitle, filterAuthor]);
+
+  const handleApplyFilters = () => {
+    setVisibleStart(0);
+    setVisibleEnd(getDisplayCount());
+  };
+
+  const [visibleStart, setVisibleStart] = useState(0);
+  const [visibleEnd, setVisibleEnd] = useState(getDisplayCount());
 
   const handleNext = async () => {
     const displayCount = getDisplayCount();
     const newStart = visibleStart + displayCount;
     const newEnd = visibleEnd + displayCount;
 
-    if (newEnd <= bookLS.length) {
+    if (newEnd <= filteredBooks.length) {
       setVisibleStart(newStart);
       setVisibleEnd(newEnd);
     } else if (page < totalPages) {
       await fetchNextPage(); // Wait for the next page to be fetched
       setVisibleStart(newStart);
       setVisibleEnd(newEnd);
-    } else if (page === totalPages && newEnd > bookLS.length) {
+    } else if (page === totalPages && newEnd > filteredBooks.length) {
       setVisibleStart(newStart);
       setVisibleEnd(newEnd);
     }
@@ -164,18 +187,6 @@ const RecommendedDesk = () => {
       );
     }
   };
-  // const handleLogout = async () => {
-  //   try {
-  //     await signout();
-  //     dispatch(clearScreenSize());
-  //     localStorage.clear();
-  //     navigate('/login');
-  //   } catch (error) {
-  //     setNotification(
-  //       error.response?.data?.message || 'Logout failed. Please try again.'
-  //     );
-  //   }
-  // };
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -237,12 +248,22 @@ const RecommendedDesk = () => {
           <FiltersSection>
             <FilteText>Filters:</FilteText>
             <InputWrapper>
-              <Input type="text" placeholder="Book title" />
+              <Input
+                type="text"
+                placeholder="Book title"
+                value={filterTitle}
+                onChange={e => setFilterTitle(e.target.value)}
+              />
             </InputWrapper>
             <InputWrapper>
-              <Input type="text" placeholder="The author" />
+              <Input
+                type="text"
+                placeholder="The author"
+                value={filterAuthor}
+                onChange={e => setFilterAuthor(e.target.value)}
+              />
             </InputWrapper>
-            <ApplyButton>To apply</ApplyButton>
+            <ApplyButton onClick={handleApplyFilters}>To apply</ApplyButton>
           </FiltersSection>
           <WorkoutSection>
             <WorkoutTitle>Start your workout</WorkoutTitle>
@@ -286,12 +307,13 @@ const RecommendedDesk = () => {
               <ArrowButton
                 onClick={handleNext}
                 disabled={
-                  (visibleEnd >= bookLS.length && page === totalPages) ||
+                  (visibleEnd >= filteredBooks.length && page === totalPages) ||
                   loading
                 }
                 style={{
                   opacity:
-                    (visibleEnd >= bookLS.length && page === totalPages) ||
+                    (visibleEnd >= filteredBooks.length &&
+                      page === totalPages) ||
                     loading
                       ? 0.2
                       : 1,
@@ -302,10 +324,10 @@ const RecommendedDesk = () => {
             </ArrowNavigation>
           </RecommendedBlock>
           <BookList>
-            {loading && bookLS.length === 0 ? (
+            {loading && filteredBooks.length === 0 ? (
               <Loader />
             ) : (
-              bookLS.slice(visibleStart, visibleEnd).map(book => (
+              filteredBooks.slice(visibleStart, visibleEnd).map(book => (
                 <BookItem key={book._id}>
                   <BookCover src={book.imageUrl} alt={book.title} />
                   <BookBlock>
