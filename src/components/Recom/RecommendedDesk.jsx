@@ -59,7 +59,7 @@ import chevronleft from '../../assets/svg/chevron-left.svg';
 import chevronright from '../../assets/svg/chevron-right.svg';
 import usermenu from '../../assets/svg/usermenu.svg';
 import closeIcon from '../../assets/svg/x-close.svg';
-
+import BookModal from './BookModal/BookModal';
 import { AuthContext } from '../../context/AuthContext';
 import { BookContext } from '../../context/BookContext';
 import { clearScreenSize } from '../../redux/screenSizeSlice';
@@ -197,6 +197,16 @@ const RecommendedDesk = () => {
     };
   }, []);
 
+  const [selectedBook, setSelectedBook] = useState(null);
+
+  const handleBookClick = book => {
+    setSelectedBook(book);
+  };
+
+  const closeModal = () => {
+    setSelectedBook(null);
+  };
+
   return (
     <Container>
       {notification && (
@@ -331,7 +341,7 @@ const RecommendedDesk = () => {
               <Loader />
             ) : (
               filteredBooks.slice(visibleStart, visibleEnd).map(book => (
-                <BookItem key={book._id}>
+                <BookItem key={book._id} onClick={() => handleBookClick(book)}>
                   <BookCover src={book.imageUrl} alt={book.title} />
                   <BookBlock>
                     <BookTitle>{book.title}</BookTitle>
@@ -343,6 +353,8 @@ const RecommendedDesk = () => {
           </BookList>
         </RecommendedSection>
       </BodySection>
+
+      {selectedBook && <BookModal book={selectedBook} onClose={closeModal} />}
     </Container>
   );
 };
