@@ -1,4 +1,4 @@
-//RecommendedDesk.styled.jsx
+//MyLibrary.styled.jsx
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -221,11 +221,11 @@ export const SidebarSection = styled.div`
   background-color: var(--lightblack);
   border-radius: 30px;
   padding: 20px;
-  gap: 20px;
+  gap: 78px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: left;
+  justify-content: center;
+  align-items: center;
 
   @media (max-width: 1440px) {
     width: 704px;
@@ -238,7 +238,7 @@ export const SidebarSection = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     width: 335px;
-    height: 484px;
+    height: 528px;
     padding: 20px;
     gap: 20px;
   }
@@ -246,7 +246,7 @@ export const SidebarSection = styled.div`
 
 export const FiltersSection = styled.div`
   width: 313px;
-  height: 216px;
+  height: 27px;
   background-color: var(--lightblack);
   display: flex;
   flex-direction: column;
@@ -256,7 +256,7 @@ export const FiltersSection = styled.div`
 
   @media (max-width: 1440px) {
     width: 295px;
-    height: 244px;
+    height: 278px;
   }
 `;
 
@@ -289,7 +289,7 @@ export const InputWrapper = styled.div`
   width: 100%;
 `;
 
-export const Input = styled.input`
+export const Info = styled.div`
   width: 313px;
   height: 50px;
   padding: 16px;
@@ -304,14 +304,14 @@ export const Input = styled.input`
   letter-spacing: -0.02em;
   text-align: left;
 
-  &::placeholder {
+  span {
     color: var(--lightgray);
   }
 
-  &:focus {
-    border: 1px solid rgba(249, 249, 249, 0.1);
-    outline: none;
-  }
+  // &:focus {
+  //   border: 1px solid rgba(249, 249, 249, 0.1);
+  //   outline: none;
+  // }
 
   @media (max-width: 1440px) {
     width: 295px;
@@ -350,6 +350,7 @@ export const ApplyButton = styled.button`
   }
 
   @media (max-width: 1440px) {
+    margin-top: 35px;
   }
 
   @media (max-width: 768px) {
@@ -361,12 +362,13 @@ export const ApplyButton = styled.button`
     line-height: 18px;
     letter-spacing: 0.02em;
     text-align: left;
+    margin-top: 12px;
   }
 `;
 
 export const WorkoutSection = styled.div`
   width: 313px;
-  height: 272px;
+  height: 259px;
   border-radius: 12px;
   padding: 20px;
   display: flex;
@@ -381,8 +383,8 @@ export const WorkoutSection = styled.div`
   }
   @media (max-width: 768px) {
     width: 295px;
-    height: 2250px;
-    gap: 20px;
+    height: 244px;
+    gap: 0px;
   }
 `;
 
@@ -392,15 +394,17 @@ export const WorkoutTitle = styled.h3`
   line-height: 20px;
   letter-spacing: -0.02em;
   color: var(--white);
+  background-color: var(--darkgray);
   text-align: left;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
 
   @media (max-width: 768px) {
     font-size: 18px;
     font-weight: 700;
     line-height: 18px;
     letter-spacing: -0.02em;
-    margin-bottom: 0px;
+    text-align: left;
+    margin-bottom: 14px;
   }
 `;
 
@@ -474,9 +478,11 @@ export const MyLibraryBlok = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  background-color: var(--darkgray);
 
   @media (max-width: 768px) {
-    width: 244px;
+    width: 253px;
+    margin-top: 10px;
   }
 `;
 
@@ -489,7 +495,7 @@ export const MyLibraryLink = styled.a`
   text-decoration: underline;
   cursor: pointer;
   color: var(--lightgray);
-  background-color: var(--lightblack);
+  background-color: var(--darkgray);
 
   &:hover {
     color: var(--white);
@@ -720,19 +726,19 @@ export const CloseButton = styled.div`
 
 export const BookList = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   column-gap: 20px;
-  row-gap: 27px;
-
+  // row-gap: 27px;
+  background-color: var(--darkgray);
   @media (max-width: 1440px) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     column-gap: 25px;
     // row-gap: 27px;
   }
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 21px;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
     // row-gap: 27px;
   }
 `;
@@ -746,15 +752,15 @@ export const BookItem = styled.div`
 `;
 
 export const BookCover = styled.img`
-  width: 137px;
-  height: 208px;
+  width: 71px;
+  height: 107px;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 8px;
 `;
 export const BookBlock = styled.div`
-  width: 137px;
-  height: 32px;
+  width: 71px;
+  height: 26px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -763,20 +769,23 @@ export const BookBlock = styled.div`
     height: 31px;
   }
   @media (max-width: 768px) {
-    height: 32px;
+    height: 26px;
   }
 `;
 export const BookTitle = styled.div`
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 700;
-  line-height: 18px;
+  line-height: 12px;
   letter-spacing: -0.02em;
   text-align: left;
   color: var(--white);
-  width: 137px;
+  width: 71px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media (max-width: 768px) {
+  }
 `;
 
 export const BookAuthor = styled.div`

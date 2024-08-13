@@ -219,10 +219,10 @@ const RecommendedDesk = () => {
       <HeaderSection>
         <MobLogo src={logotablet} mobilesrc={logoImage} alt="logo" />
         <MenuSection>
-          <Link to="#home">
+          <Link to="/recommended">
             <GetButton>Home</GetButton>
           </Link>
-          <Link to="#my-library">
+          <Link to="/library">
             <GetButton>My Library</GetButton>
           </Link>
         </MenuSection>
@@ -248,11 +248,11 @@ const RecommendedDesk = () => {
           <img src={closeIcon} alt="Close" />
         </CloseButton>
         <MenuSection>
-          <Link to="#home">
-            <GetButton>Home</GetButton>
+          <Link to="/recommended">
+            <GetButton isActive={true}>Home</GetButton>
           </Link>
-          <Link to="#my-library">
-            <GetButton>My Library</GetButton>
+          <Link to="/library">
+            <GetButton isActive={false}>My Library</GetButton>
           </Link>
         </MenuSection>
         <PopupMenuButton onClick={handleLogout}>Log out</PopupMenuButton>

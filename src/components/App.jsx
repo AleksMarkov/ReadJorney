@@ -6,6 +6,7 @@ import Loader from './Loader/Loader';
 const Reg = lazy(() => import('./Reg/Reg'));
 const Log = lazy(() => import('./Log/Log'));
 const RecommendedDesk = lazy(() => import('./Recom/RecommendedDesk'));
+const MyLibrary = lazy(() => import('./MyLibrary/MyLibrary'));
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/registration" element={<Reg />} />
         <Route path="/login" element={<Log />} />
         <Route path="/recommended" element={<RecommendedDesk />} />
+        <Route path="/library" element={<MyLibrary />} />
         <Route path="*" element={<Navigate to="/registration" />} />
       </Routes>
     </Suspense>
