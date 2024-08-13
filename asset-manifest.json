@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/ReadJorney/static/css/main.03b7374c.css",
-    "main.js": "/ReadJorney/static/js/main.a520a77a.js",
+    "main.js": "/ReadJorney/static/js/main.26f00a64.js",
     "static/js/125.724381d3.chunk.js": "/ReadJorney/static/js/125.724381d3.chunk.js",
     "static/js/517.a4c2e264.chunk.js": "/ReadJorney/static/js/517.a4c2e264.chunk.js",
-    "static/js/535.f9068b50.chunk.js": "/ReadJorney/static/js/535.f9068b50.chunk.js",
+    "static/js/535.77734fc3.chunk.js": "/ReadJorney/static/js/535.77734fc3.chunk.js",
     "static/js/143.2a8b8a7c.chunk.js": "/ReadJorney/static/js/143.2a8b8a7c.chunk.js",
     "static/media/iPhone.jpg": "/ReadJorney/static/media/iPhone.d6f371be7cbf18c03067.jpg",
     "static/media/phoneMockup.png": "/ReadJorney/static/media/phoneMockup.e08349f2920a9e3749cc.png",
@@ -22,14 +22,14 @@
     "static/media/x-close.svg": "/ReadJorney/static/media/x-close.dfdd8a3ce6d5134ecd24cc92f1672d18.svg",
     "static/media/usermenu.svg": "/ReadJorney/static/media/usermenu.db223cd27c1047cd6e43bac542d68496.svg",
     "main.03b7374c.css.map": "/ReadJorney/static/css/main.03b7374c.css.map",
-    "main.a520a77a.js.map": "/ReadJorney/static/js/main.a520a77a.js.map",
+    "main.26f00a64.js.map": "/ReadJorney/static/js/main.26f00a64.js.map",
     "125.724381d3.chunk.js.map": "/ReadJorney/static/js/125.724381d3.chunk.js.map",
     "517.a4c2e264.chunk.js.map": "/ReadJorney/static/js/517.a4c2e264.chunk.js.map",
-    "535.f9068b50.chunk.js.map": "/ReadJorney/static/js/535.f9068b50.chunk.js.map",
+    "535.77734fc3.chunk.js.map": "/ReadJorney/static/js/535.77734fc3.chunk.js.map",
     "143.2a8b8a7c.chunk.js.map": "/ReadJorney/static/js/143.2a8b8a7c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.03b7374c.css",
-    "static/js/main.a520a77a.js"
+    "static/js/main.26f00a64.js"
   ]
 }
