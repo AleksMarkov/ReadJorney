@@ -220,10 +220,10 @@ const RecommendedDesk = () => {
         <MobLogo src={logotablet} mobilesrc={logoImage} alt="logo" />
         <MenuSection>
           <Link to="/recommended">
-            <GetButton>Home</GetButton>
+            <GetButton isActive={true}>Home</GetButton>
           </Link>
           <Link to="/library">
-            <GetButton>My Library</GetButton>
+            <GetButton isActive={false}>My Library</GetButton>
           </Link>
         </MenuSection>
         <UserSection>
@@ -295,7 +295,7 @@ const RecommendedDesk = () => {
                 <span>define a goal, choose a period, start training.</span>
               </WorkoutDescription>
             </WorkoutStep>
-            <MyLibraryBlok>
+            <MyLibraryBlok onClick={() => navigate('/library')}>
               <MyLibraryLink>My library</MyLibraryLink>
               <Arrow src={leftarrow} alt="left arrow" />
             </MyLibraryBlok>

@@ -1,3 +1,4 @@
+//MyLibrary.jsx
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -48,6 +49,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { BookContext } from '../../context/BookContext';
 import { clearScreenSize } from '../../redux/screenSizeSlice';
 import Notification from '../Notification/Notification';
+import { useScreenSize } from '../../hooks/useScreenSize'; // Используем хук для определения размера экрана
 import { selectBookLS } from '../../redux/bookLSSlice';
 
 const MyLibrary = () => {
@@ -60,6 +62,7 @@ const MyLibrary = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const bookLS = useSelector(selectBookLS);
+  const screenSize = useScreenSize(); // Определяем текущий размер экрана
 
   const toggleMenuVisibility = () => {
     setIsMenuVisible(!isMenuVisible);
@@ -150,10 +153,10 @@ const MyLibrary = () => {
         </CloseButton>
         <MenuSection>
           <Link to="/recommended">
-            <GetButton>Home</GetButton>
+            <GetButton isActive={false}>Home</GetButton>
           </Link>
           <Link to="/library">
-            <GetButton>My Library</GetButton>
+            <GetButton isActive={true}>My Library</GetButton>
           </Link>
         </MenuSection>
         <PopupMenuButton onClick={handleLogout}>Log out</PopupMenuButton>
@@ -161,7 +164,9 @@ const MyLibrary = () => {
       <BodySection>
         <SidebarSection>
           <FiltersSection>
-            <FilteText>Create your library:</FilteText>
+            <FilteText>
+              {screenSize >= 1440 ? 'Create your library:' : 'Filter:'}
+            </FilteText>
             <InputWrapper>
               <Info>
                 <span>Book title:</span>{' '}
@@ -202,7 +207,7 @@ const MyLibrary = () => {
                 ))
               )}
             </BookList>
-            <MyLibraryBlok>
+            <MyLibraryBlok onClick={() => navigate('/recommended')}>
               <MyLibraryLink>Home</MyLibraryLink>
               <Arrow src={leftarrow} alt="left arrow" />
             </MyLibraryBlok>

@@ -246,7 +246,7 @@ export const SidebarSection = styled.div`
 
 export const FiltersSection = styled.div`
   width: 313px;
-  height: 27px;
+  height: 274px;
   background-color: var(--lightblack);
   display: flex;
   flex-direction: column;
@@ -408,69 +408,6 @@ export const WorkoutTitle = styled.h3`
   }
 `;
 
-export const WorkoutStep = styled.div`
-  width: 252px;
-  height: 54px;
-  display: flex;
-  gap: 12px;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-
-  @media (max-width: 768px) {
-    width: 255px;
-  }
-`;
-
-export const WorkoutIcon = styled.div`
-  width: 44px;
-  height: 44px;
-  background-color: var(--white);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 20px;
-  letter-spacing: -0.02em;
-  text-align: center;
-
-  color: var(--lightblack);
-
-  @media (max-width: 768px) {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 18px;
-    letter-spacing: -0.02em;
-    text-align: center;
-  }
-`;
-
-export const WorkoutDescription = styled.div`
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 18px;
-  letter-spacing: -0.02em;
-  text-align: left;
-  color: var (--white);
-  flex: 1;
-
-  span {
-    color: var(--lightgray);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 18px;
-    letter-spacing: -0.02em;
-    text-align: left;
-  }
-`;
-
 export const MyLibraryBlok = styled.div`
   width: 273px;
   height: 24px;
@@ -510,45 +447,6 @@ export const Arrow = styled.img`
 
   &:hover {
     cursor: pointer;
-  }
-`;
-
-export const Quoteoftheday = styled.div`
-  width: 313px;
-  height: 83px;
-  border-radius: 12px;
-  padding: 20px;
-  display: flex;
-  gap: 12px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--darkgray);
-
-  &.emoji-books::before {
-    content: '📚';
-    font-size: 40px;
-    line-height: 40px;
-    display: inline-block;
-  }
-
-  p {
-    width: 219px;
-    height: 54px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 18px;
-    letter-spacing: -0.02em;
-    text-align: left;
-    color: var(--lightgray);
-  }
-
-  span {
-    color: var(--white);
-  }
-
-  @media (max-width: 1440px) {
-    display: none;
   }
 `;
 
@@ -602,43 +500,6 @@ export const RecomText = styled.div`
   @media (max-width: 768px) {
     font-size: 20px;
     line-height: 20px;
-  }
-`;
-
-export const ArrowNavigation = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-export const ArrowButton = styled.button`
-  width: 40px;
-  height: 40px;
-  border: 1px solid rgba(249, 249, 249, 0.2);
-  border-radius: 50%;
-  background: none;
-  color: var(--white);
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: ${props => (props.disabled ? 0.2 : 1)};
-  pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
-
-  @media (max-width: 768px) {
-    width: 32px;
-    height: 32px;
-
-    img {
-      width: 16px;
-      height: 16px;
-      filter: brightness(0) invert(1);
-    }
-  }
-
-  img {
-    width: 20px;
-    height: 20px;
-    filter: brightness(0) invert(1);
   }
 `;
 
