@@ -54,7 +54,6 @@ export const AuthProvider = ({ children }) => {
       await authService.signout(token);
     } catch (error) {
       console.error('Signout error:', error);
-      throw error;
     } finally {
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken');

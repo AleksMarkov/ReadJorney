@@ -69,7 +69,7 @@ import { useScreenSize } from '../../hooks/useScreenSize';
 
 const RecommendedDesk = () => {
   const { signout, user } = useContext(AuthContext);
-  const { loading, page, totalPages } = useContext(BookContext);
+  const { loading } = useContext(BookContext);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [notification, setNotification] = useState(null);
   const popupRef = useRef(null);
@@ -121,7 +121,7 @@ const RecommendedDesk = () => {
   const [visibleStart, setVisibleStart] = useState(0);
   const [visibleEnd, setVisibleEnd] = useState(getDisplayCount());
 
-  const handleNext = async () => {
+  const handleNext = () => {
     const displayCount = getDisplayCount();
     const newStart = visibleStart + displayCount;
     const newEnd = visibleEnd + displayCount;
@@ -202,6 +202,11 @@ const RecommendedDesk = () => {
   const closeModal = () => {
     setSelectedBook(null);
   };
+
+  // Важно! Проверяем, что пользователь существует перед рендерингом элементов
+  if (!user) {
+    return null; // Если пользователь не существует, ничего не рендерим
+  }
 
   return (
     <Container>
@@ -315,17 +320,10 @@ const RecommendedDesk = () => {
               </ArrowButton>
               <ArrowButton
                 onClick={handleNext}
-                disabled={
-                  (visibleEnd >= filteredBooks.length && page === totalPages) ||
-                  loading
-                }
+                disabled={visibleEnd >= filteredBooks.length || loading}
                 style={{
                   opacity:
-                    (visibleEnd >= filteredBooks.length &&
-                      page === totalPages) ||
-                    loading
-                      ? 0.2
-                      : 1,
+                    visibleEnd >= filteredBooks.length || loading ? 0.2 : 1,
                 }}
               >
                 <img src={chevronright} alt="Next" />

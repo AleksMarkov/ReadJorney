@@ -9,13 +9,13 @@ import React, {
 import bookService from '../services/bookService';
 import { AuthContext } from './AuthContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { addBooksToLS, selectBookLS } from '../redux/bookLSSlice';
+import { addBooksToLS, selectBookLS, clearBookLS } from '../redux/bookLSSlice';
 
 export const BookContext = createContext();
 
 export const BookProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const bookLS = useSelector(selectBookLS);
 
@@ -53,6 +53,13 @@ export const BookProvider = ({ children }) => {
       fetchAllBooks(); // Загружаем все книги после авторизации
     }
   }, [user, fetchAllBooks, bookLS.length]);
+
+  useEffect(() => {
+    if (!user) {
+      // Если пользователь вышел, очищаем bookLS
+      dispatch(clearBookLS());
+    }
+  }, [user, dispatch]);
 
   return (
     <BookContext.Provider
