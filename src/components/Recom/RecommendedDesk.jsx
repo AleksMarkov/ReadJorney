@@ -1,8 +1,14 @@
 //RecommendedDesk.jsx
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  useCallback,
+} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import Loader from '../Loader/Loader'; // Импорт компонента Loader
+import { useDispatch, useSelector } from 'react-redux';
+import Loader from '../Loader/Loader';
 import {
   Container,
   HeaderSection,
@@ -58,22 +64,71 @@ import { AuthContext } from '../../context/AuthContext';
 import { BookContext } from '../../context/BookContext';
 import { clearScreenSize } from '../../redux/screenSizeSlice';
 import Notification from '../Notification/Notification';
+import { selectBookLS } from '../../redux/bookLSSlice';
+import { useScreenSize } from '../../hooks/useScreenSize';
 
 const RecommendedDesk = () => {
   const { signout, user } = useContext(AuthContext);
-  const {
-    recommendedBooks,
-    loading,
-    fetchNextPage,
-    fetchPreviousPage,
-    page,
-    totalPages,
-  } = useContext(BookContext);
+  const { loading, fetchNextPage, page, totalPages } = useContext(BookContext);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [notification, setNotification] = useState(null);
   const popupRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const bookLS = useSelector(selectBookLS);
+  const screenSize = useScreenSize();
+
+  // Determine the number of books to display based on screen size
+  const getDisplayCount = useCallback(() => {
+    if (screenSize >= 320 && screenSize <= 767) {
+      return 2;
+    } else if (screenSize >= 768 && screenSize <= 1439) {
+      return 8;
+    } else if (screenSize >= 1440) {
+      return 10;
+    }
+    return 10;
+  }, [screenSize]);
+
+  const [visibleStart, setVisibleStart] = useState(0);
+  const [visibleEnd, setVisibleEnd] = useState(getDisplayCount());
+
+  useEffect(() => {
+    setVisibleStart(0);
+    setVisibleEnd(getDisplayCount());
+  }, [getDisplayCount]);
+
+  const handleNext = async () => {
+    const displayCount = getDisplayCount();
+    const newStart = visibleStart + displayCount;
+    const newEnd = visibleEnd + displayCount;
+
+    if (newEnd <= bookLS.length) {
+      setVisibleStart(newStart);
+      setVisibleEnd(newEnd);
+    } else if (page < totalPages) {
+      await fetchNextPage(); // Wait for the next page to be fetched
+      setVisibleStart(newStart);
+      setVisibleEnd(newEnd);
+    } else if (page === totalPages && newEnd > bookLS.length) {
+      setVisibleStart(newStart);
+      setVisibleEnd(newEnd);
+    }
+  };
+
+  const handlePrevious = () => {
+    const displayCount = getDisplayCount();
+    const newStart = visibleStart - displayCount;
+    const newEnd = visibleEnd - displayCount;
+
+    if (newStart >= 0) {
+      setVisibleStart(newStart);
+      setVisibleEnd(newEnd);
+    } else if (newStart < 0) {
+      setVisibleStart(0);
+      setVisibleEnd(getDisplayCount());
+    }
+  };
 
   const toggleMenuVisibility = () => {
     setIsMenuVisible(!isMenuVisible);
@@ -94,8 +149,14 @@ const RecommendedDesk = () => {
   const handleLogout = async () => {
     try {
       await signout();
+      // Clear Redux slices
       dispatch(clearScreenSize());
+      dispatch({ type: 'bookLS/clearBookLS' }); // Assuming you have an action to clear the bookLS slice
+
+      // Clear Local Storage
       localStorage.clear();
+
+      // Navigate to login page
       navigate('/login');
     } catch (error) {
       setNotification(
@@ -103,6 +164,18 @@ const RecommendedDesk = () => {
       );
     }
   };
+  // const handleLogout = async () => {
+  //   try {
+  //     await signout();
+  //     dispatch(clearScreenSize());
+  //     localStorage.clear();
+  //     navigate('/login');
+  //   } catch (error) {
+  //     setNotification(
+  //       error.response?.data?.message || 'Logout failed. Please try again.'
+  //     );
+  //   }
+  // };
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -122,7 +195,7 @@ const RecommendedDesk = () => {
         />
       )}
       <HeaderSection>
-        <MobLogo src={logotablet} mobileSrc={logoImage} alt="logo" />
+        <MobLogo src={logotablet} mobilesrc={logoImage} alt="logo" />
         <MenuSection>
           <Link to="#home">
             <GetButton>Home</GetButton>
@@ -132,7 +205,9 @@ const RecommendedDesk = () => {
           </Link>
         </MenuSection>
         <UserSection>
-          <UserIcon>I</UserIcon>
+          <UserIcon>
+            {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
+          </UserIcon>
           <UserName>{user?.name || 'User'}</UserName>
           <LogoutButton onClick={handleLogout}>Log out</LogoutButton>
           <UserMenu
@@ -142,8 +217,8 @@ const RecommendedDesk = () => {
           />
         </UserSection>
       </HeaderSection>
-      <Overlay isVisible={isMenuVisible} onClick={toggleMenuVisibility} />
-      <PopupMenu ref={popupRef} isVisible={isMenuVisible}>
+      <Overlay isvisible={isMenuVisible} onClick={toggleMenuVisibility} />
+      <PopupMenu ref={popupRef} isvisible={isMenuVisible}>
         <CloseButton onClick={toggleMenuVisibility}>
           <img src={closeIcon} alt="Close" />
         </CloseButton>
@@ -202,26 +277,35 @@ const RecommendedDesk = () => {
             <RecomText>Recommended</RecomText>
             <ArrowNavigation>
               <ArrowButton
-                onClick={fetchPreviousPage}
-                disabled={page === 1}
-                style={{ opacity: page === 1 ? 0.2 : 1 }}
+                onClick={handlePrevious}
+                disabled={visibleStart === 0}
+                style={{ opacity: visibleStart === 0 ? 0.2 : 1 }}
               >
                 <img src={chevronleft} alt="Previous" />
               </ArrowButton>
               <ArrowButton
-                onClick={fetchNextPage}
-                disabled={page === totalPages}
-                style={{ opacity: page === totalPages ? 0.2 : 1 }}
+                onClick={handleNext}
+                disabled={
+                  (visibleEnd >= bookLS.length && page === totalPages) ||
+                  loading
+                }
+                style={{
+                  opacity:
+                    (visibleEnd >= bookLS.length && page === totalPages) ||
+                    loading
+                      ? 0.2
+                      : 1,
+                }}
               >
                 <img src={chevronright} alt="Next" />
               </ArrowButton>
             </ArrowNavigation>
           </RecommendedBlock>
           <BookList>
-            {loading ? (
-              <Loader /> // Отображение Loader во время загрузки данных
+            {loading && bookLS.length === 0 ? (
+              <Loader />
             ) : (
-              recommendedBooks.map(book => (
+              bookLS.slice(visibleStart, visibleEnd).map(book => (
                 <BookItem key={book._id}>
                   <BookCover src={book.imageUrl} alt={book.title} />
                   <BookBlock>

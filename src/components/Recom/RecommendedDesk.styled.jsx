@@ -11,6 +11,13 @@ export const Container = styled.div`
   align-items: center;
   padding: 32px;
   gap: 16px;
+  margin: auto; /* Это свойство автоматически добавит одинаковые отступы сверху и снизу, чтобы элемент был в центре */
+
+  /* Чтобы полностью центрировать элемент по горизонтали и вертикали, можно использовать flexbox на уровне body или другого родительского элемента: */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   @media (max-width: 1440px) {
     width: 768px;
@@ -92,7 +99,7 @@ export const MobLogo = styled.img`
 
   @media (max-width: 1440px) {
     width: 42px;
-    content: url(${props => props.mobileSrc});
+    content: url(${props => props.mobilesrc});
   }
 `;
 
@@ -630,7 +637,7 @@ export const Overlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
-  display: ${props => (props.isVisible ? 'block' : 'none')};
+  display: ${props => (props.isvisible ? 'block' : 'none')};
   z-index: 999;
 
   @media (min-width: 769px) {
@@ -650,7 +657,7 @@ export const PopupMenu = styled.div`
   align-items: center;
   background-color: var(--darkgray);
   padding: 40px 20px;
-  display: ${props => (props.isVisible ? 'flex' : 'none')};
+  display: ${props => (props.isvisible ? 'flex' : 'none')};
   z-index: 1000;
 
   @media (min-width: 769px) {

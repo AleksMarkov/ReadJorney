@@ -8,27 +8,31 @@ import React, {
 } from 'react';
 import bookService from '../services/bookService';
 import { AuthContext } from './AuthContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { addBooksToLS, selectBookLS } from '../redux/bookLSSlice';
 
 export const BookContext = createContext();
 
 export const BookProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
-  const [recommendedBooks, setRecommendedBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const dispatch = useDispatch();
+  const bookLS = useSelector(selectBookLS);
 
-  // Используем useCallback, чтобы гарантировать, что функция не изменится при каждом рендере
   const fetchBooks = useCallback(
     async page => {
       if (user && user.token) {
         setLoading(true);
         try {
+          const limit = 10;
           const { results, totalPages } = await bookService.getRecommendedBooks(
             user.token,
-            page
+            page,
+            limit
           );
-          setRecommendedBooks(results);
+          dispatch(addBooksToLS(results));
           setTotalPages(totalPages);
         } catch (error) {
           console.error('Error fetching recommended books:', error);
@@ -37,32 +41,27 @@ export const BookProvider = ({ children }) => {
         }
       }
     },
-    [user]
+    [user, dispatch]
   );
 
   useEffect(() => {
-    fetchBooks(page);
-  }, [user, page, fetchBooks]); // Теперь fetchBooks можно безопасно включить в зависимости
-
-  const fetchNextPage = () => {
-    if (page < totalPages) {
-      setPage(prevPage => prevPage + 1);
+    if (bookLS.length === 0 || page > 1) {
+      fetchBooks(page);
     }
-  };
+  }, [user, page, fetchBooks, bookLS.length]);
 
-  const fetchPreviousPage = () => {
-    if (page > 1) {
-      setPage(prevPage => prevPage - 1);
+  const fetchNextPage = async () => {
+    if (page < totalPages) {
+      await setPage(prevPage => prevPage + 1);
+      await fetchBooks(page + 1);
     }
   };
 
   return (
     <BookContext.Provider
       value={{
-        recommendedBooks,
         loading,
         fetchNextPage,
-        fetchPreviousPage,
         page,
         totalPages,
       }}
