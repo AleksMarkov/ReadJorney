@@ -228,8 +228,11 @@ const RecommendedDesk = () => {
           />
         </UserSection>
       </HeaderSection>
-      <Overlay isvisible={isMenuVisible} onClick={toggleMenuVisibility} />
-      <PopupMenu ref={popupRef} isvisible={isMenuVisible}>
+      <Overlay
+        isvisible={isMenuVisible.toString()}
+        onClick={toggleMenuVisibility}
+      />
+      <PopupMenu ref={popupRef} isvisible={isMenuVisible.toString()}>
         <CloseButton onClick={toggleMenuVisibility}>
           <img src={closeIcon} alt="Close" />
         </CloseButton>
