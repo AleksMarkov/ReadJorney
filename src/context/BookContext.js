@@ -16,7 +16,7 @@ export const BookContext = createContext();
 export const BookProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1); // Инициализация page как 1
   const [totalPages, setTotalPages] = useState(1);
   const dispatch = useDispatch();
   const bookLS = useSelector(selectBookLS);
@@ -45,15 +45,17 @@ export const BookProvider = ({ children }) => {
   );
 
   useEffect(() => {
-    if (bookLS.length === 0 || page > 1) {
-      fetchBooks(page);
+    setPage(1); // Сбрасываем page на 1 при монтировании компонента
+    if (bookLS.length === 0) {
+      fetchBooks(1); // Загружаем книги с первой страницы
     }
-  }, [user, page, fetchBooks, bookLS.length]);
+  }, [user, fetchBooks, bookLS.length]); // 'page' убран из массива зависимостей
 
   const fetchNextPage = async () => {
     if (page < totalPages) {
-      await setPage(prevPage => prevPage + 1);
-      await fetchBooks(page + 1);
+      const nextPage = page + 1;
+      setPage(nextPage);
+      await fetchBooks(nextPage);
     }
   };
 

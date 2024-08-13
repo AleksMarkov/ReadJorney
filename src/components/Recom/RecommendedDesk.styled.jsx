@@ -173,7 +173,7 @@ export const LogoutButton = styled.div`
 
   &:hover {
     color: var(--lightblack);
-    background-color: var (--white);
+    background-color: var(--white);
     border: 1px solid rgba(249, 249, 249, 0.2);
   }
   @media (max-width: 768px) {
@@ -342,6 +342,12 @@ export const ApplyButton = styled.button`
   font-weight: 700;
   cursor: pointer;
   margin-top: 12px;
+
+  &:hover {
+    color: var(--lightblack);
+    background-color: var(--white);
+    border: 1px solid rgba(249, 249, 249, 0.2);
+  }
 
   @media (max-width: 1440px) {
   }
