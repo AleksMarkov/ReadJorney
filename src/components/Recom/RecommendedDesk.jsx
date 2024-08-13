@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import Loader from '../Loader/Loader'; // Импорт компонента Loader
 import {
   Container,
   HeaderSection,
@@ -60,7 +61,14 @@ import Notification from '../Notification/Notification';
 
 const RecommendedDesk = () => {
   const { signout, user } = useContext(AuthContext);
-  const { recommendedBooks, loading } = useContext(BookContext);
+  const {
+    recommendedBooks,
+    loading,
+    fetchNextPage,
+    fetchPreviousPage,
+    page,
+    totalPages,
+  } = useContext(BookContext);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [notification, setNotification] = useState(null);
   const popupRef = useRef(null);
@@ -193,17 +201,25 @@ const RecommendedDesk = () => {
           <RecommendedBlock>
             <RecomText>Recommended</RecomText>
             <ArrowNavigation>
-              <ArrowButton>
+              <ArrowButton
+                onClick={fetchPreviousPage}
+                disabled={page === 1}
+                style={{ opacity: page === 1 ? 0.2 : 1 }}
+              >
                 <img src={chevronleft} alt="Previous" />
               </ArrowButton>
-              <ArrowButton>
+              <ArrowButton
+                onClick={fetchNextPage}
+                disabled={page === totalPages}
+                style={{ opacity: page === totalPages ? 0.2 : 1 }}
+              >
                 <img src={chevronright} alt="Next" />
               </ArrowButton>
             </ArrowNavigation>
           </RecommendedBlock>
           <BookList>
             {loading ? (
-              <p>Loading...</p>
+              <Loader /> // Отображение Loader во время загрузки данных
             ) : (
               recommendedBooks.map(book => (
                 <BookItem key={book._id}>

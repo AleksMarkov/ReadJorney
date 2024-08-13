@@ -15,7 +15,10 @@ const bookService = {
           },
         }
       );
-      return response.data.results;
+      return {
+        results: response.data.results,
+        totalPages: response.data.totalPages,
+      };
     } catch (error) {
       console.error('Error fetching recommended books:', error);
       throw error;

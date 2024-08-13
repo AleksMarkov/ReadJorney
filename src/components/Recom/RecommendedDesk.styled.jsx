@@ -602,6 +602,8 @@ export const ArrowButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: ${props => (props.disabled ? 0.2 : 1)};
+  pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
 
   @media (max-width: 768px) {
     width: 32px;
