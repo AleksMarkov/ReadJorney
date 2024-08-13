@@ -69,7 +69,7 @@ import { useScreenSize } from '../../hooks/useScreenSize';
 
 const RecommendedDesk = () => {
   const { signout, user } = useContext(AuthContext);
-  const { loading, fetchNextPage, page, totalPages } = useContext(BookContext);
+  const { loading, page, totalPages } = useContext(BookContext);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [notification, setNotification] = useState(null);
   const popupRef = useRef(null);
@@ -129,13 +129,9 @@ const RecommendedDesk = () => {
     if (newEnd <= filteredBooks.length) {
       setVisibleStart(newStart);
       setVisibleEnd(newEnd);
-    } else if (page < totalPages) {
-      await fetchNextPage(); // Wait for the next page to be fetched
+    } else if (newEnd > filteredBooks.length) {
       setVisibleStart(newStart);
-      setVisibleEnd(newEnd);
-    } else if (page === totalPages && newEnd > filteredBooks.length) {
-      setVisibleStart(newStart);
-      setVisibleEnd(newEnd);
+      setVisibleEnd(filteredBooks.length);
     }
   };
 
