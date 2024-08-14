@@ -1,5 +1,5 @@
 //Notification.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const NotificationContainer = styled.div`
@@ -15,6 +15,11 @@ const NotificationContainer = styled.div`
 `;
 
 const Notification = ({ message, onClose }) => {
+  useEffect(() => {
+    const timer = setTimeout(onClose, 5000); // Закрытие через 5 секунд
+    return () => clearTimeout(timer); // Очистка таймера при размонтировании
+  }, [onClose]);
+
   return (
     <NotificationContainer>
       {message}

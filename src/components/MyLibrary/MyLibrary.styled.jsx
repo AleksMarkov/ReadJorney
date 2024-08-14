@@ -776,7 +776,7 @@ export const NumberInput = styled.input`
   width: 313px;
   height: 50px;
   padding: 16px;
-  gap: 8px;
+  margin-bottom: 8px;
   border-radius: 12px;
   background-color: var(--darkgray);
   color: var(--white);
@@ -809,4 +809,13 @@ export const NumberInput = styled.input`
     line-height: 16px;
     letter-spacing: -0.02em;
   }
+`;
+
+export const ErrorMessage = styled.p`
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: -0.02em;
+  color: #e90516;
+  text-align: left;
 `;

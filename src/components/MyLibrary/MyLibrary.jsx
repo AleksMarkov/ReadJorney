@@ -2,8 +2,15 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import Loader from '../Loader/Loader';
 import BookModalRead from './BookModalRead/BookModalRead';
+import BookAddedPopup from './BookAddedPopup/BookAddedPopup'; // Adjust the path as necessary
+import {
+  addBookToUserLibrary,
+  fetchUserBooks,
+} from '../../services/bookAddService';
 import {
   Container,
   HeaderSection,
@@ -49,6 +56,7 @@ import {
   EmptyMessageWrapper,
   EmptyMessageIcon,
   EmptyMessageText,
+  ErrorMessage,
 } from './MyLibrary.styled';
 import logoImage from '../../assets/svg/Logomobile.svg';
 import logotablet from '../../assets/svg/Logotablet.svg';
@@ -59,26 +67,33 @@ import { AuthContext } from '../../context/AuthContext';
 import { BookContext } from '../../context/BookContext';
 import { clearScreenSize } from '../../redux/screenSizeSlice';
 import Notification from '../Notification/Notification';
-import { selectUserBooks } from '../../redux/userBooksSlice';
+import { setUserBooks, selectUserBooks } from '../../redux/userBooksSlice';
 import { selectBookLS } from '../../redux/bookLSSlice';
+import bookSchema from '../../schemas/bookSchema';
 
 const MyLibrary = () => {
   const { signout, user } = useContext(AuthContext);
   const { loading } = useContext(BookContext);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [notification, setNotification] = useState(null);
-  const [selectedBook, setSelectedBook] = useState(null); // Состояние для выбранной книги
-  const [selectedRecBook, setSelectedRecBook] = useState({
-    title: '',
-    author: '',
-    totalPages: '',
-  }); // Состояние для выбранной книги
-  const [isModalVisible, setIsModalVisible] = useState(false); // Состояние для отображения модального окна
+  const [selectedBook, setSelectedBook] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const popupRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userBooks = useSelector(selectUserBooks);
   const bookLS = useSelector(selectBookLS);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  // Используем react-hook-form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(bookSchema),
+  });
 
   const toggleMenuVisibility = () => {
     setIsMenuVisible(!isMenuVisible);
@@ -99,14 +114,9 @@ const MyLibrary = () => {
   const handleLogout = async () => {
     try {
       await signout();
-      // Clear Redux slices
       dispatch(clearScreenSize());
       dispatch({ type: 'bookLS/clearBookLS' });
-
-      // Clear Local Storage
       localStorage.clear();
-
-      // Navigate to login page
       navigate('/login');
     } catch (error) {
       setNotification(
@@ -125,24 +135,33 @@ const MyLibrary = () => {
   }, []);
 
   const handleBookClick = book => {
-    setSelectedBook(book); // Устанавливаем выбранную книгу
-    setIsModalVisible(true); // Отображаем модальное окно
+    setSelectedBook(book);
+    setIsModalVisible(true);
   };
 
   const handleRecBookClick = book => {
-    setSelectedRecBook(book); // Устанавливаем выбранную книгу
+    reset(book);
   };
 
   const handleCloseModal = () => {
     setIsModalVisible(false);
   };
 
-  const handleInputChange = event => {
-    const { name, value } = event.target;
-    setSelectedRecBook(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
+  const handleAddBook = async data => {
+    try {
+      const result = await addBookToUserLibrary(data, user.token);
+      if (result.success) {
+        setIsPopupVisible(true); // Show pop-up on success
+        const booksResult = await fetchUserBooks(user.token);
+        if (booksResult.success) {
+          dispatch(setUserBooks(booksResult.data));
+        }
+      } else {
+        setNotification(result.message);
+      }
+    } catch (error) {
+      setNotification('An unexpected error occurred.');
+    }
   };
 
   return (
@@ -152,6 +171,9 @@ const MyLibrary = () => {
           message={notification}
           onClose={() => setNotification(null)}
         />
+      )}
+      {isPopupVisible && (
+        <BookAddedPopup onClose={() => setIsPopupVisible(false)} />
       )}
       <HeaderSection>
         <MobLogo src={logotablet} mobilesrc={logoImage} alt="logo" />
@@ -198,34 +220,42 @@ const MyLibrary = () => {
         <SidebarSection>
           <FiltersSection>
             <FilteText>{'Create your library:'}</FilteText>
-            <InputWrapper>
-              <NumberInput
-                type="text"
-                name="title"
-                placeholder="Book title"
-                value={selectedRecBook.title}
-                onChange={handleInputChange}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <NumberInput
-                type="text"
-                name="author"
-                placeholder="The author"
-                value={selectedRecBook.author}
-                onChange={handleInputChange}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <NumberInput
-                type="text"
-                name="totalPages"
-                placeholder="Number of pages"
-                value={selectedRecBook.totalPages}
-                onChange={handleInputChange}
-              />
-            </InputWrapper>
-            <ApplyButton>Add book</ApplyButton>
+            <form onSubmit={handleSubmit(handleAddBook)}>
+              <InputWrapper>
+                <NumberInput
+                  type="text"
+                  name="title"
+                  placeholder="Book title"
+                  {...register('title')}
+                />
+                {errors.title && (
+                  <ErrorMessage>{errors.title.message}</ErrorMessage>
+                )}
+              </InputWrapper>
+              <InputWrapper>
+                <NumberInput
+                  type="text"
+                  name="author"
+                  placeholder="The author"
+                  {...register('author')}
+                />
+                {errors.author && (
+                  <ErrorMessage>{errors.author.message}</ErrorMessage>
+                )}
+              </InputWrapper>
+              <InputWrapper>
+                <NumberInput
+                  type="text"
+                  name="totalPages"
+                  placeholder="Number of pages"
+                  {...register('totalPages')}
+                />
+                {errors.totalPages && (
+                  <ErrorMessage>{errors.totalPages.message}</ErrorMessage>
+                )}
+              </InputWrapper>
+              <ApplyButton type="submit">Add book</ApplyButton>
+            </form>
           </FiltersSection>
           <WorkoutSection>
             <WorkoutTitle>Recommended books</WorkoutTitle>
