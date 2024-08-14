@@ -73,6 +73,8 @@ import Notification from '../Notification/Notification';
 import { setUserBooks, selectUserBooks } from '../../redux/userBooksSlice';
 import { selectBookLS } from '../../redux/bookLSSlice';
 import bookSchema from '../../schemas/bookSchema';
+import BookDeletePopup from './BookDeletePopup/BookDeletePopup';
+import { deleteBookFromUserLibrary } from '../../services/bookDeleteService';
 
 const MyLibrary = () => {
   const { signout, user } = useContext(AuthContext);
@@ -87,6 +89,8 @@ const MyLibrary = () => {
   const userBooks = useSelector(selectUserBooks);
   const bookLS = useSelector(selectBookLS);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [isDeletePopupVisible, setIsDeletePopupVisible] = useState(false);
+  const [bookToDelete, setBookToDelete] = useState(null);
 
   // Используем react-hook-form
   const {
@@ -167,6 +171,31 @@ const MyLibrary = () => {
     }
   };
 
+  const handleDeleteClick = book => {
+    setBookToDelete(book);
+    setIsDeletePopupVisible(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    setIsDeletePopupVisible(false);
+    if (bookToDelete) {
+      const result = await deleteBookFromUserLibrary(
+        bookToDelete._id,
+        user.token
+      );
+      if (result.success) {
+        setNotification(result.data.message);
+        // Обновление списка книг после успешного удаления
+        const booksResult = await fetchUserBooks(user.token);
+        if (booksResult.success) {
+          dispatch(setUserBooks(booksResult.data));
+        }
+      } else {
+        setNotification(result.message);
+      }
+    }
+  };
+
   return (
     <Container>
       {notification && (
@@ -177,6 +206,13 @@ const MyLibrary = () => {
       )}
       {isPopupVisible && (
         <BookAddedPopup onClose={() => setIsPopupVisible(false)} />
+      )}
+      {isDeletePopupVisible && (
+        <BookDeletePopup
+          book={bookToDelete}
+          onClose={() => setIsDeletePopupVisible(false)}
+          onDelete={handleDeleteConfirm}
+        />
       )}
       <HeaderSection>
         <MobLogo src={logotablet} mobilesrc={logoImage} alt="logo" />
@@ -296,21 +332,29 @@ const MyLibrary = () => {
             <EmptyMessageWrapper>
               <EmptyMessageIcon />
               <EmptyMessageText>
-                To start training, add some of your books or from the
-                recommended ones.
+                To start training, add <span>some of your books</span> or from
+                the recommended ones.
               </EmptyMessageText>
             </EmptyMessageWrapper>
           ) : (
             <BookList>
               {userBooks.map(book => (
-                <BookItem key={book._id} onClick={() => handleBookClick(book)}>
-                  <BookCover src={book.imageUrl} alt={book.title} />
+                <BookItem key={book._id}>
+                  <BookCover
+                    onClick={() => handleBookClick(book)}
+                    src={book.imageUrl}
+                    alt={book.title}
+                  />
                   <BookBlock>
                     <TextBlock>
                       <BookTitle>{book.title}</BookTitle>
                       <BookAuthor>{book.author}</BookAuthor>
                     </TextBlock>
-                    <DelBlock src={deleteIcon} alt="red basket" />
+                    <DelBlock
+                      src={deleteIcon}
+                      alt="red basket"
+                      onClick={() => handleDeleteClick(book)}
+                    />
                   </BookBlock>
                 </BookItem>
               ))}

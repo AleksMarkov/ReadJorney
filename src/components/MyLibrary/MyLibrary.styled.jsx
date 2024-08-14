@@ -810,9 +810,20 @@ export const EmptyMessageIcon = styled.div`
     top: 30px;
     left: 30px;
   }
+
+  @media (max-width: 768px) {
+    width: 100px;
+    height: 100px;
+    font-size: 50px;
+    position: absolute;
+    top: 25px;
+    left: 25px;
+  }
 `;
 
 export const EmptyMessageText = styled.div`
+  width: 274px;
+  height: 36px;
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
@@ -820,6 +831,20 @@ export const EmptyMessageText = styled.div`
   letter-spacing: -0.02em;
   color: #f9f9f9;
   margin-top: 20px;
+
+  span {
+    color: #686868;
+  }
+
+  @media (max-width: 768px) {
+    width: 197px;
+    height: 54px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
 `;
 
 export const NumberInput = styled.input`
