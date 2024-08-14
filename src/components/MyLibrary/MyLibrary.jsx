@@ -68,7 +68,11 @@ const MyLibrary = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [notification, setNotification] = useState(null);
   const [selectedBook, setSelectedBook] = useState(null); // Состояние для выбранной книги
-  const [selectedRecBook, setSelectedRecBook] = useState(null); // Состояние для выбранной книги
+  const [selectedRecBook, setSelectedRecBook] = useState({
+    title: '',
+    author: '',
+    totalPages: '',
+  }); // Состояние для выбранной книги
   const [isModalVisible, setIsModalVisible] = useState(false); // Состояние для отображения модального окна
   const popupRef = useRef(null);
   const navigate = useNavigate();
@@ -133,6 +137,14 @@ const MyLibrary = () => {
     setIsModalVisible(false);
   };
 
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+    setSelectedRecBook(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   return (
     <Container>
       {notification && (
@@ -189,25 +201,28 @@ const MyLibrary = () => {
             <InputWrapper>
               <NumberInput
                 type="text"
+                name="title"
                 placeholder="Book title"
-                value={selectedRecBook ? selectedRecBook.title : ''}
-                readOnly
+                value={selectedRecBook.title}
+                onChange={handleInputChange}
               />
             </InputWrapper>
             <InputWrapper>
               <NumberInput
                 type="text"
+                name="author"
                 placeholder="The author"
-                value={selectedRecBook ? selectedRecBook.author : ''}
-                readOnly
+                value={selectedRecBook.author}
+                onChange={handleInputChange}
               />
             </InputWrapper>
             <InputWrapper>
               <NumberInput
                 type="text"
+                name="totalPages"
                 placeholder="Number of pages"
-                value={selectedRecBook ? selectedRecBook.totalPages : ''}
-                readOnly
+                value={selectedRecBook.totalPages}
+                onChange={handleInputChange}
               />
             </InputWrapper>
             <ApplyButton>Add book</ApplyButton>
