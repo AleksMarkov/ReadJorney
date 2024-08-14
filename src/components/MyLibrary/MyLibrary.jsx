@@ -85,6 +85,8 @@ import { selectBookLS } from '../../redux/bookLSSlice';
 import bookSchema from '../../schemas/bookSchema';
 import BookDeletePopup from './BookDeletePopup/BookDeletePopup';
 import { deleteBookFromUserLibrary } from '../../services/bookDeleteService';
+import chevronDown from '../../assets/svg/chevronDown.svg';
+import chevronUp from '../../assets/svg/chevronUpp.svg';
 
 const MyLibrary = () => {
   const { signout, user } = useContext(AuthContext);
@@ -369,6 +371,10 @@ const MyLibrary = () => {
             <FilterContainer>
               <FilterButton onClick={toggleFilter}>
                 {selectedFilter}
+                <img
+                  src={filterVisible ? chevronUp : chevronDown}
+                  alt={filterVisible ? 'chevron up' : 'chevron down'}
+                />
               </FilterButton>
               {filterVisible && (
                 <FilterDropdown>

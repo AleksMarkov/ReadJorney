@@ -1,4 +1,4 @@
-//MyLibrary.styled.jsx
+//Reading.styled.jsx
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -221,11 +221,11 @@ export const SidebarSection = styled.div`
   background-color: var(--lightblack);
   border-radius: 30px;
   padding: 20px;
-  gap: 78px;
+  gap: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: left;
 
   @media (max-width: 1440px) {
     width: 704px;
@@ -238,7 +238,7 @@ export const SidebarSection = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     width: 335px;
-    height: 528px;
+    height: 484px;
     padding: 20px;
     gap: 20px;
   }
@@ -246,7 +246,7 @@ export const SidebarSection = styled.div`
 
 export const FiltersSection = styled.div`
   width: 313px;
-  height: 274px;
+  height: 216px;
   background-color: var(--lightblack);
   display: flex;
   flex-direction: column;
@@ -256,7 +256,7 @@ export const FiltersSection = styled.div`
 
   @media (max-width: 1440px) {
     width: 295px;
-    height: 278px;
+    height: 244px;
   }
 `;
 
@@ -289,7 +289,7 @@ export const InputWrapper = styled.div`
   width: 100%;
 `;
 
-export const Info = styled.div`
+export const Input = styled.input`
   width: 313px;
   height: 50px;
   padding: 16px;
@@ -304,14 +304,14 @@ export const Info = styled.div`
   letter-spacing: -0.02em;
   text-align: left;
 
-  span {
+  &::placeholder {
     color: var(--lightgray);
   }
 
-  // &:focus {
-  //   border: 1px solid rgba(249, 249, 249, 0.1);
-  //   outline: none;
-  // }
+  &:focus {
+    border: 1px solid rgba(249, 249, 249, 0.1);
+    outline: none;
+  }
 
   @media (max-width: 1440px) {
     width: 295px;
@@ -350,7 +350,6 @@ export const ApplyButton = styled.button`
   }
 
   @media (max-width: 1440px) {
-    margin-top: 35px;
   }
 
   @media (max-width: 768px) {
@@ -362,13 +361,12 @@ export const ApplyButton = styled.button`
     line-height: 18px;
     letter-spacing: 0.02em;
     text-align: left;
-    margin-top: 12px;
   }
 `;
 
 export const WorkoutSection = styled.div`
   width: 313px;
-  height: 259px;
+  height: 272px;
   border-radius: 12px;
   padding: 20px;
   display: flex;
@@ -383,8 +381,8 @@ export const WorkoutSection = styled.div`
   }
   @media (max-width: 768px) {
     width: 295px;
-    height: 244px;
-    gap: 0px;
+    height: 2250px;
+    gap: 20px;
   }
 `;
 
@@ -394,59 +392,78 @@ export const WorkoutTitle = styled.h3`
   line-height: 20px;
   letter-spacing: -0.02em;
   color: var(--white);
-  background-color: var(--darkgray);
   text-align: left;
-  // margin-bottom: 20px;
+  margin-bottom: 20px;
 
   @media (max-width: 768px) {
     font-size: 18px;
     font-weight: 700;
     line-height: 18px;
     letter-spacing: -0.02em;
-    text-align: left;
-    margin-bottom: 14px;
+    margin-bottom: 0px;
   }
 `;
 
-export const MyLibraryBlok = styled.div`
-  width: 273px;
-  height: 24px;
+export const WorkoutStep = styled.div`
+  width: 252px;
+  height: 54px;
   display: flex;
+  gap: 12px;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--darkgray);
+  justify-content: flex-start;
+  align-items: flex-start;
 
   @media (max-width: 768px) {
-    width: 253px;
-    margin-top: 10px;
+    width: 255px;
   }
 `;
 
-export const MyLibraryLink = styled.a`
+export const WorkoutIcon = styled.div`
+  width: 44px;
+  height: 44px;
+  background-color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  text-align: center;
+
+  color: var(--lightblack);
+
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+`;
+
+export const WorkoutDescription = styled.div`
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
   letter-spacing: -0.02em;
   text-align: left;
-  text-decoration: underline;
-  cursor: pointer;
-  color: var(--lightgray);
-  background-color: var(--darkgray);
+  color: var (--white);
+  flex: 1;
 
-  &:hover {
-    color: var(--white);
-    cursor: pointer;
+  span {
+    color: var(--lightgray);
   }
-`;
 
-export const Arrow = styled.img`
-  width: 24px;
-  height: 24px;
-  color: var(--white);
-
-  &:hover {
-    cursor: pointer;
+  @media (max-width: 768px) {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: left;
   }
 `;
 
@@ -465,7 +482,7 @@ export const RecommendedSection = styled.div`
 
   @media (max-width: 768px) {
     width: 335px;
-    height: 407px;
+    height: 382px;
     padding: 40px 20px;
   }
 `;
@@ -582,469 +599,5 @@ export const CloseButton = styled.div`
 
   @media (min-width: 769px) {
     display: none;
-  }
-`;
-
-export const RecBookList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 20px;
-  // row-gap: 27px;
-  background-color: var(--darkgray);
-  @media (max-width: 1440px) {
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 25px;
-    // row-gap: 27px;
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 20px;
-    // row-gap: 27px;
-  }
-`;
-
-export const RecBookItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--lightblack);
-  text-align: center;
-`;
-
-export const RecBookCover = styled.img`
-  width: 71px;
-  height: 107px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 8px;
-`;
-export const RecBookBlock = styled.div`
-  width: 71px;
-  height: 26px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-  @media (max-width: 1440px) {
-    height: 31px;
-  }
-  @media (max-width: 768px) {
-    height: 26px;
-  }
-`;
-export const RecBookTitle = styled.div`
-  font-size: 10px;
-  font-weight: 700;
-  line-height: 12px;
-  letter-spacing: -0.02em;
-  text-align: left;
-  color: var(--white);
-  width: 71px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  @media (max-width: 768px) {
-  }
-`;
-
-export const RecBookAuthor = styled.div`
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 12px;
-  letter-spacing: -0.02em;
-  text-align: left;
-  color: var(--lightgray);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-export const BookList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  column-gap: 20px;
-  row-gap: 27px;
-  max-height: 600px; /* максимальная высота секции с книгами */
-  overflow-y: auto; /* добавляем прокрутку по вертикали */
-
-  @media (max-width: 1440px) {
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 25px;
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 21px;
-  }
-`;
-
-export const BookItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--lightblack);
-  text-align: center;
-
-  &:nth-child(n + 11) {
-    display: none; /* скрываем книги, которые не помещаются */
-  }
-
-  @media (max-width: 1440px) {
-    &:nth-child(n + 9) {
-      display: none; /* для среднего экрана */
-    }
-  }
-
-  @media (max-width: 768px) {
-    &:nth-child(n + 3) {
-      display: none; /* для малого экрана */
-    }
-  }
-`;
-
-export const BookCover = styled.img`
-  width: 137px;
-  height: 208px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 8px;
-`;
-
-export const BookBlock = styled.div`
-  width: 137px;
-  height: 32px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 2px;
-  @media (max-width: 1440px) {
-    height: 32px;
-  }
-  @media (max-width: 768px) {
-    height: 32px;
-  }
-`;
-
-export const TextBlock = styled.div`
-  width: 89px;
-  height: 32px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-
-  @media (max-width: 1440px) {
-  }
-  @media (max-width: 768px) {
-    width: 95px;
-  }
-`;
-
-export const BookTitle = styled.div`
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 18px;
-  letter-spacing: -0.02em;
-  text-align: left;
-  color: var(--white);
-  width: 87px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  @media (max-width: 768px) {
-    width: 95px;
-  }
-`;
-
-export const BookAuthor = styled.div`
-  width: 87px;
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 12px;
-  letter-spacing: -0.02em;
-  text-align: left;
-  color: var(--lightgray);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  @media (max-width: 768px) {
-    width: 95px;
-  }
-`;
-
-export const DelBlock = styled.img`
-  width: 28px;
-  height: 28px;
-  color: #e85050;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-export const EmptyMessageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  position: relative;
-
-  @media (max-width: 768px) {
-    justify-content: flex-start;
-  }
-`;
-
-export const EmptyMessageIcon = styled.div`
-  width: 130px;
-  height: 130px;
-  background-color: #262626;
-  border-radius: 50%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &::before {
-    content: '📚';
-    font-size: 70px;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  @media (max-width: 768px) {
-    width: 100px;
-    height: 100px;
-    font-size: 50px;
-
-    &::before {
-      font-size: 50px;
-    }
-  }
-`;
-
-export const EmptyMessageText = styled.div`
-  width: 274px;
-  height: 36px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 18px;
-  text-align: center;
-  letter-spacing: -0.02em;
-  color: #f9f9f9;
-  margin-top: 20px;
-
-  span {
-    color: #686868;
-  }
-
-  @media (max-width: 768px) {
-    width: 197px;
-    height: 54px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 18px;
-    letter-spacing: -0.02em;
-    text-align: center;
-  }
-`;
-
-export const NumberInput = styled.input`
-  width: 313px;
-  height: 50px;
-  padding: 16px;
-  margin-bottom: 8px;
-  border-radius: 12px;
-  background-color: var(--darkgray);
-  color: var(--white);
-  border: none;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 18px;
-  letter-spacing: -0.02em;
-  text-align: left;
-
-  &::placeholder {
-    color: var(--lightgray);
-    opacity: 1; /* Сохраняем видимость placeholder при вводе данных */
-  }
-
-  &:focus {
-    border: 1px solid rgba(249, 249, 249, 0.1);
-    outline: none;
-  }
-
-  @media (max-width: 1440px) {
-    width: 295px;
-  }
-  @media (max-width: 768px) {
-    width: 295px;
-    height: 44px;
-    padding: 14px;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 16px;
-    letter-spacing: -0.02em;
-  }
-`;
-
-export const ErrorMessage = styled.p`
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 12px;
-  letter-spacing: -0.02em;
-  color: #e90516;
-  text-align: left;
-`;
-
-export const FilterWrapper = styled.div`
-  width: 153px;
-  height: 46px;
-  background: var(--darkgray);
-  border: 1px solid #3e3e3e;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-
-  @media (max-width: 768px) {
-    width: 120px;
-    height: 40px;
-  }
-`;
-
-export const FilterSelect = styled.div`
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 18px;
-  letter-spacing: -0.02em;
-  text-align: center;
-  color: var(--white);
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0 14px;
-`;
-
-export const DropdownMenu = styled.div`
-  position: absolute;
-  top: 50px;
-  width: 153px;
-  background: #262626;
-  border-radius: 12px;
-  z-index: 10;
-
-  @media (max-width: 768px) {
-    width: 120px;
-  }
-`;
-
-export const DropdownItem = styled.div`
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 18px;
-  letter-spacing: -0.02em;
-  text-align: left;
-  color: #686868;
-  cursor: pointer;
-
-  &:hover {
-    background: #3e3e3e;
-    color: #f9f9f9;
-  }
-
-  &:first-child {
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-  }
-
-  &:last-child {
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-  }
-
-  @media (max-width: 768px) {
-    ont-size: 12px;
-    line-height: 16px;
-  }
-`;
-
-export const FilterContainer = styled.div`
-  position: relative;
-  width: 153px;
-  height: 46px;
-  border: 1px solid #3e3e3e;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--lightblack);
-`;
-
-export const FilterButton = styled.div`
-  width: 100%;
-  text-align: center;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 18px;
-  color: #f9f9f9;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
-  cursor: pointer;
-
-  img {
-    width: 16px;
-    height: 16px;
-    // filter: brightness(0) invert(1);
-  }
-
-  @media (max-width: 768px) {
-    ont-size: 12px;
-    line-height: 16px;
-  }
-`;
-
-export const FilterDropdown = styled.div`
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 153px;
-  background-color: #262626;
-  border-radius: 12px;
-  margin-top: 5px;
-  z-index: 10;
-`;
-
-export const FilterOption = styled.div`
-  padding: 7px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 18px;
-  color: #686868;
-  cursor: pointer;
-
-  &:hover {
-    color: #f9f9f9;
-    background-color: #333;
-  }
-
-  &:last-child {
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-  }
-
-  @media (max-width: 768px) {
-    ont-size: 12px;
-    line-height: 16px;
   }
 `;
