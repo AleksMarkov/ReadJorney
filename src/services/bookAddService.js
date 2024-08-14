@@ -1,15 +1,11 @@
 // services/bookAddService.js
 import axios from 'axios';
 
-export const addBookToUserLibrary = async (book, token) => {
+export const addBookToUserLibrary = async (bookId, token) => {
   try {
     const response = await axios.post(
-      'https://readjourney.b.goit.study/api/books/add',
-      {
-        title: book.title,
-        author: book.author,
-        totalPages: book.totalPages,
-      },
+      `https://readjourney.b.goit.study/api/books/add/${bookId}`,
+      {},
       {
         headers: {
           Authorization: `Bearer ${token}`,

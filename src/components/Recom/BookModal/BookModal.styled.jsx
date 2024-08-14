@@ -117,7 +117,7 @@ export const BookPages = styled.div`
   }
 `;
 
-export const AddButton = styled.button`
+export const AddButton = styled.div`
   display: block;
   margin: 32px auto 0;
   width: 162px;
@@ -132,6 +132,7 @@ export const AddButton = styled.button`
   letter-spacing: 0.02em;
   cursor: pointer;
   text-align: center;
+  padding: 14px;
 
   &:hover {
     background-color: rgba(249, 249, 249, 0.1);
@@ -141,7 +142,7 @@ export const AddButton = styled.button`
     margin: 20px auto 0;
     width: 141px;
     height: 42px;
-
+    padding: 10px;
     font-size: 14px;
     font-weight: 700;
     line-height: 18px;

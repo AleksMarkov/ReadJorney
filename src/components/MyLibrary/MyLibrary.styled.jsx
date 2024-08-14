@@ -794,6 +794,10 @@ export const EmptyMessageWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+  }
 `;
 
 export const EmptyMessageIcon = styled.div`
@@ -802,22 +806,27 @@ export const EmptyMessageIcon = styled.div`
   background-color: #262626;
   border-radius: 50%;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &::before {
     content: '📚';
     font-size: 70px;
     position: absolute;
-    top: 30px;
-    left: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   @media (max-width: 768px) {
     width: 100px;
     height: 100px;
     font-size: 50px;
-    position: absolute;
-    top: 25px;
-    left: 25px;
+
+    &::before {
+      font-size: 50px;
+    }
   }
 `;
 
