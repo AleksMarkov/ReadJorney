@@ -1,12 +1,13 @@
 {
   "files": {
     "main.css": "/ReadJorney/static/css/main.03b7374c.css",
-    "main.js": "/ReadJorney/static/js/main.537bc6a1.js",
+    "main.js": "/ReadJorney/static/js/main.ff0bbdec.js",
     "static/js/125.0a0a1816.chunk.js": "/ReadJorney/static/js/125.0a0a1816.chunk.js",
     "static/js/517.405854b6.chunk.js": "/ReadJorney/static/js/517.405854b6.chunk.js",
-    "static/js/526.db8cb037.chunk.js": "/ReadJorney/static/js/526.db8cb037.chunk.js",
-    "static/js/804.8ce4f80d.chunk.js": "/ReadJorney/static/js/804.8ce4f80d.chunk.js",
+    "static/js/526.8cb50431.chunk.js": "/ReadJorney/static/js/526.8cb50431.chunk.js",
+    "static/js/45.e1bd68c2.chunk.js": "/ReadJorney/static/js/45.e1bd68c2.chunk.js",
     "static/js/143.fb63495d.chunk.js": "/ReadJorney/static/js/143.fb63495d.chunk.js",
+    "static/js/305.df6feb00.chunk.js": "/ReadJorney/static/js/305.df6feb00.chunk.js",
     "static/media/iPhone.jpg": "/ReadJorney/static/media/iPhone.d6f371be7cbf18c03067.jpg",
     "static/media/phoneMockup.png": "/ReadJorney/static/media/phoneMockup.e08349f2920a9e3749cc.png",
     "static/media/phoneMockup.jpg": "/ReadJorney/static/media/phoneMockup.ae95921291576374d3cc.jpg",
@@ -24,15 +25,16 @@
     "static/media/x-close.svg": "/ReadJorney/static/media/x-close.dfdd8a3ce6d5134ecd24cc92f1672d18.svg",
     "static/media/usermenu.svg": "/ReadJorney/static/media/usermenu.db223cd27c1047cd6e43bac542d68496.svg",
     "main.03b7374c.css.map": "/ReadJorney/static/css/main.03b7374c.css.map",
-    "main.537bc6a1.js.map": "/ReadJorney/static/js/main.537bc6a1.js.map",
+    "main.ff0bbdec.js.map": "/ReadJorney/static/js/main.ff0bbdec.js.map",
     "125.0a0a1816.chunk.js.map": "/ReadJorney/static/js/125.0a0a1816.chunk.js.map",
     "517.405854b6.chunk.js.map": "/ReadJorney/static/js/517.405854b6.chunk.js.map",
-    "526.db8cb037.chunk.js.map": "/ReadJorney/static/js/526.db8cb037.chunk.js.map",
-    "804.8ce4f80d.chunk.js.map": "/ReadJorney/static/js/804.8ce4f80d.chunk.js.map",
-    "143.fb63495d.chunk.js.map": "/ReadJorney/static/js/143.fb63495d.chunk.js.map"
+    "526.8cb50431.chunk.js.map": "/ReadJorney/static/js/526.8cb50431.chunk.js.map",
+    "45.e1bd68c2.chunk.js.map": "/ReadJorney/static/js/45.e1bd68c2.chunk.js.map",
+    "143.fb63495d.chunk.js.map": "/ReadJorney/static/js/143.fb63495d.chunk.js.map",
+    "305.df6feb00.chunk.js.map": "/ReadJorney/static/js/305.df6feb00.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.03b7374c.css",
-    "static/js/main.537bc6a1.js"
+    "static/js/main.ff0bbdec.js"
   ]
 }
