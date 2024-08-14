@@ -1,5 +1,7 @@
 //BookModal.jsx
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useDispatch } from 'react-redux';
+import { AuthContext } from '../../../context/AuthContext';
 import {
   ModalOverlay,
   ModalContainer,
@@ -12,8 +14,42 @@ import {
   AddButton,
 } from './BookModal.styled';
 import closeIcon from '../../../assets/svg/x-close.svg';
+import {
+  addBookByIdToUserLibrary,
+  fetchUserBooks,
+} from '../../../services/bookAddService';
+import { setUserBooks } from '../../../redux/userBooksSlice';
+import Notification from '../../Notification/Notification';
+import BookAddedPopup from '../../MyLibrary/BookAddedPopup/BookAddedPopup';
 
 const BookModal = ({ book, onClose }) => {
+  const dispatch = useDispatch();
+  const { user } = useContext(AuthContext);
+  const [notification, setNotification] = useState(null);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  const handleAddBook = async () => {
+    if (!user || !user.token) {
+      setNotification('User is not authenticated');
+      return;
+    }
+
+    try {
+      const result = await addBookByIdToUserLibrary(book._id, user.token);
+      if (result.success) {
+        setIsPopupVisible(true); // Показать всплывающее окно
+        const booksResult = await fetchUserBooks(user.token);
+        if (booksResult.success) {
+          dispatch(setUserBooks(booksResult.data));
+        }
+      } else {
+        setNotification(result.message);
+      }
+    } catch (error) {
+      setNotification('An unexpected error occurred.');
+    }
+  };
+
   useEffect(() => {
     const handleKeyDown = event => {
       if (event.key === 'Escape') {
@@ -45,7 +81,16 @@ const BookModal = ({ book, onClose }) => {
           <BookAuthor>{book.author}</BookAuthor>
           <BookPages>{book.totalPages} pages</BookPages>
         </BookInfo>
-        <AddButton>Add to library</AddButton>
+        <AddButton onClick={handleAddBook}>Add to library</AddButton>
+        {notification && (
+          <Notification
+            message={notification}
+            onClose={() => setNotification(null)}
+          />
+        )}
+        {isPopupVisible && (
+          <BookAddedPopup onClose={() => setIsPopupVisible(false)} />
+        )}
       </ModalContainer>
     </ModalOverlay>
   );

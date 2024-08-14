@@ -2,7 +2,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import authService from '../services/authService';
-import { setUserBooks, clearUserBooks } from '../redux/userBooksSlice'; // Импортируем setUserBooks и clearUserBooks
+import { setUserBooks, clearUserBooks } from '../redux/userBooksSlice';
 import bookService from '../services/bookService';
 
 export const AuthContext = createContext();
@@ -20,7 +20,6 @@ export const AuthProvider = ({ children }) => {
           const data = await authService.getCurrentUser(token);
           setUser(data);
 
-          // Получаем книги пользователя и сохраняем их в Redux store
           const userBooks = await bookService.getUserBooks(token);
           dispatch(setUserBooks(userBooks));
         } catch (error) {
@@ -40,7 +39,6 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('token', data.token);
       setUser(data);
 
-      // Получаем книги пользователя и сохраняем их в Redux store
       const userBooks = await bookService.getUserBooks(data.token);
       dispatch(setUserBooks(userBooks));
     } catch (error) {
@@ -55,7 +53,6 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('refreshToken', data.refreshToken);
       setUser(data);
 
-      // Получаем книги пользователя и сохраняем их в Redux store
       const userBooks = await bookService.getUserBooks(data.token);
       dispatch(setUserBooks(userBooks));
     } catch (error) {
@@ -74,7 +71,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken');
       setUser(null);
-      dispatch(clearUserBooks()); // Очистка книг пользователя при выходе
+      dispatch(clearUserBooks());
     }
   };
 
