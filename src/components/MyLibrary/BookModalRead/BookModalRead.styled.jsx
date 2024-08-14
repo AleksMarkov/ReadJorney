@@ -1,4 +1,4 @@
-//BookModal.styled.jsx
+//BookModalRead.styled.jsx
 import styled from 'styled-components';
 
 export const ModalOverlay = styled.div`

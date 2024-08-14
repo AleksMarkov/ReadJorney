@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../Loader/Loader';
+import BookModalRead from './BookModalRead/BookModalRead';
 import {
   Container,
   HeaderSection,
@@ -19,7 +20,7 @@ import {
   FiltersSection,
   FilteText,
   InputWrapper,
-  Info,
+  NumberInput,
   ApplyButton,
   WorkoutSection,
   WorkoutTitle,
@@ -67,6 +68,7 @@ const MyLibrary = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [notification, setNotification] = useState(null);
   const [selectedBook, setSelectedBook] = useState(null); // Состояние для выбранной книги
+  const [isModalVisible, setIsModalVisible] = useState(false); // Состояние для отображения модального окна
   const popupRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -119,6 +121,11 @@ const MyLibrary = () => {
 
   const handleBookClick = book => {
     setSelectedBook(book); // Устанавливаем выбранную книгу
+    setIsModalVisible(true); // Отображаем модальное окно
+  };
+
+  const handleCloseModal = () => {
+    setIsModalVisible(false);
   };
 
   return (
@@ -175,22 +182,28 @@ const MyLibrary = () => {
           <FiltersSection>
             <FilteText>{'Create your library:'}</FilteText>
             <InputWrapper>
-              <Info>
-                <span>Book title:</span>{' '}
-                {selectedBook ? selectedBook.title : ''}
-              </Info>
+              <NumberInput
+                type="text"
+                placeholder="Book title"
+                value={selectedBook ? selectedBook.title : ''}
+                readOnly
+              />
             </InputWrapper>
             <InputWrapper>
-              <Info>
-                <span>The author:</span>{' '}
-                {selectedBook ? selectedBook.author : ''}
-              </Info>
+              <NumberInput
+                type="text"
+                placeholder="The author"
+                value={selectedBook ? selectedBook.author : ''}
+                readOnly
+              />
             </InputWrapper>
             <InputWrapper>
-              <Info>
-                <span>Number of pages:</span>{' '}
-                {selectedBook ? selectedBook.totalPages : ''}
-              </Info>
+              <NumberInput
+                type="text"
+                placeholder="Number of pages"
+                value={selectedBook ? selectedBook.totalPages : ''}
+                readOnly
+              />
             </InputWrapper>
             <ApplyButton>Add book</ApplyButton>
           </FiltersSection>
@@ -249,6 +262,10 @@ const MyLibrary = () => {
           )}
         </RecommendedSection>
       </BodySection>
+
+      {isModalVisible && (
+        <BookModalRead book={selectedBook} onClose={handleCloseModal} />
+      )}
     </Container>
   );
 };

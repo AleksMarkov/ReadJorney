@@ -1,4 +1,4 @@
-//BookModal.jsx
+//BookModalRead.jsx
 import React, { useEffect } from 'react';
 import {
   ModalOverlay,
@@ -10,10 +10,10 @@ import {
   BookAuthor,
   BookPages,
   AddButton,
-} from './BookModal.styled';
+} from './BookModalRead.styled';
 import closeIcon from '../../../assets/svg/x-close.svg';
 
-const BookModal = ({ book, onClose }) => {
+const BookModalRead = ({ book, onClose }) => {
   useEffect(() => {
     const handleKeyDown = event => {
       if (event.key === 'Escape') {
@@ -45,10 +45,10 @@ const BookModal = ({ book, onClose }) => {
           <BookAuthor>{book.author}</BookAuthor>
           <BookPages>{book.totalPages} pages</BookPages>
         </BookInfo>
-        <AddButton>Add to library</AddButton>
+        <AddButton>Start reading</AddButton>
       </ModalContainer>
     </ModalOverlay>
   );
 };
 
-export default BookModal;
+export default BookModalRead;

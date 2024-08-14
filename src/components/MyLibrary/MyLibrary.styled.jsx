@@ -771,3 +771,42 @@ export const EmptyMessageText = styled.div`
   color: #f9f9f9;
   margin-top: 20px;
 `;
+
+export const NumberInput = styled.input`
+  width: 313px;
+  height: 50px;
+  padding: 16px;
+  gap: 8px;
+  border-radius: 12px;
+  background-color: var(--darkgray);
+  color: var(--white);
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+
+  &::placeholder {
+    color: var(--lightgray);
+    opacity: 1; /* Сохраняем видимость placeholder при вводе данных */
+  }
+
+  &:focus {
+    border: 1px solid rgba(249, 249, 249, 0.1);
+    outline: none;
+  }
+
+  @media (max-width: 1440px) {
+    width: 295px;
+  }
+  @media (max-width: 768px) {
+    width: 295px;
+    height: 44px;
+    padding: 14px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.02em;
+  }
+`;
