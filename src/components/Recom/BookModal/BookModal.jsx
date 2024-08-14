@@ -89,7 +89,12 @@ const BookModal = ({ book, onClose }) => {
           />
         )}
         {isPopupVisible && (
-          <BookAddedPopup onClose={() => setIsPopupVisible(false)} />
+          <BookAddedPopup
+            onClose={() => {
+              setIsPopupVisible(false);
+              onClose(); // Закрытие модального окна при закрытии всплывающего окна
+            }}
+          />
         )}
       </ModalContainer>
     </ModalOverlay>
