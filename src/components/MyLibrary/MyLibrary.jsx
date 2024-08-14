@@ -1,5 +1,11 @@
 //MyLibrary.jsx
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  useCallback,
+} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -95,6 +101,7 @@ const MyLibrary = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isDeletePopupVisible, setIsDeletePopupVisible] = useState(false);
   const [bookToDelete, setBookToDelete] = useState(null);
+  const [filteredBooks, setFilteredBooks] = useState(userBooks);
 
   const [filterVisible, setFilterVisible] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('All books');
@@ -143,10 +150,27 @@ const MyLibrary = () => {
     setFilterVisible(!filterVisible);
   };
 
+  const filterBooks = useCallback(
+    filter => {
+      if (filter === 'All books') {
+        setFilteredBooks(userBooks);
+      } else {
+        const filtered = userBooks.filter(book => {
+          if (filter === 'Unread') return book.status === 'unread';
+          if (filter === 'In progress') return book.status === 'in-progress';
+          if (filter === 'Done') return book.status === 'done';
+          return true;
+        });
+        setFilteredBooks(filtered);
+      }
+    },
+    [userBooks]
+  );
+
   const selectFilterOption = option => {
     setSelectedFilter(option);
     setFilterVisible(false);
-    // Добавьте логику фильтрации книг на основе выбранного фильтра
+    filterBooks(option);
   };
 
   useEffect(() => {
@@ -368,7 +392,7 @@ const MyLibrary = () => {
           </RecommendedBlock>
           {loading ? (
             <Loader />
-          ) : userBooks.length === 0 ? (
+          ) : filteredBooks.length === 0 ? (
             <EmptyMessageWrapper>
               <EmptyMessageIcon />
               <EmptyMessageText>
@@ -378,7 +402,7 @@ const MyLibrary = () => {
             </EmptyMessageWrapper>
           ) : (
             <BookList>
-              {userBooks.map(book => (
+              {filteredBooks.map(book => (
                 <BookItem key={book._id}>
                   <BookCover
                     onClick={() => handleBookClick(book)}
