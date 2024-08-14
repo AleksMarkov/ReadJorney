@@ -59,6 +59,10 @@ import {
   ErrorMessage,
   TextBlock,
   DelBlock,
+  FilterContainer,
+  FilterButton,
+  FilterDropdown,
+  FilterOption,
 } from './MyLibrary.styled';
 import logoImage from '../../assets/svg/Logomobile.svg';
 import logotablet from '../../assets/svg/Logotablet.svg';
@@ -91,6 +95,9 @@ const MyLibrary = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isDeletePopupVisible, setIsDeletePopupVisible] = useState(false);
   const [bookToDelete, setBookToDelete] = useState(null);
+
+  const [filterVisible, setFilterVisible] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState('All books');
 
   // Используем react-hook-form
   const {
@@ -130,6 +137,16 @@ const MyLibrary = () => {
         error.response?.data?.message || 'Logout failed. Please try again.'
       );
     }
+  };
+
+  const toggleFilter = () => {
+    setFilterVisible(!filterVisible);
+  };
+
+  const selectFilterOption = option => {
+    setSelectedFilter(option);
+    setFilterVisible(false);
+    // Добавьте логику фильтрации книг на основе выбранного фильтра
   };
 
   useEffect(() => {
@@ -325,6 +342,29 @@ const MyLibrary = () => {
         <RecommendedSection>
           <RecommendedBlock>
             <RecomText>My library</RecomText>
+            <FilterContainer>
+              <FilterButton onClick={toggleFilter}>
+                {selectedFilter}
+              </FilterButton>
+              {filterVisible && (
+                <FilterDropdown>
+                  <FilterOption onClick={() => selectFilterOption('Unread')}>
+                    Unread
+                  </FilterOption>
+                  <FilterOption
+                    onClick={() => selectFilterOption('In progress')}
+                  >
+                    In progress
+                  </FilterOption>
+                  <FilterOption onClick={() => selectFilterOption('Done')}>
+                    Done
+                  </FilterOption>
+                  <FilterOption onClick={() => selectFilterOption('All books')}>
+                    All books
+                  </FilterOption>
+                </FilterDropdown>
+              )}
+            </FilterContainer>
           </RecommendedBlock>
           {loading ? (
             <Loader />

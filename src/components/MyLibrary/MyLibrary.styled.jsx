@@ -465,7 +465,7 @@ export const RecommendedSection = styled.div`
 
   @media (max-width: 768px) {
     width: 335px;
-    height: 382px;
+    height: 407px;
     padding: 40px 20px;
   }
 `;
@@ -902,4 +902,143 @@ export const ErrorMessage = styled.p`
   letter-spacing: -0.02em;
   color: #e90516;
   text-align: left;
+`;
+
+export const FilterWrapper = styled.div`
+  width: 153px;
+  height: 46px;
+  background: var(--darkgray);
+  border: 1px solid #3e3e3e;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 120px;
+    height: 40px;
+  }
+`;
+
+export const FilterSelect = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 14px;
+`;
+
+export const DropdownMenu = styled.div`
+  position: absolute;
+  top: 50px;
+  width: 153px;
+  background: #262626;
+  border-radius: 12px;
+  z-index: 10;
+
+  @media (max-width: 768px) {
+    width: 120px;
+  }
+`;
+
+export const DropdownItem = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #686868;
+  cursor: pointer;
+
+  &:hover {
+    background: #3e3e3e;
+    color: #f9f9f9;
+  }
+
+  &:first-child {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  &:last-child {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+
+  @media (max-width: 768px) {
+    ont-size: 12px;
+    line-height: 16px;
+  }
+`;
+
+export const FilterContainer = styled.div`
+  position: relative;
+  width: 153px;
+  height: 46px;
+  border: 1px solid #3e3e3e;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--lightblack);
+`;
+
+export const FilterButton = styled.div`
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #f9f9f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    ont-size: 12px;
+    line-height: 16px;
+  }
+`;
+
+export const FilterDropdown = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 153px;
+  background-color: #262626;
+  border-radius: 12px;
+  margin-top: 5px;
+  z-index: 10;
+`;
+
+export const FilterOption = styled.div`
+  padding: 7px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #686868;
+  cursor: pointer;
+
+  &:hover {
+    color: #f9f9f9;
+    background-color: #333;
+  }
+
+  &:last-child {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+
+  @media (max-width: 768px) {
+    ont-size: 12px;
+    line-height: 16px;
+  }
 `;
