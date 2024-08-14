@@ -24,6 +24,21 @@ const bookService = {
       throw error;
     }
   },
+
+  getUserBooks: async token => {
+    try {
+      const response = await axios.get(`${BASE_URL}/books/own`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching user books:', error);
+      throw error;
+    }
+  },
 };
 
 export default bookService;

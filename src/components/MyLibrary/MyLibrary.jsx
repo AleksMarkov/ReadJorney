@@ -26,19 +26,28 @@ import {
   MyLibraryBlok,
   MyLibraryLink,
   Arrow,
-  BookList,
-  BookItem,
-  BookCover,
-  BookTitle,
-  BookAuthor,
+  RecBookList,
+  RecBookItem,
+  RecBookCover,
+  RecBookTitle,
+  RecBookAuthor,
   UserMenu,
   PopupMenu,
   CloseButton,
   Overlay,
   PopupMenuButton,
-  BookBlock,
+  RecBookBlock,
   RecommendedBlock,
   RecomText,
+  BookList,
+  BookItem,
+  BookCover,
+  BookBlock,
+  BookTitle,
+  BookAuthor,
+  EmptyMessageWrapper,
+  EmptyMessageIcon,
+  EmptyMessageText,
 } from './MyLibrary.styled';
 import logoImage from '../../assets/svg/Logomobile.svg';
 import logotablet from '../../assets/svg/Logotablet.svg';
@@ -49,7 +58,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { BookContext } from '../../context/BookContext';
 import { clearScreenSize } from '../../redux/screenSizeSlice';
 import Notification from '../Notification/Notification';
-import { useScreenSize } from '../../hooks/useScreenSize'; // Используем хук для определения размера экрана
+import { selectUserBooks } from '../../redux/userBooksSlice';
 import { selectBookLS } from '../../redux/bookLSSlice';
 
 const MyLibrary = () => {
@@ -61,8 +70,8 @@ const MyLibrary = () => {
   const popupRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userBooks = useSelector(selectUserBooks);
   const bookLS = useSelector(selectBookLS);
-  const screenSize = useScreenSize(); // Определяем текущий размер экрана
 
   const toggleMenuVisibility = () => {
     setIsMenuVisible(!isMenuVisible);
@@ -164,9 +173,7 @@ const MyLibrary = () => {
       <BodySection>
         <SidebarSection>
           <FiltersSection>
-            <FilteText>
-              {screenSize >= 1440 ? 'Create your library:' : 'Filter:'}
-            </FilteText>
+            <FilteText>{'Create your library:'}</FilteText>
             <InputWrapper>
               <Info>
                 <span>Book title:</span>{' '}
@@ -189,24 +196,24 @@ const MyLibrary = () => {
           </FiltersSection>
           <WorkoutSection>
             <WorkoutTitle>Recommended books</WorkoutTitle>
-            <BookList>
-              {loading && bookLS.length === 0 ? (
+            <RecBookList>
+              {loading && userBooks.length === 0 ? (
                 <Loader />
               ) : (
-                bookLS.slice(8, 11).map(book => (
-                  <BookItem
+                bookLS.slice(0, 3).map(book => (
+                  <RecBookItem
                     key={book._id}
                     onClick={() => handleBookClick(book)}
                   >
-                    <BookCover src={book.imageUrl} alt={book.title} />
-                    <BookBlock>
-                      <BookTitle>{book.title}</BookTitle>
-                      <BookAuthor>{book.author}</BookAuthor>
-                    </BookBlock>
-                  </BookItem>
+                    <RecBookCover src={book.imageUrl} alt={book.title} />
+                    <RecBookBlock>
+                      <RecBookTitle>{book.title}</RecBookTitle>
+                      <RecBookAuthor>{book.author}</RecBookAuthor>
+                    </RecBookBlock>
+                  </RecBookItem>
                 ))
               )}
-            </BookList>
+            </RecBookList>
             <MyLibraryBlok onClick={() => navigate('/recommended')}>
               <MyLibraryLink>Home</MyLibraryLink>
               <Arrow src={leftarrow} alt="left arrow" />
@@ -217,6 +224,29 @@ const MyLibrary = () => {
           <RecommendedBlock>
             <RecomText>My library</RecomText>
           </RecommendedBlock>
+          {loading ? (
+            <Loader />
+          ) : userBooks.length === 0 ? (
+            <EmptyMessageWrapper>
+              <EmptyMessageIcon />
+              <EmptyMessageText>
+                To start training, add some of your books or from the
+                recommended ones.
+              </EmptyMessageText>
+            </EmptyMessageWrapper>
+          ) : (
+            <BookList>
+              {userBooks.map(book => (
+                <BookItem key={book._id} onClick={() => handleBookClick(book)}>
+                  <BookCover src={book.imageUrl} alt={book.title} />
+                  <BookBlock>
+                    <BookTitle>{book.title}</BookTitle>
+                    <BookAuthor>{book.author}</BookAuthor>
+                  </BookBlock>
+                </BookItem>
+              ))}
+            </BookList>
+          )}
         </RecommendedSection>
       </BodySection>
     </Container>

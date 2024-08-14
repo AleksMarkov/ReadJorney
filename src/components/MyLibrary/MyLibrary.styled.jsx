@@ -585,7 +585,7 @@ export const CloseButton = styled.div`
   }
 `;
 
-export const BookList = styled.div`
+export const RecBookList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 20px;
@@ -604,7 +604,7 @@ export const BookList = styled.div`
   }
 `;
 
-export const BookItem = styled.div`
+export const RecBookItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -612,14 +612,14 @@ export const BookItem = styled.div`
   text-align: center;
 `;
 
-export const BookCover = styled.img`
+export const RecBookCover = styled.img`
   width: 71px;
   height: 107px;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 8px;
 `;
-export const BookBlock = styled.div`
+export const RecBookBlock = styled.div`
   width: 71px;
   height: 26px;
   display: flex;
@@ -633,7 +633,7 @@ export const BookBlock = styled.div`
     height: 26px;
   }
 `;
-export const BookTitle = styled.div`
+export const RecBookTitle = styled.div`
   font-size: 10px;
   font-weight: 700;
   line-height: 12px;
@@ -649,6 +649,81 @@ export const BookTitle = styled.div`
   }
 `;
 
+export const RecBookAuthor = styled.div`
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: var(--lightgray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export const BookList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 20px;
+  row-gap: 27px;
+
+  @media (max-width: 1440px) {
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 25px;
+    // row-gap: 27px;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 21px;
+    // row-gap: 27px;
+  }
+`;
+
+export const BookItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--lightblack);
+  text-align: center;
+`;
+
+export const BookCover = styled.img`
+  width: 137px;
+  height: 208px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 8px;
+`;
+
+export const BookBlock = styled.div`
+  width: 137px;
+  height: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  @media (max-width: 1440px) {
+    height: 31px;
+  }
+  @media (max-width: 768px) {
+    height: 32px;
+  }
+`;
+
+export const BookTitle = styled.div`
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: var(--white);
+  width: 137px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 export const BookAuthor = styled.div`
   font-size: 10px;
   font-weight: 500;
@@ -659,4 +734,40 @@ export const BookAuthor = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+export const EmptyMessageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+`;
+
+export const EmptyMessageIcon = styled.div`
+  width: 130px;
+  height: 130px;
+  background-color: #262626;
+  border-radius: 50%;
+  position: relative;
+
+  &::before {
+    content: '📚';
+    font-size: 70px;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+  }
+`;
+
+export const EmptyMessageText = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: -0.02em;
+  color: #f9f9f9;
+  margin-top: 20px;
 `;

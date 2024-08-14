@@ -1,12 +1,16 @@
 //context/AuthContext.js
 import React, { createContext, useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import authService from '../services/authService';
+import { setUserBooks, clearUserBooks } from '../redux/userBooksSlice'; // Импортируем setUserBooks и clearUserBooks
+import bookService from '../services/bookService';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const checkUser = async () => {
@@ -15,6 +19,10 @@ export const AuthProvider = ({ children }) => {
         try {
           const data = await authService.getCurrentUser(token);
           setUser(data);
+
+          // Получаем книги пользователя и сохраняем их в Redux store
+          const userBooks = await bookService.getUserBooks(token);
+          dispatch(setUserBooks(userBooks));
         } catch (error) {
           console.error('Error fetching current user:', error);
           setUser(null);
@@ -24,13 +32,17 @@ export const AuthProvider = ({ children }) => {
     };
 
     checkUser();
-  }, []);
+  }, [dispatch]);
 
   const signup = async userData => {
     try {
       const data = await authService.signup(userData);
       localStorage.setItem('token', data.token);
       setUser(data);
+
+      // Получаем книги пользователя и сохраняем их в Redux store
+      const userBooks = await bookService.getUserBooks(data.token);
+      dispatch(setUserBooks(userBooks));
     } catch (error) {
       console.error('Signup error:', error);
     }
@@ -42,6 +54,10 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('token', data.token);
       localStorage.setItem('refreshToken', data.refreshToken);
       setUser(data);
+
+      // Получаем книги пользователя и сохраняем их в Redux store
+      const userBooks = await bookService.getUserBooks(data.token);
+      dispatch(setUserBooks(userBooks));
     } catch (error) {
       console.error('Signin error:', error);
       throw error;
@@ -58,6 +74,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken');
       setUser(null);
+      dispatch(clearUserBooks()); // Очистка книг пользователя при выходе
     }
   };
 
