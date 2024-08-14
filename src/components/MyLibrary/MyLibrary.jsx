@@ -68,6 +68,7 @@ const MyLibrary = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [notification, setNotification] = useState(null);
   const [selectedBook, setSelectedBook] = useState(null); // Состояние для выбранной книги
+  const [selectedRecBook, setSelectedRecBook] = useState(null); // Состояние для выбранной книги
   const [isModalVisible, setIsModalVisible] = useState(false); // Состояние для отображения модального окна
   const popupRef = useRef(null);
   const navigate = useNavigate();
@@ -122,6 +123,10 @@ const MyLibrary = () => {
   const handleBookClick = book => {
     setSelectedBook(book); // Устанавливаем выбранную книгу
     setIsModalVisible(true); // Отображаем модальное окно
+  };
+
+  const handleRecBookClick = book => {
+    setSelectedRecBook(book); // Устанавливаем выбранную книгу
   };
 
   const handleCloseModal = () => {
@@ -185,7 +190,7 @@ const MyLibrary = () => {
               <NumberInput
                 type="text"
                 placeholder="Book title"
-                value={selectedBook ? selectedBook.title : ''}
+                value={selectedRecBook ? selectedRecBook.title : ''}
                 readOnly
               />
             </InputWrapper>
@@ -193,7 +198,7 @@ const MyLibrary = () => {
               <NumberInput
                 type="text"
                 placeholder="The author"
-                value={selectedBook ? selectedBook.author : ''}
+                value={selectedRecBook ? selectedRecBook.author : ''}
                 readOnly
               />
             </InputWrapper>
@@ -201,7 +206,7 @@ const MyLibrary = () => {
               <NumberInput
                 type="text"
                 placeholder="Number of pages"
-                value={selectedBook ? selectedBook.totalPages : ''}
+                value={selectedRecBook ? selectedRecBook.totalPages : ''}
                 readOnly
               />
             </InputWrapper>
@@ -216,7 +221,7 @@ const MyLibrary = () => {
                 bookLS.slice(0, 3).map(book => (
                   <RecBookItem
                     key={book._id}
-                    onClick={() => handleBookClick(book)}
+                    onClick={() => handleRecBookClick(book)}
                   >
                     <RecBookCover src={book.imageUrl} alt={book.title} />
                     <RecBookBlock>
