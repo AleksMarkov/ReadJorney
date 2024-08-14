@@ -57,12 +57,15 @@ import {
   EmptyMessageIcon,
   EmptyMessageText,
   ErrorMessage,
+  TextBlock,
+  DelBlock,
 } from './MyLibrary.styled';
 import logoImage from '../../assets/svg/Logomobile.svg';
 import logotablet from '../../assets/svg/Logotablet.svg';
 import leftarrow from '../../assets/svg/login.svg';
 import usermenu from '../../assets/svg/usermenu.svg';
 import closeIcon from '../../assets/svg/x-close.svg';
+import deleteIcon from '../../assets/svg/delete.svg';
 import { AuthContext } from '../../context/AuthContext';
 import { BookContext } from '../../context/BookContext';
 import { clearScreenSize } from '../../redux/screenSizeSlice';
@@ -303,8 +306,11 @@ const MyLibrary = () => {
                 <BookItem key={book._id} onClick={() => handleBookClick(book)}>
                   <BookCover src={book.imageUrl} alt={book.title} />
                   <BookBlock>
-                    <BookTitle>{book.title}</BookTitle>
-                    <BookAuthor>{book.author}</BookAuthor>
+                    <TextBlock>
+                      <BookTitle>{book.title}</BookTitle>
+                      <BookAuthor>{book.author}</BookAuthor>
+                    </TextBlock>
+                    <DelBlock src={deleteIcon} alt="red basket" />
                   </BookBlock>
                 </BookItem>
               ))}

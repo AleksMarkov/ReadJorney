@@ -666,17 +666,17 @@ export const BookList = styled.div`
   grid-template-columns: repeat(5, 1fr);
   column-gap: 20px;
   row-gap: 27px;
+  max-height: 600px; /* максимальная высота секции с книгами */
+  overflow-y: auto; /* добавляем прокрутку по вертикали */
 
   @media (max-width: 1440px) {
     grid-template-columns: repeat(4, 1fr);
     column-gap: 25px;
-    // row-gap: 27px;
   }
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
     column-gap: 21px;
-    // row-gap: 27px;
   }
 `;
 
@@ -686,6 +686,22 @@ export const BookItem = styled.div`
   align-items: center;
   background-color: var(--lightblack);
   text-align: center;
+
+  &:nth-child(n + 11) {
+    display: none; /* скрываем книги, которые не помещаются */
+  }
+
+  @media (max-width: 1440px) {
+    &:nth-child(n + 9) {
+      display: none; /* для среднего экрана */
+    }
+  }
+
+  @media (max-width: 768px) {
+    &:nth-child(n + 3) {
+      display: none; /* для малого экрана */
+    }
+  }
 `;
 
 export const BookCover = styled.img`
@@ -700,14 +716,29 @@ export const BookBlock = styled.div`
   width: 137px;
   height: 32px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   gap: 2px;
   @media (max-width: 1440px) {
-    height: 31px;
+    height: 32px;
   }
   @media (max-width: 768px) {
     height: 32px;
+  }
+`;
+
+export const TextBlock = styled.div`
+  width: 89px;
+  height: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+
+  @media (max-width: 1440px) {
+  }
+  @media (max-width: 768px) {
+    width: 95px;
   }
 `;
 
@@ -718,13 +749,18 @@ export const BookTitle = styled.div`
   letter-spacing: -0.02em;
   text-align: left;
   color: var(--white);
-  width: 137px;
+  width: 87px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media (max-width: 768px) {
+    width: 95px;
+  }
 `;
 
 export const BookAuthor = styled.div`
+  width: 87px;
   font-size: 10px;
   font-weight: 500;
   line-height: 12px;
@@ -734,6 +770,20 @@ export const BookAuthor = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media (max-width: 768px) {
+    width: 95px;
+  }
+`;
+
+export const DelBlock = styled.img`
+  width: 28px;
+  height: 28px;
+  color: #e85050;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const EmptyMessageWrapper = styled.div`
