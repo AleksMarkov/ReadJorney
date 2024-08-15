@@ -1,7 +1,9 @@
 //Reading.jsx
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Container,
   HeaderSection,
@@ -37,23 +39,49 @@ import {
   BookCover,
   BookItem,
   RedBlock,
+  ErrorMessage, // Новый компонент
 } from './Reading.styled';
 import logoImage from '../../assets/svg/Logomobile.svg';
 import logotablet from '../../assets/svg/Logotablet.svg';
 import usermenu from '../../assets/svg/usermenu.svg';
 import closeIcon from '../../assets/svg/x-close.svg';
+import redcircule from '../../assets/svg/redsircule.svg';
+import redsguare from '../../assets/svg/redsquare.svg';
 import { AuthContext } from '../../context/AuthContext';
 import { clearScreenSize } from '../../redux/screenSizeSlice';
-import redcircule from '../../assets/svg/redsircule.svg';
+import {
+  setReadBook,
+  setReadBookStatus,
+  setReadBookError,
+  selectReadBook,
+  selectReadBookStatus,
+} from '../../redux/readBookSlice';
+import { fetchBookById } from '../../services/bookReadService';
+import { startReadingBook } from '../../services/bookReadingService';
+import { finishReadingBook } from '../../services/bookFinishService';
+import readSchema from '../../schemas/readSchema';
+import Notification from '../Notification/Notification';
 
 const Reading = () => {
   const { signout, user } = useContext(AuthContext);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [condition, setCondition] = useState('inactive');
+  const [notification, setNotification] = useState(null);
   const popupRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { state } = useLocation();
-  const book = state?.book; // Получаем данные книги из state
+  const bookId = state?.book?._id;
+  const readBook = useSelector(selectReadBook);
+  const readBookStatus = useSelector(selectReadBookStatus);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(readSchema),
+  });
 
   const toggleMenuVisibility = () => {
     setIsMenuVisible(!isMenuVisible);
@@ -74,17 +102,43 @@ const Reading = () => {
   const handleLogout = async () => {
     try {
       await signout();
-      // Clear Redux slices
       dispatch(clearScreenSize());
-      dispatch({ type: 'bookLS/clearBookLS' }); // Assuming you have an action to clear the bookLS slice
-      // Clear Local Storage
+      dispatch({ type: 'bookLS/clearBookLS' });
       localStorage.clear();
-      // Navigate to login page
       navigate('/login');
     } catch (error) {
-      //   setNotification(
-      //     error.response?.data?.message || 'Logout failed. Please try again.'
-      //   );
+      setNotification('Logout failed. Please try again.');
+    }
+  };
+
+  const handleApply = async data => {
+    try {
+      const token = localStorage.getItem('token');
+      if (bookId && token) {
+        let response;
+        if (condition === 'inactive') {
+          response = await startReadingBook(bookId, data.page, token);
+        } else {
+          response = await finishReadingBook(bookId, data.page, token);
+        }
+
+        if (response.success) {
+          const lastProgress =
+            response.data.progress[response.data.progress.length - 1];
+          const newCondition =
+            lastProgress?.status === 'active' ? 'active' : 'inactive';
+          setCondition(newCondition);
+          setNotification(
+            condition === 'inactive'
+              ? 'Reading started successfully'
+              : 'Reading stopped successfully'
+          );
+        } else {
+          setNotification(response.message);
+        }
+      }
+    } catch (error) {
+      setNotification('An error occurred. Please try again.');
     }
   };
 
@@ -97,8 +151,42 @@ const Reading = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (bookId && token) {
+      dispatch(setReadBookStatus('loading'));
+
+      fetchBookById(bookId, token)
+        .then(response => {
+          if (response.success) {
+            dispatch(setReadBook(response.data));
+
+            const lastProgress =
+              response.data.progress[response.data.progress.length - 1];
+            const newCondition =
+              lastProgress?.status === 'active' ? 'active' : 'inactive';
+            setCondition(newCondition);
+          } else {
+            dispatch(setReadBookError(response.message));
+            setNotification(response.message);
+          }
+        })
+        .catch(error => {
+          dispatch(setReadBookError(error.message));
+          setNotification(error.message);
+        });
+    }
+  }, [bookId, dispatch]);
+
   return (
     <Container>
+      {notification && (
+        <Notification
+          message={notification}
+          onClose={() => setNotification(null)}
+        />
+      )}
       <HeaderSection>
         <MobLogo src={logotablet} mobilesrc={logoImage} alt="logo" />
         <MenuSection>
@@ -142,13 +230,26 @@ const Reading = () => {
       </PopupMenu>
       <BodySection>
         <SidebarSection>
-          <FiltersSection>
-            <FilteText>Start page</FilteText>
-            <InputWrapper>
-              <Input type="text" placeholder="Page number:" value="" />
-            </InputWrapper>
-            <ApplyButton>To start</ApplyButton>
-          </FiltersSection>
+          <form onSubmit={handleSubmit(handleApply)}>
+            <FiltersSection>
+              <FilteText>
+                {condition === 'active' ? 'Stop page' : 'Start page'}
+              </FilteText>
+              <InputWrapper>
+                <Input
+                  type="text"
+                  placeholder="Page number:"
+                  {...register('page')}
+                />
+              </InputWrapper>
+              {errors.page && (
+                <ErrorMessage>{errors.page.message}</ErrorMessage>
+              )}
+              <ApplyButton type="submit">
+                {condition === 'active' ? 'To stop' : 'To start'}
+              </ApplyButton>
+            </FiltersSection>
+          </form>
           <WorkoutSection>
             <WorkoutTitle>Progress</WorkoutTitle>
             <WorkoutStep>
@@ -163,16 +264,26 @@ const Reading = () => {
             <RecomText>My reading</RecomText>
           </RecommendedBlock>
 
-          {book && (
+          {readBookStatus === 'loading' && <p>Loading book...</p>}
+          {readBookStatus === 'succeeded' && readBook && (
             <BookItem>
-              <BookCover src={book.imageUrl} alt="book cover" />
+              <BookCover src={readBook.imageUrl} alt="book cover" />
               <BookBlock>
-                <BookTitle>{book.title}</BookTitle>
-                <BookAuthor>{book.author}</BookAuthor>
+                <BookTitle>{readBook.title}</BookTitle>
+                <BookAuthor>{readBook.author}</BookAuthor>
               </BookBlock>
-              <RedBlock src={redcircule} alt="red circule" />
+              <RedBlock
+                src={condition === 'active' ? redsguare : redcircule}
+                alt={condition === 'active' ? 'red square' : 'red circle'}
+              />
             </BookItem>
           )}
+          {/* {readBookStatus === 'failed' && (
+            <Notification
+              message={notification}
+              onClose={() => setNotification(null)}
+            />
+          )} */}
         </RecommendedSection>
       </BodySection>
     </Container>

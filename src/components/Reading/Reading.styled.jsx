@@ -724,3 +724,14 @@ export const RedBlock = styled.img`
     cursor: pointer;
   }
 `;
+
+export const ErrorMessage = styled.p`
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: -0.02em;
+  color: #e90516;
+  text-align: left;
+  margin-left: 14px;
+  margin-top: 4px;
+`;

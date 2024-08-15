@@ -1,16 +1,21 @@
-// services/bookReadService.js
+//bookFinishService.js;
 import axios from 'axios';
 
 const BASE_URL = 'https://readjourney.b.goit.study/api';
 
-export const fetchBookById = async (bookId, token) => {
+export const finishReadingBook = async (bookId, page, token) => {
   try {
-    const response = await axios.get(`${BASE_URL}/books/${bookId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-      },
-    });
+    const response = await axios.post(
+      `${BASE_URL}/books/reading/finish`,
+      { id: bookId, page: parseInt(page, 10) },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      }
+    );
     return { success: true, data: response.data };
   } catch (error) {
     let errorMessage = 'An error occurred. Please try again.';
@@ -21,6 +26,9 @@ export const fetchBookById = async (bookId, token) => {
           break;
         case 404:
           errorMessage = 'Book not found';
+          break;
+        case 409:
+          errorMessage = error.response.data.message || 'Conflict error';
           break;
         case 500:
           errorMessage = 'Server error';

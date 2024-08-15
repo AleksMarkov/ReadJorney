@@ -226,12 +226,21 @@ const MyLibrary = () => {
         bookToDelete._id,
         user.token
       );
+      console.log('AAA filteredBooks:', filteredBooks);
       if (result.success) {
         setNotification(result.data.message);
-        // Обновление списка книг после успешного удаления
+        console.log('BBB filteredBooks:', filteredBooks);
+        // Обновление списка фильтрованных книг после успешного удаления
+        const updatedBooks = filteredBooks.filter(
+          book => book._id !== bookToDelete._id
+        );
+        setFilteredBooks(updatedBooks);
+
+        // Обновление списка книг пользователя в Redux
         const booksResult = await fetchUserBooks(user.token);
         if (booksResult.success) {
           dispatch(setUserBooks(booksResult.data));
+          console.log('CCC filteredBooks:', booksResult.data);
         }
       } else {
         setNotification(result.message);
