@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/ReadJorney/static/css/main.03b7374c.css",
-    "main.js": "/ReadJorney/static/js/main.1438799b.js",
+    "main.js": "/ReadJorney/static/js/main.87a73112.js",
     "static/js/125.0a0a1816.chunk.js": "/ReadJorney/static/js/125.0a0a1816.chunk.js",
     "static/js/517.405854b6.chunk.js": "/ReadJorney/static/js/517.405854b6.chunk.js",
     "static/js/526.81bd8918.chunk.js": "/ReadJorney/static/js/526.81bd8918.chunk.js",
-    "static/js/622.80c19b9b.chunk.js": "/ReadJorney/static/js/622.80c19b9b.chunk.js",
-    "static/js/710.5360a8a5.chunk.js": "/ReadJorney/static/js/710.5360a8a5.chunk.js",
+    "static/js/622.0f2b8344.chunk.js": "/ReadJorney/static/js/622.0f2b8344.chunk.js",
+    "static/js/323.bae45e1c.chunk.js": "/ReadJorney/static/js/323.bae45e1c.chunk.js",
     "static/js/143.fb63495d.chunk.js": "/ReadJorney/static/js/143.fb63495d.chunk.js",
     "static/js/305.df6feb00.chunk.js": "/ReadJorney/static/js/305.df6feb00.chunk.js",
     "static/media/iPhone.jpg": "/ReadJorney/static/media/iPhone.d6f371be7cbf18c03067.jpg",
@@ -24,22 +24,23 @@
     "static/media/Logomobile.svg": "/ReadJorney/static/media/Logomobile.92c04be856eadc763b09ef164b5c46d1.svg",
     "static/media/login.svg": "/ReadJorney/static/media/login.f8fd3ec0758e20fbdd87f353900ab072.svg",
     "static/media/x-close.svg": "/ReadJorney/static/media/x-close.dfdd8a3ce6d5134ecd24cc92f1672d18.svg",
+    "static/media/redsquare.svg": "/ReadJorney/static/media/redsquare.2eeabb4df011d28e78fb48d7eab55bb7.svg",
     "static/media/usermenu.svg": "/ReadJorney/static/media/usermenu.db223cd27c1047cd6e43bac542d68496.svg",
     "static/media/redsircule.svg": "/ReadJorney/static/media/redsircule.ab6543a16ee2d1562262b8cd07e11395.svg",
     "static/media/chevronUpp.svg": "/ReadJorney/static/media/chevronUpp.96230b19cdbcad897ebb36c94642ecea.svg",
     "static/media/chevronDown.svg": "/ReadJorney/static/media/chevronDown.ed7ba7edebb5c871cb1c129aa7bcc742.svg",
     "main.03b7374c.css.map": "/ReadJorney/static/css/main.03b7374c.css.map",
-    "main.1438799b.js.map": "/ReadJorney/static/js/main.1438799b.js.map",
+    "main.87a73112.js.map": "/ReadJorney/static/js/main.87a73112.js.map",
     "125.0a0a1816.chunk.js.map": "/ReadJorney/static/js/125.0a0a1816.chunk.js.map",
     "517.405854b6.chunk.js.map": "/ReadJorney/static/js/517.405854b6.chunk.js.map",
     "526.81bd8918.chunk.js.map": "/ReadJorney/static/js/526.81bd8918.chunk.js.map",
-    "622.80c19b9b.chunk.js.map": "/ReadJorney/static/js/622.80c19b9b.chunk.js.map",
-    "710.5360a8a5.chunk.js.map": "/ReadJorney/static/js/710.5360a8a5.chunk.js.map",
+    "622.0f2b8344.chunk.js.map": "/ReadJorney/static/js/622.0f2b8344.chunk.js.map",
+    "323.bae45e1c.chunk.js.map": "/ReadJorney/static/js/323.bae45e1c.chunk.js.map",
     "143.fb63495d.chunk.js.map": "/ReadJorney/static/js/143.fb63495d.chunk.js.map",
     "305.df6feb00.chunk.js.map": "/ReadJorney/static/js/305.df6feb00.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.03b7374c.css",
-    "static/js/main.1438799b.js"
+    "static/js/main.87a73112.js"
   ]
 }
