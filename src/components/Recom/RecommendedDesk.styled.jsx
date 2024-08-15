@@ -451,7 +451,7 @@ export const WorkoutDescription = styled.div`
   line-height: 18px;
   letter-spacing: -0.02em;
   text-align: left;
-  color: var (--white);
+  color: var(--white);
   flex: 1;
 
   span {
