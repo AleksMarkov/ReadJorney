@@ -1,6 +1,6 @@
 //Reading.jsx
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {
   Container,
@@ -44,7 +44,6 @@ import usermenu from '../../assets/svg/usermenu.svg';
 import closeIcon from '../../assets/svg/x-close.svg';
 import { AuthContext } from '../../context/AuthContext';
 import { clearScreenSize } from '../../redux/screenSizeSlice';
-import iphone from '../../assets/images/iPhone.jpg';
 import redcircule from '../../assets/svg/redsircule.svg';
 
 const Reading = () => {
@@ -53,7 +52,8 @@ const Reading = () => {
   const popupRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [notification, setNotification] = useState(null);
+  const { state } = useLocation();
+  const book = state?.book; // Получаем данные книги из state
 
   const toggleMenuVisibility = () => {
     setIsMenuVisible(!isMenuVisible);
@@ -82,9 +82,9 @@ const Reading = () => {
       // Navigate to login page
       navigate('/login');
     } catch (error) {
-      setNotification(
-        error.response?.data?.message || 'Logout failed. Please try again.'
-      );
+      //   setNotification(
+      //     error.response?.data?.message || 'Logout failed. Please try again.'
+      //   );
     }
   };
 
@@ -163,14 +163,16 @@ const Reading = () => {
             <RecomText>My reading</RecomText>
           </RecommendedBlock>
 
-          <BookItem>
-            <BookCover src={iphone} alt="book cover" />
-            <BookBlock>
-              <BookTitle>test</BookTitle>
-              <BookAuthor>test</BookAuthor>
-            </BookBlock>
-            <RedBlock src={redcircule} alt="red circule" />
-          </BookItem>
+          {book && (
+            <BookItem>
+              <BookCover src={book.imageUrl} alt="book cover" />
+              <BookBlock>
+                <BookTitle>{book.title}</BookTitle>
+                <BookAuthor>{book.author}</BookAuthor>
+              </BookBlock>
+              <RedBlock src={redcircule} alt="red circule" />
+            </BookItem>
+          )}
         </RecommendedSection>
       </BodySection>
     </Container>

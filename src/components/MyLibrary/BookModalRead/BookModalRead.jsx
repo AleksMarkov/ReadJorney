@@ -1,5 +1,6 @@
 //BookModalRead.jsx
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   ModalOverlay,
   ModalContainer,
@@ -14,6 +15,8 @@ import {
 import closeIcon from '../../../assets/svg/x-close.svg';
 
 const BookModalRead = ({ book, onClose }) => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     const handleKeyDown = event => {
       if (event.key === 'Escape') {
@@ -33,6 +36,10 @@ const BookModalRead = ({ book, onClose }) => {
     }
   };
 
+  const startReading = () => {
+    navigate('/reading', { state: { book } });
+  };
+
   return (
     <ModalOverlay onClick={handleOverlayClick}>
       <ModalContainer>
@@ -45,7 +52,7 @@ const BookModalRead = ({ book, onClose }) => {
           <BookAuthor>{book.author}</BookAuthor>
           <BookPages>{book.totalPages} pages</BookPages>
         </BookInfo>
-        <AddButton>Start reading</AddButton>
+        <AddButton onClick={startReading}>Start reading</AddButton>
       </ModalContainer>
     </ModalOverlay>
   );
