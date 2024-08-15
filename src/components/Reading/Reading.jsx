@@ -72,11 +72,13 @@ import {
   selectReadBook,
   selectReadBookStatus,
 } from '../../redux/readBookSlice';
+import { updateUserBookStatus } from '../../redux/userBooksSlice';
 import { fetchBookById } from '../../services/bookReadService';
 import { startReadingBook } from '../../services/bookReadingService';
 import { finishReadingBook } from '../../services/bookFinishService';
 import readSchema from '../../schemas/readSchema';
 import Notification from '../Notification/Notification';
+import BookReadPopup from './BookReadPopup/BookReadPopup';
 
 const Reading = () => {
   const { signout, user } = useContext(AuthContext);
@@ -85,6 +87,7 @@ const Reading = () => {
   const [notification, setNotification] = useState(null);
   const [finishPage, setFinishPage] = useState(0);
   const [procent, setProcent] = useState(0);
+  const [isBookReadPopupVisible, setIsBookReadPopupVisible] = useState(false);
   const popupRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -141,6 +144,8 @@ const Reading = () => {
         }
 
         if (response.success) {
+          dispatch(setReadBook(response.data));
+
           const lastProgress =
             response.data.progress[response.data.progress.length - 1];
           const newCondition =
@@ -152,12 +157,31 @@ const Reading = () => {
               : 'Reading stopped successfully'
           );
 
-          const newFinishPage = Math.max(
-            ...response.data.progress.map(p => p.finishPage)
+          // Находим наибольшее значение finishPage среди всех записей progress
+          const maxFinishPage = Math.max(
+            0,
+            ...response.data.progress
+              .filter(p => p.finishPage !== undefined)
+              .map(p => p.finishPage)
           );
-          setFinishPage(newFinishPage);
-          const newProcent = (newFinishPage / readBook.totalPages) * 100;
+
+          setFinishPage(maxFinishPage);
+
+          const newProcent = (maxFinishPage / readBook.totalPages) * 100;
           setProcent(newProcent.toFixed(2));
+
+          // Обновление статуса книги в Redux
+          dispatch(
+            updateUserBookStatus({
+              bookId,
+              status: newCondition === 'active' ? 'in-progress' : 'done',
+            })
+          );
+
+          // Проверка, завершил ли пользователь чтение книги
+          if (parseInt(data.page, 10) === readBook.totalPages) {
+            setIsBookReadPopupVisible(true);
+          }
         } else {
           setNotification(response.message);
         }
@@ -193,12 +217,23 @@ const Reading = () => {
               lastProgress?.status === 'active' ? 'active' : 'inactive';
             setCondition(newCondition);
 
-            const newFinishPage = Math.max(
-              ...response.data.progress.map(p => p.finishPage)
+            const maxFinishPage = Math.max(
+              0,
+              ...response.data.progress
+                .filter(p => p.finishPage !== undefined)
+                .map(p => p.finishPage)
             );
-            setFinishPage(newFinishPage);
-            const newProcent = (newFinishPage / response.data.totalPages) * 100;
+            setFinishPage(maxFinishPage);
+            const newProcent = (maxFinishPage / response.data.totalPages) * 100;
             setProcent(newProcent.toFixed(2));
+
+            // Обновление статуса книги в Redux
+            dispatch(
+              updateUserBookStatus({
+                bookId,
+                status: newCondition === 'active' ? 'in-progress' : 'done',
+              })
+            );
           } else {
             dispatch(setReadBookError(response.message));
             setNotification(response.message);
@@ -222,6 +257,9 @@ const Reading = () => {
           message={notification}
           onClose={() => setNotification(null)}
         />
+      )}
+      {isBookReadPopupVisible && (
+        <BookReadPopup onClose={() => setIsBookReadPopupVisible(false)} />
       )}
       <HeaderSection>
         <MobLogo src={logotablet} mobilesrc={logoImage} alt="logo" />
@@ -287,7 +325,8 @@ const Reading = () => {
             </FiltersSection>
           </form>
           <WorkoutSection>
-            {readBook.status === 'in-progress' && (
+            {(readBook.status === 'in-progress' ||
+              readBook.status === 'done') && (
               <>
                 <WorkoutTitle>
                   Statistics
@@ -303,7 +342,10 @@ const Reading = () => {
                 </WorkoutStep1>
                 <PieBlock>
                   <ChartWrapper>
-                    <Chart src={load20} alt="load 20%" />
+                    <Chart
+                      src={procent > 99 ? load100 : load20}
+                      alt={procent > 99 ? 'load 100%' : 'load 20%'}
+                    />
                     <div className="centered-text">{`${procent}%`}</div>
                   </ChartWrapper>
                   <PietextBlock>

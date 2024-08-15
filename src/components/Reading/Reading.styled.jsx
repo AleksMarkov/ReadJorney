@@ -239,7 +239,8 @@ export const SidebarSection = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     width: 335px;
-    height: ${({ status }) => (status === 'in-progress' ? '451px' : '390px')};
+    height: ${({ status }) =>
+      status === 'in-progress' || status === 'done' ? '451px' : '390px'};
     padding: 20px;
     gap: 40px;
   }

@@ -80,7 +80,11 @@ import { AuthContext } from '../../context/AuthContext';
 import { BookContext } from '../../context/BookContext';
 import { clearScreenSize } from '../../redux/screenSizeSlice';
 import Notification from '../Notification/Notification';
-import { setUserBooks, selectUserBooks } from '../../redux/userBooksSlice';
+import {
+  setUserBooks,
+  deleteUserBook,
+  selectUserBooks,
+} from '../../redux/userBooksSlice';
 import { selectBookLS } from '../../redux/bookLSSlice';
 import bookSchema from '../../schemas/bookSchema';
 import BookDeletePopup from './BookDeletePopup/BookDeletePopup';
@@ -108,7 +112,6 @@ const MyLibrary = () => {
   const [filterVisible, setFilterVisible] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('All books');
 
-  // Используем react-hook-form
   const {
     register,
     handleSubmit,
@@ -229,15 +232,18 @@ const MyLibrary = () => {
       if (result.success) {
         setNotification(result.data.message);
         // Обновление списка книг после успешного удаления
-        const booksResult = await fetchUserBooks(user.token);
-        if (booksResult.success) {
-          dispatch(setUserBooks(booksResult.data));
-        }
+        dispatch(deleteUserBook(bookToDelete._id));
       } else {
         setNotification(result.message);
       }
     }
   };
+
+  useEffect(() => {
+    if (userBooks) {
+      filterBooks(selectedFilter);
+    }
+  }, [userBooks, selectedFilter, filterBooks]);
 
   return (
     <Container>
