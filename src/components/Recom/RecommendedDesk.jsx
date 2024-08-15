@@ -331,7 +331,6 @@ const RecommendedDesk = () => {
             ) : (
               filteredBooks.slice(visibleStart, visibleEnd).map(book => (
                 <BookItem key={book._id} onClick={() => handleBookClick(book)}>
-                  {/* <BookCover src={book.imageUrl} alt={book.title} /> */}
                   {book.imageUrl ? (
                     <BookCover src={book.imageUrl} alt={book.title} />
                   ) : (

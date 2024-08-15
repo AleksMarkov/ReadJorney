@@ -357,7 +357,6 @@ const MyLibrary = () => {
                     key={book._id}
                     onClick={() => handleRecBookClick(book)}
                   >
-                    {/* <RecBookCover src={book.imageUrl} alt={book.title} /> */}
                     {book.imageUrl ? (
                       <RecBookCover src={book.imageUrl} alt={book.title} />
                     ) : (
@@ -425,11 +424,6 @@ const MyLibrary = () => {
             <BookList>
               {filteredBooks.map(book => (
                 <BookItem key={book._id}>
-                  {/* <BookCover
-                    onClick={() => handleBookClick(book)}
-                    src={book.imageUrl}
-                    alt={book.title}
-                  /> */}
                   {book.imageUrl ? (
                     <BookCover
                       onClick={() => handleBookClick(book)}

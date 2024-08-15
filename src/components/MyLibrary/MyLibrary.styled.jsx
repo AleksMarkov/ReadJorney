@@ -11,7 +11,7 @@ export const Container = styled.div`
   align-items: center;
   padding: 32px;
   gap: 16px;
-  margin: auto; /* Центрирование */
+  margin: auto;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -658,8 +658,8 @@ export const BookList = styled.div`
   grid-template-columns: repeat(5, 1fr);
   column-gap: 20px;
   row-gap: 27px;
-  max-height: 600px; /* максимальная высота секции с книгами */
-  overflow-y: auto; /* добавляем прокрутку по вертикали */
+  max-height: 600px;
+  overflow-y: auto;
 
   @media (max-width: 1440px) {
     grid-template-columns: repeat(4, 1fr);
@@ -680,18 +680,18 @@ export const BookItem = styled.div`
   text-align: center;
 
   &:nth-child(n + 11) {
-    display: none; /* скрываем книги, которые не помещаются */
+    display: none; 
   }
 
   @media (max-width: 1440px) {
     &:nth-child(n + 9) {
-      display: none; /* для среднего экрана */
+      display: none; 
     }
   }
 
   @media (max-width: 768px) {
     &:nth-child(n + 3) {
-      display: none; /* для малого экрана */
+      display: none; 
     }
   }
 `;
@@ -865,7 +865,7 @@ export const NumberInput = styled.input`
 
   &::placeholder {
     color: var(--lightgray);
-    opacity: 1; /* Сохраняем видимость placeholder при вводе данных */
+    opacity: 1; 
   }
 
   &:focus {

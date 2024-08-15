@@ -196,48 +196,37 @@ const Reading = () => {
     setView(newView);
 
     if (newView === 'diary') {
-      console.log('readBook', readBook);
-      // Если данные еще не загружены, ожидаем их загрузки
       if (!readBook || !readBook.progress) {
-        console.log('Waiting for book data to load...');
-
-        // Пример ожидания данных через simulate или прямой вызов загрузки данных (если доступно)
         await new Promise(resolve => {
           const checkDataLoaded = setInterval(() => {
             if (readBook && readBook.progress) {
               clearInterval(checkDataLoaded);
               resolve();
             }
-          }, 100); // Проверка каждые 100 мс
+          }, 100);
         });
-
-        console.log('Book data loaded, proceeding with analysis...');
       }
 
       if (readBook.status === 'unread') {
-        console.log("Diary not generated, book status is 'unread'");
         return;
       }
 
-      // Создание массива progress
       const progress = readBook.progress
         .filter(p => p.status === 'inactive')
         .map(p => ({
           ...p,
           pages: p.finishPage - p.startPage + 1,
-          data: p.finishReading.split('T')[0], // Извлечение даты
+          data: p.finishReading.split('T')[0],
           time: Math.round(
             (new Date(p.finishReading) - new Date(p.startReading)) / 60000
-          ), // Время в минутах
+          ),
           proc: ((p.finishPage - p.startPage) / readBook.totalPages) * 100,
         }));
 
-      // Округление proc до одного знака после запятой
       progress.forEach(p => {
         p.proc = parseFloat(p.proc.toFixed(1));
       });
 
-      // Суммирование страниц для записей с одинаковой датой и добавление totalpages
       const groupedByDate = progress.reduce((acc, curr) => {
         acc[curr.data] = acc[curr.data] || [];
         acc[curr.data].push(curr);
@@ -248,8 +237,6 @@ const Reading = () => {
         const totalPages = group.reduce((sum, item) => sum + item.pages, 0);
         group.forEach(item => (item.totalpages = totalPages));
       });
-
-      console.log(progress); // Вывод обработанного массива progress
     }
   };
 

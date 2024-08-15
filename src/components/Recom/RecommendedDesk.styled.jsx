@@ -11,7 +11,7 @@ export const Container = styled.div`
   align-items: center;
   padding: 32px;
   gap: 16px;
-  margin: auto; /* Центрирование */
+  margin: auto; 
   position: absolute;
   top: 50%;
   left: 50%;

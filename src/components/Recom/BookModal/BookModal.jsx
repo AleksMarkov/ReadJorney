@@ -76,7 +76,7 @@ const BookModal = ({ book, onClose }) => {
         <CloseButton onClick={onClose}>
           <img src={closeIcon} alt="Close" />
         </CloseButton>
-        {/* <BookImage src={book.imageUrl} alt={book.title} /> */}
+
         {book.imageUrl ? (
           <BookImage src={book.imageUrl} alt={book.title} />
         ) : (
