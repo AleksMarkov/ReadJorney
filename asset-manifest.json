@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/ReadJorney/static/css/main.03b7374c.css",
-    "main.js": "/ReadJorney/static/js/main.87a73112.js",
+    "main.js": "/ReadJorney/static/js/main.ad5d461e.js",
     "static/js/125.0a0a1816.chunk.js": "/ReadJorney/static/js/125.0a0a1816.chunk.js",
     "static/js/517.405854b6.chunk.js": "/ReadJorney/static/js/517.405854b6.chunk.js",
     "static/js/526.81bd8918.chunk.js": "/ReadJorney/static/js/526.81bd8918.chunk.js",
-    "static/js/622.0f2b8344.chunk.js": "/ReadJorney/static/js/622.0f2b8344.chunk.js",
-    "static/js/323.bae45e1c.chunk.js": "/ReadJorney/static/js/323.bae45e1c.chunk.js",
+    "static/js/622.316fabd4.chunk.js": "/ReadJorney/static/js/622.316fabd4.chunk.js",
+    "static/js/386.7c26011f.chunk.js": "/ReadJorney/static/js/386.7c26011f.chunk.js",
     "static/js/143.fb63495d.chunk.js": "/ReadJorney/static/js/143.fb63495d.chunk.js",
     "static/js/305.df6feb00.chunk.js": "/ReadJorney/static/js/305.df6feb00.chunk.js",
     "static/media/iPhone.jpg": "/ReadJorney/static/media/iPhone.d6f371be7cbf18c03067.jpg",
@@ -15,9 +15,13 @@
     "static/media/Gilroy-ExtraBold.otf": "/ReadJorney/static/media/Gilroy-ExtraBold.0094146a0505298ed06a.otf",
     "static/media/Gilroy-Light.otf": "/ReadJorney/static/media/Gilroy-Light.cc7ab55d27205bd64001.otf",
     "static/media/Logotablet.svg": "/ReadJorney/static/media/Logotablet.34e56d8fb436d27eda8fdc21018dd0a5.svg",
+    "static/media/piechart.svg": "/ReadJorney/static/media/piechart.65ebaecd5ca68305b5afa86be16f270a.svg",
     "static/media/eyeOff.svg": "/ReadJorney/static/media/eyeOff.fb258c3dc42a2491e5c37f761a1f8242.svg",
     "static/media/delete.svg": "/ReadJorney/static/media/delete.741b4ad693b4e41abd542949ce48ec77.svg",
     "index.html": "/ReadJorney/index.html",
+    "static/media/load20.svg": "/ReadJorney/static/media/load20.f5a724f8347def598ee55579e44b885c.svg",
+    "static/media/hourglass.svg": "/ReadJorney/static/media/hourglass.a4769cff57e29e481536e155580bc18b.svg",
+    "static/media/load100.svg": "/ReadJorney/static/media/load100.73f51afb615011602c7f1dd7d5ec4931.svg",
     "static/media/eyeOn.svg": "/ReadJorney/static/media/eyeOn.c382ea11686a760a94eee2f48cf66c7b.svg",
     "static/media/chevron-left.svg": "/ReadJorney/static/media/chevron-left.1a862de1df03b0ff06984581f9917a98.svg",
     "static/media/chevron-right.svg": "/ReadJorney/static/media/chevron-right.d63ffa474bf88a2160a2dae0a182027d.svg",
@@ -29,18 +33,19 @@
     "static/media/redsircule.svg": "/ReadJorney/static/media/redsircule.ab6543a16ee2d1562262b8cd07e11395.svg",
     "static/media/chevronUpp.svg": "/ReadJorney/static/media/chevronUpp.96230b19cdbcad897ebb36c94642ecea.svg",
     "static/media/chevronDown.svg": "/ReadJorney/static/media/chevronDown.ed7ba7edebb5c871cb1c129aa7bcc742.svg",
+    "static/media/green.svg": "/ReadJorney/static/media/green.9b5e170c8e557294568effe6f61ebba2.svg",
     "main.03b7374c.css.map": "/ReadJorney/static/css/main.03b7374c.css.map",
-    "main.87a73112.js.map": "/ReadJorney/static/js/main.87a73112.js.map",
+    "main.ad5d461e.js.map": "/ReadJorney/static/js/main.ad5d461e.js.map",
     "125.0a0a1816.chunk.js.map": "/ReadJorney/static/js/125.0a0a1816.chunk.js.map",
     "517.405854b6.chunk.js.map": "/ReadJorney/static/js/517.405854b6.chunk.js.map",
     "526.81bd8918.chunk.js.map": "/ReadJorney/static/js/526.81bd8918.chunk.js.map",
-    "622.0f2b8344.chunk.js.map": "/ReadJorney/static/js/622.0f2b8344.chunk.js.map",
-    "323.bae45e1c.chunk.js.map": "/ReadJorney/static/js/323.bae45e1c.chunk.js.map",
+    "622.316fabd4.chunk.js.map": "/ReadJorney/static/js/622.316fabd4.chunk.js.map",
+    "386.7c26011f.chunk.js.map": "/ReadJorney/static/js/386.7c26011f.chunk.js.map",
     "143.fb63495d.chunk.js.map": "/ReadJorney/static/js/143.fb63495d.chunk.js.map",
     "305.df6feb00.chunk.js.map": "/ReadJorney/static/js/305.df6feb00.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.03b7374c.css",
-    "static/js/main.87a73112.js"
+    "static/js/main.ad5d461e.js"
   ]
 }
