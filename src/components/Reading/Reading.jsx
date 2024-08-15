@@ -32,14 +32,25 @@ import {
   CloseButton,
   Overlay,
   PopupMenuButton,
-  Quoteoftheday,
   BookAuthor,
   BookTitle,
   BookBlock,
   BookCover,
   BookItem,
   RedBlock,
-  ErrorMessage, // Новый компонент
+  ErrorMessage,
+  Symbol,
+  Symbol2,
+  ChartWrapper,
+  Chart,
+  PietextBlock,
+  PieBlock,
+  Symblock,
+  Smblock,
+  Proc,
+  Pages,
+  Quoteoftheday,
+  WorkoutStep1,
 } from './Reading.styled';
 import logoImage from '../../assets/svg/Logomobile.svg';
 import logotablet from '../../assets/svg/Logotablet.svg';
@@ -47,6 +58,11 @@ import usermenu from '../../assets/svg/usermenu.svg';
 import closeIcon from '../../assets/svg/x-close.svg';
 import redcircule from '../../assets/svg/redsircule.svg';
 import redsguare from '../../assets/svg/redsquare.svg';
+import hourglass from '../../assets/svg/hourglass.svg';
+import load100 from '../../assets/svg/load100.svg';
+import load20 from '../../assets/svg/load20.svg';
+import greendot from '../../assets/svg/green.svg';
+import piechart from '../../assets/svg/piechart.svg';
 import { AuthContext } from '../../context/AuthContext';
 import { clearScreenSize } from '../../redux/screenSizeSlice';
 import {
@@ -67,6 +83,8 @@ const Reading = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [condition, setCondition] = useState('inactive');
   const [notification, setNotification] = useState(null);
+  const [finishPage, setFinishPage] = useState(0);
+  const [procent, setProcent] = useState(0);
   const popupRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -133,6 +151,13 @@ const Reading = () => {
               ? 'Reading started successfully'
               : 'Reading stopped successfully'
           );
+
+          const newFinishPage = Math.max(
+            ...response.data.progress.map(p => p.finishPage)
+          );
+          setFinishPage(newFinishPage);
+          const newProcent = (newFinishPage / readBook.totalPages) * 100;
+          setProcent(newProcent.toFixed(2));
         } else {
           setNotification(response.message);
         }
@@ -167,6 +192,13 @@ const Reading = () => {
             const newCondition =
               lastProgress?.status === 'active' ? 'active' : 'inactive';
             setCondition(newCondition);
+
+            const newFinishPage = Math.max(
+              ...response.data.progress.map(p => p.finishPage)
+            );
+            setFinishPage(newFinishPage);
+            const newProcent = (newFinishPage / response.data.totalPages) * 100;
+            setProcent(newProcent.toFixed(2));
           } else {
             dispatch(setReadBookError(response.message));
             setNotification(response.message);
@@ -178,6 +210,10 @@ const Reading = () => {
         });
     }
   }, [bookId, dispatch]);
+
+  if (!readBook) {
+    return <p>Loading book...</p>;
+  }
 
   return (
     <Container>
@@ -229,7 +265,7 @@ const Reading = () => {
         <PopupMenuButton onClick={handleLogout}>Log out</PopupMenuButton>
       </PopupMenu>
       <BodySection>
-        <SidebarSection>
+        <SidebarSection status={readBook.status}>
           <form onSubmit={handleSubmit(handleApply)}>
             <FiltersSection>
               <FilteText>
@@ -251,12 +287,46 @@ const Reading = () => {
             </FiltersSection>
           </form>
           <WorkoutSection>
-            <WorkoutTitle>Progress</WorkoutTitle>
-            <WorkoutStep>
-              Here you will see when and how much you read. To record, click on
-              the red button above.
-            </WorkoutStep>
-            <Quoteoftheday className="emoji-books"></Quoteoftheday>
+            {readBook.status === 'in-progress' && (
+              <>
+                <WorkoutTitle>
+                  Statistics
+                  <Symblock>
+                    <Symbol src={hourglass} alt="hour glass" />
+                    <Symbol src={piechart} alt="pie chart" />
+                  </Symblock>
+                </WorkoutTitle>
+                <WorkoutStep1>
+                  Each page, each chapter is a new round of knowledge, a new
+                  step towards understanding. By rewriting statistics, we create
+                  our own reading history.
+                </WorkoutStep1>
+                <PieBlock>
+                  <ChartWrapper>
+                    <Chart src={load20} alt="load 20%" />
+                    <div className="centered-text">{`${procent}%`}</div>
+                  </ChartWrapper>
+                  <PietextBlock>
+                    <Symbol2 src={greendot} alt="green dot" />
+                    <Smblock>
+                      <Proc>{procent}%</Proc>
+                      <Pages>{finishPage} pages read</Pages>
+                    </Smblock>
+                  </PietextBlock>
+                </PieBlock>
+              </>
+            )}
+
+            {readBook.status === 'unread' && (
+              <>
+                <WorkoutTitle>Progress</WorkoutTitle>
+                <WorkoutStep>
+                  Here you will see when and how much you read. To record, click
+                  on the red button above.
+                </WorkoutStep>
+                <Quoteoftheday className="emoji-books"></Quoteoftheday>
+              </>
+            )}
           </WorkoutSection>
         </SidebarSection>
         <RecommendedSection>
@@ -278,12 +348,6 @@ const Reading = () => {
               />
             </BookItem>
           )}
-          {/* {readBookStatus === 'failed' && (
-            <Notification
-              message={notification}
-              onClose={() => setNotification(null)}
-            />
-          )} */}
         </RecommendedSection>
       </BodySection>
     </Container>

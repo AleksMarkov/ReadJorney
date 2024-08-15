@@ -218,6 +218,7 @@ export const BodySection = styled.div`
 export const SidebarSection = styled.div`
   width: 353px;
   height: 651px;
+  // height: ${({ status }) => (status === 'in-progress' ? '451px' : '390px')};
   background-color: var(--lightblack);
   border-radius: 30px;
   padding: 20px;
@@ -238,7 +239,7 @@ export const SidebarSection = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     width: 335px;
-    height: 390px;
+    height: ${({ status }) => (status === 'in-progress' ? '451px' : '390px')};
     padding: 20px;
     gap: 40px;
   }
@@ -371,7 +372,7 @@ export const ApplyButton = styled.button`
 
 export const WorkoutSection = styled.div`
   width: 313px;
-  height: 220px;
+  height: 493px;
 
   padding: 0px 20px;
   display: flex;
@@ -395,6 +396,9 @@ export const WorkoutSection = styled.div`
 export const WorkoutTitle = styled.h3`
   width: 293px;
   height: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   font-size: 20px;
   font-weight: 700;
   line-height: 20px;
@@ -415,7 +419,7 @@ export const WorkoutTitle = styled.h3`
 
 export const WorkoutStep = styled.div`
   width: 293px;
-  height: 36px;
+  height: 72px;
   display: flex;
   gap: 12px;
   flex-direction: row;
@@ -425,7 +429,7 @@ export const WorkoutStep = styled.div`
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   text-align: left;
 
   @media (max-width: 1440px) {
@@ -437,8 +441,32 @@ export const WorkoutStep = styled.div`
   }
 `;
 
+export const WorkoutStep1 = styled.div`
+  width: 293px;
+  height: 72px;
+  display: flex;
+  gap: 12px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #686868;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.03em;
+  text-align: left;
+
+  @media (max-width: 1440px) {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    width: 295px;
+  }
+`;
+
 export const Quoteoftheday = styled.div`
-  margin-top: 50px;
+  margin-top: 24px;
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -458,11 +486,11 @@ export const Quoteoftheday = styled.div`
   }
 
   @media (max-width: 1440px) {
-    margin-top: 50px;
+    margin-top: 14px;
   }
 
   @media (max-width: 768px) {
-    margin-top: 8px;
+    margin-top: -22px;
     width: 80px;
     height: 80px;
     &.emoji-books::before {
@@ -714,10 +742,9 @@ export const RedBlock = styled.img`
   }
 
   @media (max-width: 768px) {
-   margin-top: 20px;
-   width: 40px;
-  height: 40px;
-  }
+    margin-top: 20px;
+    width: 40px;
+    height: 40px;
   }
 
   &:hover {
@@ -734,4 +761,206 @@ export const ErrorMessage = styled.p`
   text-align: left;
   margin-left: 14px;
   margin-top: 4px;
+`;
+export const Symblock = styled.div`
+  width: 48px;
+  height: 20px;
+  color: var(--white);
+  dilsplay: flex;
+  justify-content: space-between;
+  @media (max-width: 1440px) {
+  }
+
+  @media (max-width: 768px) {
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const Symbol = styled.img`
+  width: 20px;
+  height: 20px;
+  color: var(--white);
+
+  @media (max-width: 1440px) {
+  }
+
+  @media (max-width: 768px) {
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const PieBlock = styled.div`
+  width: 313px;
+  height: 281px;
+  border-radius: 12px;
+  background-color: #262626;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+
+  @media (max-width: 1440px) {
+    height: 252px;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 768px) {
+    width: 295px;
+    height: 211px;
+    margin-top: 6px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const Chart = styled.img`
+  width: 189px;
+  height: 189px;
+  color: #1f1f1f;
+  background-color: #262626;
+  // color: var(--black);
+
+  @media (max-width: 1440px) {
+    width: 138px;
+    height: 138px;
+  }
+
+  @media (max-width: 768px) {
+    width: 116px;
+    height: 116px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const PietextBlock = styled.div`
+  width: 108px;
+  height: 42px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: flex-start;
+
+  @media (max-width: 1440px) {
+  }
+
+  @media (max-width: 768px) {
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const Smblock = styled.div`
+  width: 79px;
+  height: 42px;
+
+  @media (max-width: 1440px) {
+  }
+
+  @media (max-width: 768px) {
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+export const Proc = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #f9f9f9;
+
+  @media (max-width: 1440px) {
+  }
+
+  @media (max-width: 768px) {
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const Pages = styled.div`
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #686868;
+
+  @media (max-width: 1440px) {
+  }
+
+  @media (max-width: 768px) {
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const Symbol2 = styled.img`
+  width: 14px;
+  height: 14px;
+  color: var(--white);
+
+  @media (max-width: 1440px) {
+  }
+
+  @media (max-width: 768px) {
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const ChartWrapper = styled.div`
+  position: relative;
+  width: 189px;
+  height: 189px;
+
+  @media (max-width: 1440px) {
+    width: 138px;
+    height: 138px;
+  }
+
+  @media (max-width: 768px) {
+    width: 116px;
+    height: 116px;
+  }
+
+  .centered-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -0.02em;
+    color: #f9f9f9;
+
+    @media (max-width: 768px) {
+      font-size: 18px;
+      line-height: 20px;
+    }
+  }
 `;
