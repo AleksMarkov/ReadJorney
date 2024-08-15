@@ -23,7 +23,6 @@ export const BookProvider = ({ children }) => {
     if (user && user.token) {
       setLoading(true);
       try {
-        // Первый запрос для получения общего количества книг
         const initialResponse = await bookService.getRecommendedBooks(
           user.token,
           1,
@@ -32,7 +31,6 @@ export const BookProvider = ({ children }) => {
 
         const totalPages = initialResponse.totalPages;
 
-        // Второй запрос для получения всех книг
         const fullResponse = await bookService.getRecommendedBooks(
           user.token,
           1,
@@ -50,13 +48,12 @@ export const BookProvider = ({ children }) => {
 
   useEffect(() => {
     if (user && bookLS.length === 0) {
-      fetchAllBooks(); // Загружаем все книги после авторизации
+      fetchAllBooks();
     }
   }, [user, fetchAllBooks, bookLS.length]);
 
   useEffect(() => {
     if (!user) {
-      // Если пользователь вышел, очищаем bookLS
       dispatch(clearBookLS());
     }
   }, [user, dispatch]);

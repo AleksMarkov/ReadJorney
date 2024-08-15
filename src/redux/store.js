@@ -4,7 +4,7 @@ import screenSizeReducer from './screenSizeSlice';
 import bookLSReducer from './bookLSSlice';
 import userBooksReducer from './userBooksSlice';
 import authReducer from './authSlice';
-import readBookReducer from './readBookSlice'; // Добавьте новый слайс
+import readBookReducer from './readBookSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,7 +12,7 @@ export const store = configureStore({
     bookLS: bookLSReducer,
     userBooks: userBooksReducer,
     auth: authReducer,
-    readBook: readBookReducer, // Подключите новый слайс
+    readBook: readBookReducer,
   },
 });
 

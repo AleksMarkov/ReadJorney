@@ -158,7 +158,6 @@ const Reading = () => {
               : 'Reading stopped successfully'
           );
 
-          // Находим наибольшее значение finishPage среди всех записей progress
           const maxFinishPage = Math.max(
             0,
             ...response.data.progress
@@ -171,7 +170,6 @@ const Reading = () => {
           const newProcent = (maxFinishPage / readBook.totalPages) * 100;
           setProcent(newProcent.toFixed(2));
 
-          // Обновление статуса книги в Redux
           dispatch(
             updateUserBookStatus({
               bookId,
@@ -179,7 +177,6 @@ const Reading = () => {
             })
           );
 
-          // Проверка, завершил ли пользователь чтение книги
           if (parseInt(data.page, 10) === readBook.totalPages) {
             setIsBookReadPopupVisible(true);
           }
@@ -232,7 +229,6 @@ const Reading = () => {
             const newProcent = (maxFinishPage / response.data.totalPages) * 100;
             setProcent(newProcent.toFixed(2));
 
-            // Обновление статуса книги в Redux
             dispatch(
               updateUserBookStatus({
                 bookId,

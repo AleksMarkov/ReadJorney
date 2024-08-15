@@ -3,12 +3,9 @@ import styled from 'styled-components';
 import deleteIcon from '../../assets/svg/delete.svg';
 
 export const ChartContainer = styled.div`
-  position: absolute;
   width: 313px;
   height: 373px;
-  left: 52px;
-  top: 380px;
-  background: #262626;
+  background-color: #262626;
   border-radius: 12px;
   padding: 20px;
   box-sizing: border-box;

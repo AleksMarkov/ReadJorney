@@ -11,9 +11,8 @@ export const Container = styled.div`
   align-items: center;
   padding: 20px;
   gap: 10px;
-  margin: auto; /* Это свойство автоматически добавит одинаковые отступы сверху и снизу, чтобы элемент был в центре */
+  margin: auto;
 
-  /* Чтобы полностью центрировать элемент по горизонтали и вертикали, можно использовать flexbox на уровне body или другого родительского элемента: */
   position: absolute;
   top: 50%;
   left: 50%;
@@ -94,7 +93,7 @@ export const Input = styled.input`
 
 export const EyeIcon = styled.img`
   position: absolute;
-  right: 15px; /* 15 пикселей от правого края поля */
+  right: 15px;
   width: 18px;
   height: 18px;
   cursor: pointer;

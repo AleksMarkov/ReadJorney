@@ -727,13 +727,11 @@ export const BookList = styled.div`
   @media (max-width: 1440px) {
     grid-template-columns: repeat(4, 1fr);
     column-gap: 25px;
-    // row-gap: 27px;
   }
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
     column-gap: 21px;
-    // row-gap: 27px;
   }
 `;
 

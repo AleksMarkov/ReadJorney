@@ -9,7 +9,7 @@ import {
   PopupTitle,
   PopupMessage,
 } from './BookReadPopup.styled';
-import closeIcon from '../../../assets/svg/x-close.svg'; // Assuming this path for the close icon
+import closeIcon from '../../../assets/svg/x-close.svg';
 
 const BookReadPopup = ({ onClose }) => {
   useEffect(() => {

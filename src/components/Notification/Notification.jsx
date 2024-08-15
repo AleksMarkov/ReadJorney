@@ -16,8 +16,8 @@ const NotificationContainer = styled.div`
 
 const Notification = ({ message, onClose }) => {
   useEffect(() => {
-    const timer = setTimeout(onClose, 5000); // Закрытие через 5 секунд
-    return () => clearTimeout(timer); // Очистка таймера при размонтировании
+    const timer = setTimeout(onClose, 5000);
+    return () => clearTimeout(timer);
   }, [onClose]);
 
   return (

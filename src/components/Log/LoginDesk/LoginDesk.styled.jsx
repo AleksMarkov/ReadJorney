@@ -10,9 +10,8 @@ export const Container = styled.div`
   align-items: center;
   padding: 32px;
   gap: 16px;
-  margin: auto; /* Это свойство автоматически добавит одинаковые отступы сверху и снизу, чтобы элемент был в центре */
+  margin: auto;
 
-  /* Чтобы полностью центрировать элемент по горизонтали и вертикали, можно использовать flexbox на уровне body или другого родительского элемента: */
   position: absolute;
   top: 50%;
   left: 50%;

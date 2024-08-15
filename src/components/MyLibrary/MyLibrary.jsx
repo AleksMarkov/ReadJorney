@@ -12,7 +12,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Loader from '../Loader/Loader';
 import BookModalRead from './BookModalRead/BookModalRead';
-import BookAddedPopup from './BookAddedPopup/BookAddedPopup'; // Adjust the path as necessary
+import BookAddedPopup from './BookAddedPopup/BookAddedPopup';
 import {
   addBookToUserLibrary,
   fetchUserBooks,
@@ -204,7 +204,7 @@ const MyLibrary = () => {
     try {
       const result = await addBookToUserLibrary(data, user.token);
       if (result.success) {
-        setIsPopupVisible(true); // Show pop-up on success
+        setIsPopupVisible(true);
         const booksResult = await fetchUserBooks(user.token);
         if (booksResult.success) {
           dispatch(setUserBooks(booksResult.data));
@@ -231,7 +231,7 @@ const MyLibrary = () => {
       );
       if (result.success) {
         setNotification(result.data.message);
-        // Обновление списка книг после успешного удаления
+
         dispatch(deleteUserBook(bookToDelete._id));
       } else {
         setNotification(result.message);

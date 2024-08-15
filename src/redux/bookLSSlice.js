@@ -12,7 +12,7 @@ export const bookLSSlice = createSlice({
         }
       });
     },
-    clearBookLS: () => [], // Clear the bookLS slice
+    clearBookLS: () => [],
   },
 });
 

@@ -8,7 +8,7 @@ import {
   PopupTitle,
   PopupMessage,
   PopupDeleteButton,
-} from './BookDeletePopup.styled'; // Создайте файл со стилями
+} from './BookDeletePopup.styled';
 import closeIcon from '../../../assets/svg/x-close.svg';
 
 const BookDeletePopup = ({ book, onClose, onDelete }) => {

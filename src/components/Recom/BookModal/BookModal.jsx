@@ -37,7 +37,7 @@ const BookModal = ({ book, onClose }) => {
     try {
       const result = await addBookByIdToUserLibrary(book._id, user.token);
       if (result.success) {
-        setIsPopupVisible(true); // Показать всплывающее окно
+        setIsPopupVisible(true);
         const booksResult = await fetchUserBooks(user.token);
         if (booksResult.success) {
           dispatch(setUserBooks(booksResult.data));
@@ -92,7 +92,7 @@ const BookModal = ({ book, onClose }) => {
           <BookAddedPopup
             onClose={() => {
               setIsPopupVisible(false);
-              onClose(); // Закрытие модального окна при закрытии всплывающего окна
+              onClose();
             }}
           />
         )}

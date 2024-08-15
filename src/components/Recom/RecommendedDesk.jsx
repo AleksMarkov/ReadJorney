@@ -78,12 +78,10 @@ const RecommendedDesk = () => {
   const bookLS = useSelector(selectBookLS);
   const screenSize = useScreenSize();
 
-  // Filter input states
   const [filterTitle, setFilterTitle] = useState('');
   const [filterAuthor, setFilterAuthor] = useState('');
   const [filteredBooks, setFilteredBooks] = useState(bookLS);
 
-  // Memoize getDisplayCount to avoid re-creating it on every render
   const getDisplayCount = useCallback(() => {
     if (screenSize >= 320 && screenSize <= 767) {
       return 2;
@@ -101,7 +99,6 @@ const RecommendedDesk = () => {
   }, [getDisplayCount]);
 
   useEffect(() => {
-    // Update filteredBooks when bookLS or filters change
     const filtered = bookLS.filter(book => {
       return (
         (filterTitle === '' ||
@@ -168,14 +165,12 @@ const RecommendedDesk = () => {
   const handleLogout = async () => {
     try {
       await signout();
-      // Clear Redux slices
-      dispatch(clearScreenSize());
-      dispatch({ type: 'bookLS/clearBookLS' }); // Assuming you have an action to clear the bookLS slice
 
-      // Clear Local Storage
+      dispatch(clearScreenSize());
+      dispatch({ type: 'bookLS/clearBookLS' });
+
       localStorage.clear();
 
-      // Navigate to login page
       navigate('/login');
     } catch (error) {
       setNotification(
@@ -203,9 +198,8 @@ const RecommendedDesk = () => {
     setSelectedBook(null);
   };
 
-  // Важно! Проверяем, что пользователь существует перед рендерингом элементов
   if (!user) {
-    return null; // Если пользователь не существует, ничего не рендерим
+    return null;
   }
 
   return (

@@ -9,8 +9,7 @@ import {
   PopupTitle,
   PopupMessage,
 } from './BookAddedPopup.styled';
-import closeIcon from '../../../assets/svg/x-close.svg'; // Assuming this path for the close icon
-
+import closeIcon from '../../../assets/svg/x-close.svg';
 const BookAddedPopup = ({ onClose }) => {
   useEffect(() => {
     const handleKeyDown = event => {

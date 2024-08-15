@@ -218,7 +218,7 @@ export const BodySection = styled.div`
 export const SidebarSection = styled.div`
   width: 353px;
   height: 651px;
-  // height: ${({ status }) => (status === 'in-progress' ? '451px' : '390px')};
+
   background-color: var(--lightblack);
   border-radius: 30px;
   padding: 20px;
@@ -380,8 +380,6 @@ export const WorkoutSection = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  //   gap: 40px;
-  //   background-color: var(--darkgray);
 
   @media (max-width: 1440px) {
     width: 305px;
@@ -828,7 +826,6 @@ export const Chart = styled.img`
   height: 189px;
   color: #1f1f1f;
   background-color: #262626;
-  // color: var(--black);
 
   @media (max-width: 1440px) {
     width: 138px;

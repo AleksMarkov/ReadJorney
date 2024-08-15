@@ -308,11 +308,6 @@ export const Info = styled.div`
     color: var(--lightgray);
   }
 
-  // &:focus {
-  //   border: 1px solid rgba(249, 249, 249, 0.1);
-  //   outline: none;
-  // }
-
   @media (max-width: 1440px) {
     width: 295px;
   }
@@ -396,7 +391,6 @@ export const WorkoutTitle = styled.h3`
   color: var(--white);
   background-color: var(--darkgray);
   text-align: left;
-  // margin-bottom: 20px;
 
   @media (max-width: 768px) {
     font-size: 18px;
@@ -589,18 +583,16 @@ export const RecBookList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 20px;
-  // row-gap: 27px;
+
   background-color: var(--darkgray);
   @media (max-width: 1440px) {
     grid-template-columns: repeat(3, 1fr);
     column-gap: 25px;
-    // row-gap: 27px;
   }
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
     column-gap: 20px;
-    // row-gap: 27px;
   }
 `;
 
@@ -1005,7 +997,6 @@ export const FilterButton = styled.div`
   img {
     width: 16px;
     height: 16px;
-    // filter: brightness(0) invert(1);
   }
 
   @media (max-width: 768px) {
