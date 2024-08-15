@@ -19,7 +19,7 @@ export const Container = styled.div`
 
   @media (max-width: 1440px) {
     width: 768px;
-    height: 1169px;
+    height: 1024px;
   }
   @media (max-width: 768px) {
     width: 375px;
@@ -221,7 +221,7 @@ export const SidebarSection = styled.div`
   background-color: var(--lightblack);
   border-radius: 30px;
   padding: 20px;
-  gap: 20px;
+  gap: 40px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -232,21 +232,21 @@ export const SidebarSection = styled.div`
     height: 336px;
     flex-direction: row;
     padding: 32px;
-    gap: 32px;
+    gap: 40px;
   }
 
   @media (max-width: 768px) {
     flex-direction: column;
     width: 335px;
-    height: 484px;
+    height: 390px;
     padding: 20px;
-    gap: 20px;
+    gap: 40px;
   }
 `;
 
 export const FiltersSection = styled.div`
   width: 313px;
-  height: 216px;
+  height: 158px;
   background-color: var(--lightblack);
   display: flex;
   flex-direction: column;
@@ -257,6 +257,11 @@ export const FiltersSection = styled.div`
   @media (max-width: 1440px) {
     width: 295px;
     height: 244px;
+  }
+
+  @media (max-width: 768px) {
+    width: 295px;
+    height: 124px;
   }
 `;
 
@@ -366,36 +371,40 @@ export const ApplyButton = styled.button`
 
 export const WorkoutSection = styled.div`
   width: 313px;
-  height: 272px;
-  border-radius: 12px;
-  padding: 20px;
+  height: 220px;
+
+  padding: 0px 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: start;
-  gap: 20px;
-  background-color: var(--darkgray);
+  align-items: center;
+  //   gap: 40px;
+  //   background-color: var(--darkgray);
 
   @media (max-width: 1440px) {
+    width: 305px;
     height: 272px;
   }
   @media (max-width: 768px) {
     width: 295px;
     height: 2250px;
-    gap: 20px;
+    gap: 14px;
   }
 `;
 
 export const WorkoutTitle = styled.h3`
+  width: 293px;
+  height: 20px;
   font-size: 20px;
   font-weight: 700;
   line-height: 20px;
   letter-spacing: -0.02em;
   color: var(--white);
   text-align: left;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 
   @media (max-width: 768px) {
+    width: 295px;
     font-size: 18px;
     font-weight: 700;
     line-height: 18px;
@@ -405,65 +414,60 @@ export const WorkoutTitle = styled.h3`
 `;
 
 export const WorkoutStep = styled.div`
-  width: 252px;
-  height: 54px;
+  width: 293px;
+  height: 36px;
   display: flex;
   gap: 12px;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-
-  @media (max-width: 768px) {
-    width: 255px;
-  }
-`;
-
-export const WorkoutIcon = styled.div`
-  width: 44px;
-  height: 44px;
-  background-color: var(--white);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 20px;
-  letter-spacing: -0.02em;
-  text-align: center;
-
-  color: var(--lightblack);
-
-  @media (max-width: 768px) {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 18px;
-    letter-spacing: -0.02em;
-    text-align: center;
-  }
-`;
-
-export const WorkoutDescription = styled.div`
+  color: #686868;
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
   letter-spacing: -0.02em;
   text-align: left;
-  color: var (--white);
-  flex: 1;
 
-  span {
-    color: var(--lightgray);
+  @media (max-width: 1440px) {
+    width: 305px;
   }
 
   @media (max-width: 768px) {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 18px;
-    letter-spacing: -0.02em;
-    text-align: left;
+    width: 295px;
+  }
+`;
+
+export const Quoteoftheday = styled.div`
+  margin-top: 50px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--darkgray);
+
+  &.emoji-books::before {
+    content: '🌟';
+    font-size: 50px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 1440px) {
+    margin-top: 50px;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 8px;
+    width: 80px;
+    height: 80px;
+    &.emoji-books::before {
+      font-size: 32px;
+    }
   }
 `;
 
@@ -476,13 +480,13 @@ export const RecommendedSection = styled.div`
 
   @media (max-width: 1440px) {
     width: 704px;
-    height: 663px;
-    padding: 40px;
+    height: 518px;
+    padding: 40px 40px 25px 40px;
   }
 
   @media (max-width: 768px) {
     width: 335px;
-    height: 382px;
+    height: 471px;
     padding: 40px 20px;
   }
 `;
@@ -492,17 +496,17 @@ export const RecommendedBlock = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: start;
-  margin-bottom: 27px;
+  margin-bottom: 44px;
 
   @media (max-width: 1440px) {
     width: 624px;
-    margin-bottom: 20px;
+    margin-bottom: 32px;
   }
 
   @media (max-width: 768px) {
     width: 295px;
-    height: 32px;
-    margin-bottom: 22px;
+    height: 20px;
+    margin-bottom: 40px;
   }
 `;
 
@@ -514,7 +518,12 @@ export const RecomText = styled.div`
   text-align: left;
   color: var(--white);
 
+  @media (max-width: 1440px) {
+  }
+
   @media (max-width: 768px) {
+    font-size: 20px;
+    line-height: 20px;
     font-size: 20px;
     line-height: 20px;
   }
@@ -599,5 +608,119 @@ export const CloseButton = styled.div`
 
   @media (min-width: 769px) {
     display: none;
+  }
+`;
+
+export const BookItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--lightblack);
+  text-align: center;
+`;
+
+export const BookCover = styled.img`
+  width: 224px;
+  height: 340px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 25px;
+
+  @media (max-width: 1440px) {
+    width: 169px;
+    height: 256px;
+  }
+
+  @media (max-width: 768px) {
+    width: 137px;
+    height: 208px;
+    margin-bottom: 10px;
+  }
+`;
+
+export const BookBlock = styled.div`
+  width: 847px;
+  height: 42px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  @media (max-width: 1440px) {
+    width: 600px;
+    height: 42px;
+  }
+
+  @media (max-width: 768px) {
+    height: 53px;
+  }
+`;
+export const BookTitle = styled.div`
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  width: 700px;
+  text-align: center;
+  color: var(--white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: 1440px) {
+    width: 600px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    line-height: 18px;
+    width: 200px;
+    white-space: wrap;
+  }
+`;
+
+export const BookAuthor = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  width: 700px;
+  text-align: center;
+  color: var(--lightgray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: 1440px) {
+    width: 600px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+    line-height: 12px;
+    width: 200px;
+    white-space: wrap;
+  }
+`;
+
+export const RedBlock = styled.img`
+  margin-top: 30px;
+  width: 50px;
+  height: 50px;
+  color: #e90516;
+
+  @media (max-width: 1440px) {
+    margin-top: 16px;
+  }
+
+  @media (max-width: 768px) {
+   margin-top: 20px;
+   width: 40px;
+  height: 40px;
+  }
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 `;

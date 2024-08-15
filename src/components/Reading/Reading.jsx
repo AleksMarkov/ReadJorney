@@ -23,8 +23,6 @@ import {
   WorkoutSection,
   WorkoutTitle,
   WorkoutStep,
-  WorkoutIcon,
-  WorkoutDescription,
   RecommendedBlock,
   RecomText,
   UserMenu,
@@ -32,6 +30,13 @@ import {
   CloseButton,
   Overlay,
   PopupMenuButton,
+  Quoteoftheday,
+  BookAuthor,
+  BookTitle,
+  BookBlock,
+  BookCover,
+  BookItem,
+  RedBlock,
 } from './Reading.styled';
 import logoImage from '../../assets/svg/Logomobile.svg';
 import logotablet from '../../assets/svg/Logotablet.svg';
@@ -39,6 +44,8 @@ import usermenu from '../../assets/svg/usermenu.svg';
 import closeIcon from '../../assets/svg/x-close.svg';
 import { AuthContext } from '../../context/AuthContext';
 import { clearScreenSize } from '../../redux/screenSizeSlice';
+import iphone from '../../assets/images/iPhone.jpg';
+import redcircule from '../../assets/svg/redsircule.svg';
 
 const Reading = () => {
   const { signout, user } = useContext(AuthContext);
@@ -136,35 +143,34 @@ const Reading = () => {
       <BodySection>
         <SidebarSection>
           <FiltersSection>
-            <FilteText>Filters:</FilteText>
+            <FilteText>Start page</FilteText>
             <InputWrapper>
-              <Input />
+              <Input type="text" placeholder="Page number:" value="" />
             </InputWrapper>
-            <ApplyButton>To apply</ApplyButton>
+            <ApplyButton>To start</ApplyButton>
           </FiltersSection>
           <WorkoutSection>
-            <WorkoutTitle>Start your workout</WorkoutTitle>
+            <WorkoutTitle>Progress</WorkoutTitle>
             <WorkoutStep>
-              <WorkoutIcon>1</WorkoutIcon>
-              <WorkoutDescription>
-                Create a personal library:{' '}
-                <span>add the books you intend to read to it.</span>
-              </WorkoutDescription>
+              Here you will see when and how much you read. To record, click on
+              the red button above.
             </WorkoutStep>
-            <WorkoutStep></WorkoutStep>
+            <Quoteoftheday className="emoji-books"></Quoteoftheday>
           </WorkoutSection>
         </SidebarSection>
         <RecommendedSection>
           <RecommendedBlock>
-            <RecomText>Recommended</RecomText>
+            <RecomText>My reading</RecomText>
           </RecommendedBlock>
-          {/* <BookItem key={book._id} onClick={() => handleBookClick(book)}>
-                  <BookCover src={book.imageUrl} alt={book.title} />
-                  <BookBlock>
-                    <BookTitle>{book.title}</BookTitle>
-                    <BookAuthor>{book.author}</BookAuthor>
-                  </BookBlock>
-                </BookItem> */}
+
+          <BookItem>
+            <BookCover src={iphone} alt="book cover" />
+            <BookBlock>
+              <BookTitle>test</BookTitle>
+              <BookAuthor>test</BookAuthor>
+            </BookBlock>
+            <RedBlock src={redcircule} alt="red circule" />
+          </BookItem>
         </RecommendedSection>
       </BodySection>
     </Container>
