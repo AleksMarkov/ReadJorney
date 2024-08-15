@@ -91,6 +91,7 @@ import BookDeletePopup from './BookDeletePopup/BookDeletePopup';
 import { deleteBookFromUserLibrary } from '../../services/bookDeleteService';
 import chevronDown from '../../assets/svg/chevronDown.svg';
 import chevronUp from '../../assets/svg/chevronUpp.svg';
+import placeholderImage from '../../assets/images/tor.jpg';
 
 const MyLibrary = () => {
   const { signout, user } = useContext(AuthContext);
@@ -356,7 +357,15 @@ const MyLibrary = () => {
                     key={book._id}
                     onClick={() => handleRecBookClick(book)}
                   >
-                    <RecBookCover src={book.imageUrl} alt={book.title} />
+                    {/* <RecBookCover src={book.imageUrl} alt={book.title} /> */}
+                    {book.imageUrl ? (
+                      <RecBookCover src={book.imageUrl} alt={book.title} />
+                    ) : (
+                      <RecBookCover
+                        src={placeholderImage}
+                        alt="Book cover is not available"
+                      />
+                    )}
                     <RecBookBlock>
                       <RecBookTitle>{book.title}</RecBookTitle>
                       <RecBookAuthor>{book.author}</RecBookAuthor>
@@ -416,11 +425,23 @@ const MyLibrary = () => {
             <BookList>
               {filteredBooks.map(book => (
                 <BookItem key={book._id}>
-                  <BookCover
+                  {/* <BookCover
                     onClick={() => handleBookClick(book)}
                     src={book.imageUrl}
                     alt={book.title}
-                  />
+                  /> */}
+                  {book.imageUrl ? (
+                    <BookCover
+                      onClick={() => handleBookClick(book)}
+                      src={book.imageUrl}
+                      alt={book.title}
+                    />
+                  ) : (
+                    <BookCover
+                      src={placeholderImage}
+                      alt="Book cover is not available"
+                    />
+                  )}
                   <BookBlock>
                     <TextBlock>
                       <BookTitle>{book.title}</BookTitle>

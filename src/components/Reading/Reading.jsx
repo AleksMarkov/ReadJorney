@@ -76,9 +76,10 @@ import { updateUserBookStatus } from '../../redux/userBooksSlice';
 import { fetchBookById } from '../../services/bookReadService';
 import { startReadingBook } from '../../services/bookReadingService';
 import { finishReadingBook } from '../../services/bookFinishService';
-import readSchema from '../../schemas/readSchema';
+import createReadSchema from '../../schemas/readSchema';
 import Notification from '../Notification/Notification';
 import BookReadPopup from './BookReadPopup/BookReadPopup';
+import placeholderImage from '../../assets/images/tor.jpg';
 
 const Reading = () => {
   const { signout, user } = useContext(AuthContext);
@@ -97,12 +98,14 @@ const Reading = () => {
   const readBook = useSelector(selectReadBook);
   const readBookStatus = useSelector(selectReadBookStatus);
 
+  const schema = createReadSchema(readBook?.totalPages || 1);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(readSchema),
+    resolver: yupResolver(schema),
   });
 
   const toggleMenuVisibility = () => {
@@ -189,8 +192,65 @@ const Reading = () => {
     }
   };
 
-  const handleViewChange = newView => {
+  const handleViewChange = async newView => {
     setView(newView);
+
+    if (newView === 'diary') {
+      console.log('readBook', readBook);
+      // Если данные еще не загружены, ожидаем их загрузки
+      if (!readBook || !readBook.progress) {
+        console.log('Waiting for book data to load...');
+
+        // Пример ожидания данных через simulate или прямой вызов загрузки данных (если доступно)
+        await new Promise(resolve => {
+          const checkDataLoaded = setInterval(() => {
+            if (readBook && readBook.progress) {
+              clearInterval(checkDataLoaded);
+              resolve();
+            }
+          }, 100); // Проверка каждые 100 мс
+        });
+
+        console.log('Book data loaded, proceeding with analysis...');
+      }
+
+      if (readBook.status === 'unread') {
+        console.log("Diary not generated, book status is 'unread'");
+        return;
+      }
+
+      // Создание массива progress
+      const progress = readBook.progress
+        .filter(p => p.status === 'inactive')
+        .map(p => ({
+          ...p,
+          pages: p.finishPage - p.startPage + 1,
+          data: p.finishReading.split('T')[0], // Извлечение даты
+          time: Math.round(
+            (new Date(p.finishReading) - new Date(p.startReading)) / 60000
+          ), // Время в минутах
+          proc: ((p.finishPage - p.startPage) / readBook.totalPages) * 100,
+        }));
+
+      // Округление proc до одного знака после запятой
+      progress.forEach(p => {
+        p.proc = parseFloat(p.proc.toFixed(1));
+      });
+
+      // Суммирование страниц для записей с одинаковой датой и добавление totalpages
+      const groupedByDate = progress.reduce((acc, curr) => {
+        acc[curr.data] = acc[curr.data] || [];
+        acc[curr.data].push(curr);
+        return acc;
+      }, {});
+
+      Object.values(groupedByDate).forEach(group => {
+        const totalPages = group.reduce((sum, item) => sum + item.pages, 0);
+        group.forEach(item => (item.totalpages = totalPages));
+      });
+
+      console.log(progress); // Вывод обработанного массива progress
+    }
   };
 
   useEffect(() => {
@@ -394,7 +454,14 @@ const Reading = () => {
           {readBookStatus === 'loading' && <p>Loading book...</p>}
           {readBookStatus === 'succeeded' && readBook && (
             <BookItem>
-              <BookCover src={readBook.imageUrl} alt="book cover" />
+              {readBook.imageUrl ? (
+                <BookCover src={readBook.imageUrl} alt="book cover" />
+              ) : (
+                <BookCover
+                  src={placeholderImage}
+                  alt="Book cover is not available"
+                />
+              )}
               <BookBlock>
                 <BookTitle>{readBook.title}</BookTitle>
                 <BookAuthor>{readBook.author}</BookAuthor>

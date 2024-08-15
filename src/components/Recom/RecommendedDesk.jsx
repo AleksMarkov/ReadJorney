@@ -66,6 +66,7 @@ import { clearScreenSize } from '../../redux/screenSizeSlice';
 import Notification from '../Notification/Notification';
 import { selectBookLS } from '../../redux/bookLSSlice';
 import { useScreenSize } from '../../hooks/useScreenSize';
+import placeholderImage from '../../assets/images/tor.jpg';
 
 const RecommendedDesk = () => {
   const { signout, user } = useContext(AuthContext);
@@ -330,7 +331,15 @@ const RecommendedDesk = () => {
             ) : (
               filteredBooks.slice(visibleStart, visibleEnd).map(book => (
                 <BookItem key={book._id} onClick={() => handleBookClick(book)}>
-                  <BookCover src={book.imageUrl} alt={book.title} />
+                  {/* <BookCover src={book.imageUrl} alt={book.title} /> */}
+                  {book.imageUrl ? (
+                    <BookCover src={book.imageUrl} alt={book.title} />
+                  ) : (
+                    <BookCover
+                      src={placeholderImage}
+                      alt="Book cover is not available"
+                    />
+                  )}
                   <BookBlock>
                     <BookTitle>{book.title}</BookTitle>
                     <BookAuthor>{book.author}</BookAuthor>

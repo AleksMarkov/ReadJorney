@@ -13,6 +13,7 @@ import {
   AddButton,
 } from './BookModalRead.styled';
 import closeIcon from '../../../assets/svg/x-close.svg';
+import placeholderImage from '../../../assets/images/tor.jpg';
 
 const BookModalRead = ({ book, onClose }) => {
   const navigate = useNavigate();
@@ -46,7 +47,12 @@ const BookModalRead = ({ book, onClose }) => {
         <CloseButton onClick={onClose}>
           <img src={closeIcon} alt="Close" />
         </CloseButton>
-        <BookImage src={book.imageUrl} alt={book.title} />
+        {/* <BookImage src={book.imageUrl} alt={book.title} /> */}
+        {book.imageUrl ? (
+          <BookImage src={book.imageUrl} alt={book.title} />
+        ) : (
+          <BookImage src={placeholderImage} alt="Book cover is not available" />
+        )}
         <BookInfo>
           <BookTitle>{book.title}</BookTitle>
           <BookAuthor>{book.author}</BookAuthor>
