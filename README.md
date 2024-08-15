@@ -1,112 +1,156 @@
-# React homework template
+# Read Journey
 
-Цей проект був створений за допомогою
-[Create React App](https://github.com/facebook/create-react-app). Для знайомства
-і налаштування додаткових можливостей
-[звернися до документації](https://facebook.github.io/create-react-app/docs/getting-started).
+Read Journey is an application designed to facilitate a seamless reading
+experience by allowing users to manage their book library, track reading
+progress, and explore recommended books. The platform supports users in their
+reading journey, providing both statistical and diary-like views of their
+reading history.
 
-## Створення репозиторію за шаблоном
+## Table of Contents
 
-Використовуй цей репозиторій організації GoIT як шаблон для створення репозиторію
-свого проєкта. Для цього натисни на кнопку `«Use this template»` і вибери опцію
-`«Create a new repository»`, як показано на зображенні.
+- [Project Overview](#project-overview)
+- [Technologies Used](#technologies-used)
+- [Pages and Features](#pages-and-features)
+- [Technical Specifications](#technical-specifications)
+- [Setup Instructions](#setup-instructions)
+- [Contributions](#contributions)
+- [License](#license)
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+## Project Overview
 
-На наступному кроці відкриється сторінка створення нового репозиторію. Заповни поле
-його імені, переконайся що репозиторій публічний, після чого натисни кнопку
-`«Create repository from template»`.
+Read Journey is a responsive web application designed to help users create and
+manage their personal libraries, track reading progress, and explore new book
+recommendations. The application features five main pages:
 
-![Creating repo from a template step 2](./assets/template-step-2.png)
+- **Register**: New users can register by providing their name, email, and
+  password.
+- **Login**: Registered users can log in to access their personal library and
+  reading history.
+- **Recommended**: Displays recommended books, allowing users to filter and
+  explore new reading material.
+- **My Library**: A personalized library where users can add, view, and manage
+  their books.
+- **Reading**: Tracks the user's reading progress with both statistical and
+  diary views.
 
-Після того як репозиторій буде створено, необхідно перейти в налаштування
-створеного репозиторію на вкладку `Settings` > `Actions` > `General` як
-показано на зображенні.
+## Technologies Used
 
-![Settings GitHub Actions permissions step 1](./assets/gh-actions-perm-1.png)
+- **Frontend**: React, React Router, styled-components
+- **State Management**: Redux
+- **Form Handling and Validation**: react-hook-form, yup
+- **Authentication**: Custom authentication using Axios and JWT
+- **Backend**: REST API provided by the GoIT study backend
+- **Design**: Responsive layout with support for mobile, tablet, and desktop
+  views
 
-Проскроливши сторінку до самого кінця, у секції `«Workflow permissions»` вибери
-опцію `«Read and write permissions»` і постав галочку в чекбоксі. Це
-необхідно для автоматизації процесу деплою проєкту.
+## Pages and Features
 
-![Settings GitHub Actions permissions step 2](./assets/gh-actions-perm-2.png)
+### Register Page
 
-Тепер у тебе є особистий репозиторій проекту, зі структурою файлів і папок
-репозиторію-шаблону. Далі працюй із ним як із будь-яким іншим особистим репозиторієм,
-клонуй його собі на комп'ютер, пиши код, роби комміти і відправляй їх на
-GitHub.
+- **Functionality**: Users can create a new account by entering their name,
+  email, and password. Form validation ensures all inputs are correctly
+  formatted before submission.
+- **Redirection**: Upon successful registration, users are automatically logged
+  in and redirected to the Recommended page.
 
-## Підготовка до роботи
+### Login Page
 
-1. Переконайся що на комп'ютері встановлено LTS-версія Node.js.
-   [Завантаж і встанови](https://nodejs.org/en/) її якщо необхідно.
-2. Встанови базові залежності проєкту командою `npm install`.
-3. Запусти режим розробки, виконавши команду `npm start`.
-4. Перейди в браузері за адресою [http://localhost:3000](http://localhost:3000).
-   Ця сторінка буде автоматично перезавантажуватися після збереження змін у файлах проєкту.
+- **Functionality**: Registered users can log in by providing their email and
+  password. Form validation checks for correct input before submission.
+- **Redirection**: Upon successful login, users are redirected to the
+  Recommended page.
 
-## Деплой
+### Recommended Page
 
-Продакшн версія проєкту буде автоматично проходити лінтинг, збиратися і
-деплоїтися на GitHub Pages, у гілку `gh-pages`, щоразу, коли оновлюється
-гілка `main`. Наприклад, після прямого пушу або прийнятого пул-реквесту. Для цього
-необхідно у файлі `package.json` відредагувати поле `homepage`, замінивши
-`your_username` і `your_repo_name` на свої, і відправити зміни на GitHub.
+- **Functionality**: Users can view a list of recommended books with pagination
+  support. Books can be filtered by title and author.
+- **Features**:
+  - **Book Details Modal**: Clicking on a book opens a modal with detailed
+    information and an option to add the book to the user's library.
 
-```json
-"homepage": "https://your_username.github.io/your_repo_name/"
-```
+### My Library Page
 
-Далі необхідно зайти в налаштування GitHub-репозиторію (`Settings` > `Pages`) і
-виставити роздачу продакшн-версії файлів із папки `/root` гілки `gh-pages`, якщо
-це не було зроблено автоматично.
+- **Functionality**: Users can view and manage books in their personal library.
+  Books can be filtered by reading status (Unread, In Progress, Done).
+- **Features**:
+  - **Add Book Form**: Users can manually add books to their library by entering
+    the title, author, and total number of pages.
+  - **Delete Book**: Users can remove books from their library.
+  - **Book Details Modal**: Clicking on a book opens a modal with detailed
+    information and an option to start or stop reading.
 
-![GitHub Pages settings](./assets/repo-settings.png)
+### Reading Page
 
-### Статус деплоя
+- **Functionality**: Tracks the user's reading progress and provides detailed
+  views in two modes:
+  - **Statistics**: Visual representation of reading progress.
+  - **Diary**: A chronological log of reading activities.
+- **Features**:
+  - **Start/Stop Reading**: Users can log their current reading page, starting
+    or stopping the reading session.
 
-Статус деплою крайнього коміту відображається іконкою біля його ідентифікатора.
+## Technical Specifications
 
-- **Жовтий колір** - виконується збірка і деплой проєкту.
-- **Зелений колір** - деплой завершився успішно.
-- **Червоний колір** - під час лінтингу, сборки або деплою сталася помилка.
+1. **Responsive Design**:
 
-Детальнішу інформацію про статус можна подивитися, клікнувши на іконку, і
-у вікні, що випадає, перейти за посиланням `Details`.
+   - The application is fully responsive, supporting:
+     - Mobile: 320px - 767px
+     - Tablet: 768px - 1439px
+     - Desktop: 1440px and above
+   - Includes retina-ready images and optimized asset loading.
 
-![Deployment status](./assets/deploy-status.png)
+2. **Authentication**:
 
-### Жива сторінка
+   - Registration and login are handled via JWT authentication.
+   - Users are automatically redirected to appropriate pages based on their
+     authentication status.
 
-Через якийсь час, зазвичай кілька хвилин, живу сторінку можна буде подивитися
-за адресою, вказаною у відредагованій властивості `homepage`. Наприклад, ось
-посилання на живу версію для цього репозиторію
-[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
+3. **State Management**:
 
-Якщо відкривається порожня сторінка, переконайся, що у вкладці `Console` немає помилок
-пов'язаних із неправильними шляхами до CSS і JS файлів проєкту (**404**). Швидше 
-за все у тебе неправильне значення властивості `homepage` у файлі `package.json`.
+   - State is managed using Redux for global state, ensuring consistency across
+     the application.
+   - The user's library and reading progress are stored and retrieved from a
+     backend API.
 
-### Маршрутизація
+4. **Form Validation**:
 
-Якщо додаток використовує бібліотеку `react-router-dom` для маршрутизації,
-необхідно додатково налаштувати компонент `<BrowserRouter>`, передавши у пропе
-`basename` точну назву твого репозиторію. Слеш на початку рядка обов'язковий.
+   - Forms throughout the application are validated using react-hook-form and
+     yup to ensure data integrity before interacting with the backend.
 
-```jsx
-<BrowserRouter basename="/your_repo_name">
-  <App />
-</BrowserRouter>
-```
+5. **Modal Management**:
+   - Modals for book details and notifications are controlled via state,
+     allowing users to interact seamlessly with the application without page
+     reloads.
 
-## Як це працює
+## Setup Instructions
 
-![How it works](./assets/how-it-works.png)
+1. **Clone the repository**:
 
-1. Після кожного пушу в гілку `main` GitHub-репозиторія, запускається спеціальний
-   скрипт (GitHub Action) з файла `.github/workflows/deploy.yml`.
-2. Усі файли репозиторію копіюються на сервер, де проект ініціалізується і
-   проходить лінтинг і збірку перед деплоєм.
-3. Якщо всі кроки пройшли успішно, зібрана продакшн-версія файлів проєкту
-   відправляється в гілку `gh-pages`. В іншому випадку, в лозі виконання
-   скрипта буде вказано в чому проблема.
+   ```bash
+   git clone https://github.com/AleksMarkov/readjourney.git
+   cd readjourney
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the application**:
+
+   ```bash
+   npm start
+   ```
+
+4. **Visit the application**:
+   - The application will be running on `http://localhost:3000`.
+
+## Contributions
+
+Contributions are welcome! Please feel free to submit a pull request or open an
+issue.
+
+## License
+
+This project is licensed under the MIT License.
