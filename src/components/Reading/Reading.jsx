@@ -88,6 +88,7 @@ const Reading = () => {
   const [finishPage, setFinishPage] = useState(0);
   const [procent, setProcent] = useState(0);
   const [isBookReadPopupVisible, setIsBookReadPopupVisible] = useState(false);
+  const [view, setView] = useState('statistics');
   const popupRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -189,6 +190,10 @@ const Reading = () => {
     } catch (error) {
       setNotification('An error occurred. Please try again.');
     }
+  };
+
+  const handleViewChange = newView => {
+    setView(newView);
   };
 
   useEffect(() => {
@@ -329,10 +334,24 @@ const Reading = () => {
               readBook.status === 'done') && (
               <>
                 <WorkoutTitle>
-                  Statistics
+                  {view === 'statistics' ? 'Statistics' : 'Diary'}
                   <Symblock>
-                    <Symbol src={hourglass} alt="hour glass" />
-                    <Symbol src={piechart} alt="pie chart" />
+                    <Symbol
+                      src={hourglass}
+                      alt="hour glass"
+                      style={{
+                        color: view === 'diary' ? '#141414' : '#686868',
+                      }}
+                      onClick={() => handleViewChange('diary')}
+                    />
+                    <Symbol
+                      src={piechart}
+                      alt="pie chart"
+                      style={{
+                        color: view === 'statistics' ? '#141414' : '#686868',
+                      }}
+                      onClick={() => handleViewChange('statistics')}
+                    />
                   </Symblock>
                 </WorkoutTitle>
                 <WorkoutStep1>
