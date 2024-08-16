@@ -42,7 +42,7 @@ import {
   Symbol,
   Symbol2,
   ChartWrapper,
-  Chart,
+  PieChart,
   PietextBlock,
   PieBlock,
   Symblock,
@@ -69,8 +69,10 @@ import {
   setReadBook,
   setReadBookStatus,
   setReadBookError,
+  setProgress,
   selectReadBook,
   selectReadBookStatus,
+  selectProgress,
 } from '../../redux/readBookSlice';
 import { updateUserBookStatus } from '../../redux/userBooksSlice';
 import { fetchBookById } from '../../services/bookReadService';
@@ -80,6 +82,7 @@ import createReadSchema from '../../schemas/readSchema';
 import Notification from '../Notification/Notification';
 import BookReadPopup from './BookReadPopup/BookReadPopup';
 import placeholderImage from '../../assets/images/tor.jpg';
+import Chart from './Chart/Chart';
 
 const Reading = () => {
   const { signout, user } = useContext(AuthContext);
@@ -97,6 +100,7 @@ const Reading = () => {
   const bookId = state?.book?._id;
   const readBook = useSelector(selectReadBook);
   const readBookStatus = useSelector(selectReadBookStatus);
+  const progress = useSelector(selectProgress);
 
   const schema = createReadSchema(readBook?.totalPages || 1);
 
@@ -211,32 +215,28 @@ const Reading = () => {
         return;
       }
 
-      const progress = readBook.progress
+      const progressData = readBook.progress
         .filter(p => p.status === 'inactive')
         .map(p => ({
           ...p,
           pages: p.finishPage - p.startPage + 1,
-          data: p.finishReading.split('T')[0],
+          date: p.finishReading.split('T')[0],
           time: Math.round(
             (new Date(p.finishReading) - new Date(p.startReading)) / 60000
           ),
-          proc: ((p.finishPage - p.startPage) / readBook.totalPages) * 100,
+          percentage:
+            ((p.finishPage - p.startPage) / readBook.totalPages) * 100,
+          speed: (
+            (p.finishPage - p.startPage) /
+            ((new Date(p.finishReading) - new Date(p.startReading)) / 3600000)
+          ).toFixed(2),
         }));
 
-      progress.forEach(p => {
-        p.proc = parseFloat(p.proc.toFixed(1));
+      progressData.forEach(p => {
+        p.percentage = parseFloat(p.percentage.toFixed(1));
       });
 
-      const groupedByDate = progress.reduce((acc, curr) => {
-        acc[curr.data] = acc[curr.data] || [];
-        acc[curr.data].push(curr);
-        return acc;
-      }, {});
-
-      Object.values(groupedByDate).forEach(group => {
-        const totalPages = group.reduce((sum, item) => sum + item.pages, 0);
-        group.forEach(item => (item.totalpages = totalPages));
-      });
+      dispatch(setProgress(progressData));
     }
   };
 
@@ -397,27 +397,33 @@ const Reading = () => {
                     />
                   </Symblock>
                 </WorkoutTitle>
-                <WorkoutStep1>
-                  Each page, each chapter is a new round of knowledge, a new
-                  step towards understanding. By rewriting statistics, we create
-                  our own reading history.
-                </WorkoutStep1>
-                <PieBlock>
-                  <ChartWrapper>
-                    <Chart
-                      src={procent > 99 ? load100 : load20}
-                      alt={procent > 99 ? 'load 100%' : 'load 20%'}
-                    />
-                    <div className="centered-text">{`${procent}%`}</div>
-                  </ChartWrapper>
-                  <PietextBlock>
-                    <Symbol2 src={greendot} alt="green dot" />
-                    <Smblock>
-                      <Proc>{procent}%</Proc>
-                      <Pages>{finishPage} pages read</Pages>
-                    </Smblock>
-                  </PietextBlock>
-                </PieBlock>
+                {view === 'statistics' ? (
+                  <>
+                    <WorkoutStep1>
+                      Each page, each chapter is a new round of knowledge, a new
+                      step towards understanding. By rewriting statistics, we
+                      create our own reading history.
+                    </WorkoutStep1>
+                    <PieBlock>
+                      <ChartWrapper>
+                        <PieChart
+                          src={procent > 99 ? load100 : load20}
+                          alt={procent > 99 ? 'load 100%' : 'load 20%'}
+                        />
+                        <div className="centered-text">{`${procent}%`}</div>
+                      </ChartWrapper>
+                      <PietextBlock>
+                        <Symbol2 src={greendot} alt="green dot" />
+                        <Smblock>
+                          <Proc>{procent}%</Proc>
+                          <Pages>{finishPage} pages read</Pages>
+                        </Smblock>
+                      </PietextBlock>
+                    </PieBlock>
+                  </>
+                ) : (
+                  <Chart data={progress} />
+                )}
               </>
             )}
 

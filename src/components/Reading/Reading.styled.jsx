@@ -11,7 +11,7 @@ export const Container = styled.div`
   align-items: center;
   padding: 32px;
   gap: 16px;
-  margin: auto; 
+  margin: auto;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -821,7 +821,7 @@ export const PieBlock = styled.div`
   }
 `;
 
-export const Chart = styled.img`
+export const PieChart = styled.img`
   width: 189px;
   height: 189px;
   color: #1f1f1f;
