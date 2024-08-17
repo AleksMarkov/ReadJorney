@@ -335,7 +335,6 @@ export const PhoneImage = styled.img`
   width: 255px;
   height: 351px;
   opacity: 1;
-  // display: none;
 
   @media (min-width: 768px) {
     display: none;
@@ -353,68 +352,6 @@ export const PhoneImageTablet = styled.img`
     display: none;
   }
 `;
-
-// export const PhoneMockup = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   border-radius: 30px;
-//   background-color: var(--lightblack);
-//   justify-content: start;
-//   align-items: center;
-
-//   @media (min-width: 320px) and (max-width: 767px) {
-//     width: 335px;
-//     height: 351px;
-//     padding: 0 20px;
-//   }
-
-//   @media (min-width: 768px) and (max-width: 1439px) {
-//     width: 704px;
-//     height: 960px;
-//     padding: 40px 0;
-//   }
-
-//   @media (min-width: 1440px) {
-//     width: 600px;
-//     height: 736px;
-//     padding: 40px 0;
-//   }
-// `;
-
-// export const PhoneImage = styled.img`
-//   object-fit: cover;
-//   background-color: var(--black);
-
-//   @media (min-width: 320px) and (max-width: 767px) {
-//     width: 255px;
-//     height: 351px;
-//     opacity: 1;
-//   }
-
-//   @media (min-width: 768px) and (max-width: 1439px) {
-//     width: 403px;
-//     height: 720px;
-//     border-radius: 68px 68px 0 0;
-//   }
-
-//   @media (min-width: 1440px) {
-//     width: 403px;
-//     height: 720px;
-//     border-radius: 68px 68px 0 0;
-//   }
-// `;
-
-// export const PhoneImageTablet = styled.img`
-//   object-fit: cover;
-//   background-color: var(--black);
-//   width: 403px;
-//   height: 720px;
-//   border-radius: 68px 68px 0 0;
-
-//   @media (max-width: 1440px) {
-//     display: none;
-//   }
-// `;
 
 export const ErrorMessage = styled.p`
   font-weight: 500;
