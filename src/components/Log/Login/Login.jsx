@@ -10,8 +10,10 @@ import {
   Container,
   TitleContainer,
   MobLogo,
+  Logo,
   Title,
   InputContainer,
+  InputWrapper,
   Input,
   EyeIcon,
   LoginBlock,
@@ -20,11 +22,14 @@ import {
   PhoneMockup,
   PhoneImage,
   ErrorMessage,
+  PhoneImageTablet,
 } from './Login.styled.jsx';
 import logomob from '../../../assets/svg/Logomobile.svg';
+import logodesk from '../../../assets/svg/Logotablet.svg';
 import eyeOff from '../../../assets/svg/eyeOff.svg';
 import eyeOn from '../../../assets/svg/eyeOn.svg';
 import phoneMockup from '../../../assets/images/phoneMockup.png';
+import phoneMockuptablet from '../../../assets/images/iPhone.jpg';
 
 const Login = () => {
   const { signin } = useContext(AuthContext);
@@ -64,27 +69,31 @@ const Login = () => {
         />
       )}
       <TitleContainer>
-        <MobLogo src={logomob} alt="logo mobile" />
+        <MobLogo src={logomob} alt="logo mobile" />{' '}
+        <Logo src={logodesk} alt="logo desktop" />
         <Title>
-          Expand your mind, <br />
-          reading <span>a book</span>
+          Expand your mind, reading <span>a book</span>
         </Title>
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputContainer>
-            <Input type="email" placeholder="Mail:" {...register('email')} />
+            <InputWrapper>
+              <Input type="email" placeholder="Mail:" {...register('email')} />
+            </InputWrapper>
             {errors.email && (
               <ErrorMessage>{errors.email.message}</ErrorMessage>
             )}
-            <Input
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Password:"
-              {...register('password')}
-            />
-            <EyeIcon
-              src={showPassword ? eyeOn : eyeOff}
-              alt="Toggle Password Visibility"
-              onClick={togglePasswordVisibility}
-            />
+            <InputWrapper>
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Password:"
+                {...register('password')}
+              />
+              <EyeIcon
+                src={showPassword ? eyeOn : eyeOff}
+                alt="Toggle Password Visibility"
+                onClick={togglePasswordVisibility}
+              />
+            </InputWrapper>
             {errors.password && (
               <ErrorMessage>{errors.password.message}</ErrorMessage>
             )}
@@ -98,7 +107,8 @@ const Login = () => {
         </form>
       </TitleContainer>
       <PhoneMockup>
-        <PhoneImage src={phoneMockup} alt="Phone Mockup" />
+        <PhoneImage src={phoneMockup} alt="Phone Mockup" />{' '}
+        <PhoneImageTablet src={phoneMockuptablet} alt="Phone Mockup tablet" />
       </PhoneMockup>
     </Container>
   );

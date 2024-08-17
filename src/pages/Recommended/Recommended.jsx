@@ -1,7 +1,7 @@
-//RecommendedDesk.jsx
+//Recommended.jsx
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../../pages/Header/Header';
+import Header from '../Header/Header';
 import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader/Loader';
 import {
@@ -33,7 +33,7 @@ import {
   BookTitle,
   BookAuthor,
   BookBlock,
-} from './RecommendedDesk.styled';
+} from './Recommended.styled';
 import leftarrow from '../../assets/svg/login.svg';
 import chevronleft from '../../assets/svg/chevron-left.svg';
 import chevronright from '../../assets/svg/chevron-right.svg';
@@ -44,7 +44,7 @@ import { selectBookLS } from '../../redux/bookLSSlice';
 import { useScreenSize } from '../../hooks/useScreenSize';
 import placeholderImage from '../../assets/images/tor.jpg';
 
-const RecommendedDesk = () => {
+const Recommended = () => {
   const { user } = useContext(AuthContext);
   const { loading } = useContext(BookContext);
   const bookLS = useSelector(selectBookLS);
@@ -237,4 +237,4 @@ const RecommendedDesk = () => {
   );
 };
 
-export default RecommendedDesk;
+export default Recommended;
