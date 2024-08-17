@@ -1,25 +1,12 @@
 //RecommendedDesk.jsx
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useContext,
-  useCallback,
-} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import Loader from '../Loader/Loader';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
+import { Link } from 'react-router-dom';
+import Header from '../../pages/Header/Header';
+import { useSelector } from 'react-redux';
+import Loader from '../../components/Loader/Loader';
 import {
   Container,
-  HeaderSection,
-  MenuSection,
-  MobLogo,
-  LogoutButton,
-  UserIcon,
-  UserName,
-  UserSection,
   BodySection,
-  GetButton,
   RecommendedSection,
   SidebarSection,
   FiltersSection,
@@ -45,44 +32,26 @@ import {
   BookCover,
   BookTitle,
   BookAuthor,
-  UserMenu,
-  PopupMenu,
-  CloseButton,
-  Overlay,
-  PopupMenuButton,
   BookBlock,
 } from './RecommendedDesk.styled';
-import logoImage from '../../assets/svg/Logomobile.svg';
-import logotablet from '../../assets/svg/Logotablet.svg';
 import leftarrow from '../../assets/svg/login.svg';
 import chevronleft from '../../assets/svg/chevron-left.svg';
 import chevronright from '../../assets/svg/chevron-right.svg';
-import usermenu from '../../assets/svg/usermenu.svg';
-import closeIcon from '../../assets/svg/x-close.svg';
-import BookModal from './BookModal/BookModal';
+import BookModal from '../../components/Recom/BookModal/BookModal';
 import { AuthContext } from '../../context/AuthContext';
 import { BookContext } from '../../context/BookContext';
-import { clearScreenSize } from '../../redux/screenSizeSlice';
-import Notification from '../Notification/Notification';
 import { selectBookLS } from '../../redux/bookLSSlice';
 import { useScreenSize } from '../../hooks/useScreenSize';
 import placeholderImage from '../../assets/images/tor.jpg';
 
 const RecommendedDesk = () => {
-  const { signout, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const { loading } = useContext(BookContext);
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const [notification, setNotification] = useState(null);
-  const popupRef = useRef(null);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const bookLS = useSelector(selectBookLS);
   const screenSize = useScreenSize();
-
   const [filterTitle, setFilterTitle] = useState('');
   const [filterAuthor, setFilterAuthor] = useState('');
   const [filteredBooks, setFilteredBooks] = useState(bookLS);
-
   const getDisplayCount = useCallback(() => {
     if (screenSize >= 320 && screenSize <= 767) {
       return 2;
@@ -147,48 +116,6 @@ const RecommendedDesk = () => {
     }
   };
 
-  const toggleMenuVisibility = () => {
-    setIsMenuVisible(!isMenuVisible);
-  };
-
-  const handleClickOutside = event => {
-    if (popupRef.current && !popupRef.current.contains(event.target)) {
-      setIsMenuVisible(false);
-    }
-  };
-
-  const handleKeyDown = event => {
-    if (event.key === 'Escape') {
-      setIsMenuVisible(false);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await signout();
-
-      dispatch(clearScreenSize());
-      dispatch({ type: 'bookLS/clearBookLS' });
-
-      localStorage.clear();
-
-      navigate('/login');
-    } catch (error) {
-      setNotification(
-        error.response?.data?.message || 'Logout failed. Please try again.'
-      );
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-
   const [selectedBook, setSelectedBook] = useState(null);
 
   const handleBookClick = book => {
@@ -205,53 +132,7 @@ const RecommendedDesk = () => {
 
   return (
     <Container>
-      {notification && (
-        <Notification
-          message={notification}
-          onClose={() => setNotification(null)}
-        />
-      )}
-      <HeaderSection>
-        <MobLogo src={logotablet} mobilesrc={logoImage} alt="logo" />
-        <MenuSection>
-          <Link to="/recommended">
-            <GetButton isActive={true}>Home</GetButton>
-          </Link>
-          <Link to="/library">
-            <GetButton isActive={false}>My Library</GetButton>
-          </Link>
-        </MenuSection>
-        <UserSection>
-          <UserIcon>
-            {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
-          </UserIcon>
-          <UserName>{user?.name || 'User'}</UserName>
-          <LogoutButton onClick={handleLogout}>Log out</LogoutButton>
-          <UserMenu
-            src={usermenu}
-            alt="user menu"
-            onClick={toggleMenuVisibility}
-          />
-        </UserSection>
-      </HeaderSection>
-      <Overlay
-        isvisible={isMenuVisible.toString()}
-        onClick={toggleMenuVisibility}
-      />
-      <PopupMenu ref={popupRef} isvisible={isMenuVisible.toString()}>
-        <CloseButton onClick={toggleMenuVisibility}>
-          <img src={closeIcon} alt="Close" />
-        </CloseButton>
-        <MenuSection>
-          <Link to="/recommended">
-            <GetButton isActive={true}>Home</GetButton>
-          </Link>
-          <Link to="/library">
-            <GetButton isActive={false}>My Library</GetButton>
-          </Link>
-        </MenuSection>
-        <PopupMenuButton onClick={handleLogout}>Log out</PopupMenuButton>
-      </PopupMenu>
+      <Header />
       <BodySection>
         <SidebarSection>
           <FiltersSection>
@@ -290,10 +171,12 @@ const RecommendedDesk = () => {
                 <span>define a goal, choose a period, start training.</span>
               </WorkoutDescription>
             </WorkoutStep>
-            <MyLibraryBlok onClick={() => navigate('/library')}>
-              <MyLibraryLink>My library</MyLibraryLink>
-              <Arrow src={leftarrow} alt="left arrow" />
-            </MyLibraryBlok>
+            <Link to="/library">
+              <MyLibraryBlok>
+                <MyLibraryLink>My library</MyLibraryLink>
+                <Arrow src={leftarrow} alt="left arrow" />
+              </MyLibraryBlok>
+            </Link>
           </WorkoutSection>
           <Quoteoftheday className="emoji-books">
             <p>
@@ -349,7 +232,6 @@ const RecommendedDesk = () => {
           </BookList>
         </RecommendedSection>
       </BodySection>
-
       {selectedBook && <BookModal book={selectedBook} onClose={closeModal} />}
     </Container>
   );

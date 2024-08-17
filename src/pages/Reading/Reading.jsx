@@ -1,20 +1,12 @@
 //Reading.jsx
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Container,
-  HeaderSection,
-  MenuSection,
-  MobLogo,
-  LogoutButton,
-  UserIcon,
-  UserName,
-  UserSection,
   BodySection,
-  GetButton,
   RecommendedSection,
   SidebarSection,
   FiltersSection,
@@ -27,11 +19,6 @@ import {
   WorkoutStep,
   RecommendedBlock,
   RecomText,
-  UserMenu,
-  PopupMenu,
-  CloseButton,
-  Overlay,
-  PopupMenuButton,
   BookAuthor,
   BookTitle,
   BookBlock,
@@ -52,10 +39,6 @@ import {
   Quoteoftheday,
   WorkoutStep1,
 } from './Reading.styled';
-import logoImage from '../../assets/svg/Logomobile.svg';
-import logotablet from '../../assets/svg/Logotablet.svg';
-import usermenu from '../../assets/svg/usermenu.svg';
-import closeIcon from '../../assets/svg/x-close.svg';
 import redcircule from '../../assets/svg/redsircule.svg';
 import redsguare from '../../assets/svg/redsquare.svg';
 import hourglass from '../../assets/svg/hourglass.svg';
@@ -63,8 +46,6 @@ import load100 from '../../assets/svg/load100.svg';
 import load20 from '../../assets/svg/load20.svg';
 import greendot from '../../assets/svg/green.svg';
 import piechart from '../../assets/svg/piechart.svg';
-import { AuthContext } from '../../context/AuthContext';
-import { clearScreenSize } from '../../redux/screenSizeSlice';
 import {
   setReadBook,
   setReadBookStatus,
@@ -79,22 +60,19 @@ import { fetchBookById } from '../../services/bookReadService';
 import { startReadingBook } from '../../services/bookReadingService';
 import { finishReadingBook } from '../../services/bookFinishService';
 import createReadSchema from '../../schemas/readSchema';
-import Notification from '../Notification/Notification';
-import BookReadPopup from './BookReadPopup/BookReadPopup';
+import Notification from '../../components/Notification/Notification';
+import BookReadPopup from '../../components/Reading/BookReadPopup/BookReadPopup';
 import placeholderImage from '../../assets/images/tor.jpg';
-import Chart from './Chart/Chart';
+import Chart from '../../components/Reading/Chart/Chart';
+import Header from '../../pages/Header/Header';
 
 const Reading = () => {
-  const { signout, user } = useContext(AuthContext);
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [condition, setCondition] = useState('inactive');
   const [notification, setNotification] = useState(null);
   const [finishPage, setFinishPage] = useState(0);
   const [procent, setProcent] = useState(0);
   const [isBookReadPopupVisible, setIsBookReadPopupVisible] = useState(false);
   const [view, setView] = useState('statistics');
-  const popupRef = useRef(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { state } = useLocation();
   const bookId = state?.book?._id;
@@ -103,7 +81,6 @@ const Reading = () => {
   const progress = useSelector(selectProgress);
 
   const schema = createReadSchema(readBook?.totalPages || 1);
-
   const {
     register,
     handleSubmit,
@@ -111,34 +88,6 @@ const Reading = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-  const toggleMenuVisibility = () => {
-    setIsMenuVisible(!isMenuVisible);
-  };
-
-  const handleClickOutside = event => {
-    if (popupRef.current && !popupRef.current.contains(event.target)) {
-      setIsMenuVisible(false);
-    }
-  };
-
-  const handleKeyDown = event => {
-    if (event.key === 'Escape') {
-      setIsMenuVisible(false);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await signout();
-      dispatch(clearScreenSize());
-      dispatch({ type: 'bookLS/clearBookLS' });
-      localStorage.clear();
-      navigate('/login');
-    } catch (error) {
-      setNotification('Logout failed. Please try again.');
-    }
-  };
 
   const handleApply = async data => {
     try {
@@ -171,12 +120,9 @@ const Reading = () => {
               .filter(p => p.finishPage !== undefined)
               .map(p => p.finishPage)
           );
-
           setFinishPage(maxFinishPage);
-
           const newProcent = (maxFinishPage / readBook.totalPages) * 100;
           setProcent(newProcent.toFixed(2));
-
           dispatch(
             updateUserBookStatus({
               bookId,
@@ -241,15 +187,6 @@ const Reading = () => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-
-  useEffect(() => {
     const token = localStorage.getItem('token');
 
     if (bookId && token) {
@@ -300,56 +237,16 @@ const Reading = () => {
 
   return (
     <Container>
+      {isBookReadPopupVisible && (
+        <BookReadPopup onClose={() => setIsBookReadPopupVisible(false)} />
+      )}
       {notification && (
         <Notification
           message={notification}
           onClose={() => setNotification(null)}
         />
       )}
-      {isBookReadPopupVisible && (
-        <BookReadPopup onClose={() => setIsBookReadPopupVisible(false)} />
-      )}
-      <HeaderSection>
-        <MobLogo src={logotablet} mobilesrc={logoImage} alt="logo" />
-        <MenuSection>
-          <Link to="/recommended">
-            <GetButton isActive={false}>Home</GetButton>
-          </Link>
-          <Link to="/library">
-            <GetButton isActive={false}>My Library</GetButton>
-          </Link>
-        </MenuSection>
-        <UserSection>
-          <UserIcon>
-            {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
-          </UserIcon>
-          <UserName>{user?.name || 'User'}</UserName>
-          <LogoutButton onClick={handleLogout}>Log out</LogoutButton>
-          <UserMenu
-            src={usermenu}
-            alt="user menu"
-            onClick={toggleMenuVisibility}
-          />
-        </UserSection>
-      </HeaderSection>
-      <Overlay
-        isvisible={isMenuVisible.toString()}
-        onClick={toggleMenuVisibility}
-      />
-      <PopupMenu ref={popupRef} isvisible={isMenuVisible.toString()}>
-        <CloseButton onClick={toggleMenuVisibility}>
-          <img src={closeIcon} alt="Close" />
-        </CloseButton>
-        <MenuSection>
-          <Link to="/recommended">
-            <GetButton isActive={false}>Home</GetButton>
-          </Link>
-          <Link to="/library">
-            <GetButton isActive={false}>My Library</GetButton>
-          </Link>
-        </MenuSection>
-        <PopupMenuButton onClick={handleLogout}>Log out</PopupMenuButton>
-      </PopupMenu>
+      <Header />
       <BodySection>
         <SidebarSection status={readBook.status}>
           <form onSubmit={handleSubmit(handleApply)}>
@@ -426,7 +323,6 @@ const Reading = () => {
                 )}
               </>
             )}
-
             {readBook.status === 'unread' && (
               <>
                 <WorkoutTitle>Progress</WorkoutTitle>
@@ -443,7 +339,6 @@ const Reading = () => {
           <RecommendedBlock>
             <RecomText>My reading</RecomText>
           </RecommendedBlock>
-
           {readBookStatus === 'loading' && <p>Loading book...</p>}
           {readBookStatus === 'succeeded' && readBook && (
             <BookItem>

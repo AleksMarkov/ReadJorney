@@ -1,33 +1,21 @@
 //MyLibrary.jsx
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useContext,
-  useCallback,
-} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
+import Header from '../../pages/Header/Header';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Loader from '../Loader/Loader';
-import BookModalRead from './BookModalRead/BookModalRead';
-import BookAddedPopup from './BookAddedPopup/BookAddedPopup';
+import Loader from '../../components/Loader/Loader';
+import Notification from '../../components/Notification/Notification';
+import BookModalRead from '../../components/MyLibrary/BookModalRead/BookModalRead';
+import BookAddedPopup from '../../components/MyLibrary/BookAddedPopup/BookAddedPopup';
 import {
   addBookToUserLibrary,
   fetchUserBooks,
 } from '../../services/bookAddService';
 import {
   Container,
-  HeaderSection,
-  MenuSection,
-  MobLogo,
-  LogoutButton,
-  UserIcon,
-  UserName,
-  UserSection,
   BodySection,
-  GetButton,
   RecommendedSection,
   SidebarSection,
   FiltersSection,
@@ -45,11 +33,6 @@ import {
   RecBookCover,
   RecBookTitle,
   RecBookAuthor,
-  UserMenu,
-  PopupMenu,
-  CloseButton,
-  Overlay,
-  PopupMenuButton,
   RecBookBlock,
   RecommendedBlock,
   RecomText,
@@ -70,16 +53,10 @@ import {
   FilterDropdown,
   FilterOption,
 } from './MyLibrary.styled';
-import logoImage from '../../assets/svg/Logomobile.svg';
-import logotablet from '../../assets/svg/Logotablet.svg';
 import leftarrow from '../../assets/svg/login.svg';
-import usermenu from '../../assets/svg/usermenu.svg';
-import closeIcon from '../../assets/svg/x-close.svg';
 import deleteIcon from '../../assets/svg/delete.svg';
 import { AuthContext } from '../../context/AuthContext';
 import { BookContext } from '../../context/BookContext';
-import { clearScreenSize } from '../../redux/screenSizeSlice';
-import Notification from '../Notification/Notification';
 import {
   setUserBooks,
   deleteUserBook,
@@ -87,21 +64,17 @@ import {
 } from '../../redux/userBooksSlice';
 import { selectBookLS } from '../../redux/bookLSSlice';
 import bookSchema from '../../schemas/bookSchema';
-import BookDeletePopup from './BookDeletePopup/BookDeletePopup';
+import BookDeletePopup from '../../components/MyLibrary/BookDeletePopup/BookDeletePopup';
 import { deleteBookFromUserLibrary } from '../../services/bookDeleteService';
 import chevronDown from '../../assets/svg/chevronDown.svg';
 import chevronUp from '../../assets/svg/chevronUpp.svg';
 import placeholderImage from '../../assets/images/tor.jpg';
 
 const MyLibrary = () => {
-  const { signout, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const { loading } = useContext(BookContext);
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const [notification, setNotification] = useState(null);
   const [selectedBook, setSelectedBook] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const popupRef = useRef(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const userBooks = useSelector(selectUserBooks);
   const bookLS = useSelector(selectBookLS);
@@ -109,7 +82,7 @@ const MyLibrary = () => {
   const [isDeletePopupVisible, setIsDeletePopupVisible] = useState(false);
   const [bookToDelete, setBookToDelete] = useState(null);
   const [filteredBooks, setFilteredBooks] = useState(userBooks);
-
+  const [notification, setNotification] = useState(null);
   const [filterVisible, setFilterVisible] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('All books');
 
@@ -121,36 +94,6 @@ const MyLibrary = () => {
   } = useForm({
     resolver: yupResolver(bookSchema),
   });
-
-  const toggleMenuVisibility = () => {
-    setIsMenuVisible(!isMenuVisible);
-  };
-
-  const handleClickOutside = event => {
-    if (popupRef.current && !popupRef.current.contains(event.target)) {
-      setIsMenuVisible(false);
-    }
-  };
-
-  const handleKeyDown = event => {
-    if (event.key === 'Escape') {
-      setIsMenuVisible(false);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await signout();
-      dispatch(clearScreenSize());
-      dispatch({ type: 'bookLS/clearBookLS' });
-      localStorage.clear();
-      navigate('/login');
-    } catch (error) {
-      setNotification(
-        error.response?.data?.message || 'Logout failed. Please try again.'
-      );
-    }
-  };
 
   const toggleFilter = () => {
     setFilterVisible(!filterVisible);
@@ -178,15 +121,6 @@ const MyLibrary = () => {
     setFilterVisible(false);
     filterBooks(option);
   };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
 
   const handleBookClick = book => {
     setSelectedBook(book);
@@ -264,47 +198,7 @@ const MyLibrary = () => {
           onDelete={handleDeleteConfirm}
         />
       )}
-      <HeaderSection>
-        <MobLogo src={logotablet} mobilesrc={logoImage} alt="logo" />
-        <MenuSection>
-          <Link to="/recommended">
-            <GetButton isActive={false}>Home</GetButton>
-          </Link>
-          <Link to="/library">
-            <GetButton isActive={true}>My Library</GetButton>
-          </Link>
-        </MenuSection>
-        <UserSection>
-          <UserIcon>
-            {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
-          </UserIcon>
-          <UserName>{user?.name || 'User'}</UserName>
-          <LogoutButton onClick={handleLogout}>Log out</LogoutButton>
-          <UserMenu
-            src={usermenu}
-            alt="user menu"
-            onClick={toggleMenuVisibility}
-          />
-        </UserSection>
-      </HeaderSection>
-      <Overlay
-        isvisible={isMenuVisible.toString()}
-        onClick={toggleMenuVisibility}
-      />
-      <PopupMenu ref={popupRef} isvisible={isMenuVisible.toString()}>
-        <CloseButton onClick={toggleMenuVisibility}>
-          <img src={closeIcon} alt="Close" />
-        </CloseButton>
-        <MenuSection>
-          <Link to="/recommended">
-            <GetButton isActive={false}>Home</GetButton>
-          </Link>
-          <Link to="/library">
-            <GetButton isActive={true}>My Library</GetButton>
-          </Link>
-        </MenuSection>
-        <PopupMenuButton onClick={handleLogout}>Log out</PopupMenuButton>
-      </PopupMenu>
+      <Header />
       <BodySection>
         <SidebarSection>
           <FiltersSection>
@@ -373,10 +267,12 @@ const MyLibrary = () => {
                 ))
               )}
             </RecBookList>
-            <MyLibraryBlok onClick={() => navigate('/recommended')}>
-              <MyLibraryLink>Home</MyLibraryLink>
-              <Arrow src={leftarrow} alt="left arrow" />
-            </MyLibraryBlok>
+            <Link to="/recommended">
+              <MyLibraryBlok>
+                <MyLibraryLink>Home</MyLibraryLink>
+                <Arrow src={leftarrow} alt="left arrow" />
+              </MyLibraryBlok>
+            </Link>
           </WorkoutSection>
         </SidebarSection>
         <RecommendedSection>
@@ -453,7 +349,6 @@ const MyLibrary = () => {
           )}
         </RecommendedSection>
       </BodySection>
-
       {isModalVisible && (
         <BookModalRead book={selectedBook} onClose={handleCloseModal} />
       )}

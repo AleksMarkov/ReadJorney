@@ -7,9 +7,9 @@ import PublicRoute from './PublicRoute';
 
 const Reg = lazy(() => import('./Reg/Reg'));
 const Log = lazy(() => import('./Log/Log'));
-const RecommendedDesk = lazy(() => import('./Recom/RecommendedDesk'));
-const MyLibrary = lazy(() => import('./MyLibrary/MyLibrary'));
-const Reading = lazy(() => import('./Reading/Reading'));
+const RecommendedDesk = lazy(() => import('../pages/Recom/RecommendedDesk'));
+const MyLibrary = lazy(() => import('../pages/MyLibrary/MyLibrary'));
+const Reading = lazy(() => import('../pages/Reading/Reading'));
 
 const App = () => {
   return (
