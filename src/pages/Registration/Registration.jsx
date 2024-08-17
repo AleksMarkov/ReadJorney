@@ -1,15 +1,16 @@
-//RegistrationDesk.jsx
+//Registration.jsx
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import registrationSchema from '../../../schemas/registrationSchema';
-import { AuthContext } from '../../../context/AuthContext';
-import Notification from '../../Notification/Notification';
+import registrationSchema from '../../schemas/registrationSchema';
+import { AuthContext } from '../../context/AuthContext';
+import Notification from '../../components/Notification/Notification';
 import {
   Container,
   TitleContainer,
   MobLogo,
+  Logo,
   Title,
   InputContainer,
   InputWrapper,
@@ -20,14 +21,17 @@ import {
   LinkText,
   PhoneMockup,
   PhoneImage,
+  PhoneImageTablet,
   ErrorMessage,
-} from './RegistrationDesk.styled.jsx';
-import logotablet from '../../../assets/svg/Logotablet.svg';
-import eyeOff from '../../../assets/svg/eyeOff.svg';
-import eyeOn from '../../../assets/svg/eyeOn.svg';
-import iphonedesk from '../../../assets/images/iPhone.jpg';
+} from './Registration.styled.jsx';
+import logomob from '../../assets/svg/Logomobile.svg';
+import logodesk from '../../assets/svg/Logotablet.svg';
+import eyeOff from '../../assets/svg/eyeOff.svg';
+import eyeOn from '../../assets/svg/eyeOn.svg';
+import phoneMockup from '../../assets/images/phoneMockup.png';
+import phoneMockuptablet from '../../assets/images/iPhone.jpg';
 
-const RegistrationDesk = () => {
+const Registration = () => {
   const { signup } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [notification, setNotification] = useState(null);
@@ -65,7 +69,8 @@ const RegistrationDesk = () => {
         />
       )}
       <TitleContainer>
-        <MobLogo src={logotablet} alt="logo mobile" />
+        <MobLogo src={logomob} alt="logo mobile" />
+        <Logo src={logodesk} alt="logo desktop" />
         <Title>
           Expand your mind, reading <span>a book</span>
         </Title>
@@ -106,10 +111,11 @@ const RegistrationDesk = () => {
         </form>
       </TitleContainer>
       <PhoneMockup>
-        <PhoneImage src={iphonedesk} alt="Phone Mockup" />
+        <PhoneImage src={phoneMockup} alt="Phone Mockup" />
+        <PhoneImageTablet src={phoneMockuptablet} alt="Phone Mockup tablet" />
       </PhoneMockup>
     </Container>
   );
 };
 
-export default RegistrationDesk;
+export default Registration;
