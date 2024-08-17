@@ -3,9 +3,9 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import loginSchema from '../../../schemas/loginSchema';
-import { AuthContext } from '../../../context/AuthContext';
-import Notification from '../../Notification/Notification';
+import loginSchema from '../../schemas/loginSchema';
+import { AuthContext } from '../../context/AuthContext';
+import Notification from '../../components/Notification/Notification';
 import {
   Container,
   TitleContainer,
@@ -24,12 +24,12 @@ import {
   ErrorMessage,
   PhoneImageTablet,
 } from './Login.styled.jsx';
-import logomob from '../../../assets/svg/Logomobile.svg';
-import logodesk from '../../../assets/svg/Logotablet.svg';
-import eyeOff from '../../../assets/svg/eyeOff.svg';
-import eyeOn from '../../../assets/svg/eyeOn.svg';
-import phoneMockup from '../../../assets/images/phoneMockup.png';
-import phoneMockuptablet from '../../../assets/images/iPhone.jpg';
+import logomob from '../../assets/svg/Logomobile.svg';
+import logodesk from '../../assets/svg/Logotablet.svg';
+import eyeOff from '../../assets/svg/eyeOff.svg';
+import eyeOn from '../../assets/svg/eyeOn.svg';
+import phoneMockup from '../../assets/images/phoneMockup.png';
+import phoneMockuptablet from '../../assets/images/iPhone.jpg';
 
 const Login = () => {
   const { signin } = useContext(AuthContext);
