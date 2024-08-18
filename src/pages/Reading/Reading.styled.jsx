@@ -11,11 +11,11 @@ export const Container = styled.div`
   align-items: center;
   padding: 32px;
   gap: 16px;
-  margin: auto;
+  margin: 0 auto;
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
 
   @media (max-width: 1440px) {
     width: 768px;

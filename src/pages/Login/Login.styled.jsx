@@ -3,15 +3,15 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   background-color: var(--black);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  margin: auto;
+  margin: 0 auto;
   width: 1280px;
   height: 800px;
   flex-direction: row;
