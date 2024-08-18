@@ -1,48 +1,15 @@
 //Recommended.jsx
 import React, { useState, useEffect, useContext, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import Header from '../Header/Header';
 import { useSelector } from 'react-redux';
-import Loader from '../../components/Loader/Loader';
-import {
-  Container,
-  BodySection,
-  RecommendedSection,
-  SidebarSection,
-  FiltersSection,
-  FilteText,
-  InputWrapper,
-  Input,
-  ApplyButton,
-  WorkoutSection,
-  WorkoutTitle,
-  WorkoutStep,
-  WorkoutIcon,
-  WorkoutDescription,
-  MyLibraryBlok,
-  MyLibraryLink,
-  Arrow,
-  Quoteoftheday,
-  RecommendedBlock,
-  RecomText,
-  ArrowNavigation,
-  ArrowButton,
-  BookList,
-  BookItem,
-  BookCover,
-  BookTitle,
-  BookAuthor,
-  BookBlock,
-} from './Recommended.styled';
-import leftarrow from '../../assets/svg/login.svg';
-import chevronleft from '../../assets/svg/chevron-left.svg';
-import chevronright from '../../assets/svg/chevron-right.svg';
+import Header from '../Header/Header';
+import { Container, BodySection } from './Recommended.styled';
 import BookModal from '../../components/Recom/BookModal/BookModal';
 import { AuthContext } from '../../context/AuthContext';
 import { BookContext } from '../../context/BookContext';
 import { selectBookLS } from '../../redux/bookLSSlice';
 import { useScreenSize } from '../../hooks/useScreenSize';
-import placeholderImage from '../../assets/images/tor.jpg';
+import Sidebar from '../../components/Recom/Sidebar/Sidebar';
+import RecommendedBooks from '../../components/Recom/RecommendedBooks/RecommendedBooks';
 
 const Recommended = () => {
   const { user } = useContext(AuthContext);
@@ -134,103 +101,22 @@ const Recommended = () => {
     <Container>
       <Header />
       <BodySection>
-        <SidebarSection>
-          <FiltersSection>
-            <FilteText>Filters:</FilteText>
-            <InputWrapper>
-              <Input
-                type="text"
-                placeholder="Book title"
-                value={filterTitle}
-                onChange={e => setFilterTitle(e.target.value)}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <Input
-                type="text"
-                placeholder="The author"
-                value={filterAuthor}
-                onChange={e => setFilterAuthor(e.target.value)}
-              />
-            </InputWrapper>
-            <ApplyButton onClick={handleApplyFilters}>To apply</ApplyButton>
-          </FiltersSection>
-          <WorkoutSection>
-            <WorkoutTitle>Start your workout</WorkoutTitle>
-            <WorkoutStep>
-              <WorkoutIcon>1</WorkoutIcon>
-              <WorkoutDescription>
-                Create a personal library:{' '}
-                <span>add the books you intend to read to it.</span>
-              </WorkoutDescription>
-            </WorkoutStep>
-            <WorkoutStep>
-              <WorkoutIcon>2</WorkoutIcon>
-              <WorkoutDescription>
-                Create your first workout:{' '}
-                <span>define a goal, choose a period, start training.</span>
-              </WorkoutDescription>
-            </WorkoutStep>
-            <Link to="/library">
-              <MyLibraryBlok>
-                <MyLibraryLink>My library</MyLibraryLink>
-                <Arrow src={leftarrow} alt="left arrow" />
-              </MyLibraryBlok>
-            </Link>
-          </WorkoutSection>
-          <Quoteoftheday className="emoji-books">
-            <p>
-              "Books are <span>windows</span> to the world, and reading is a
-              journey into the unknown."
-            </p>
-          </Quoteoftheday>
-        </SidebarSection>
-        <RecommendedSection>
-          <RecommendedBlock>
-            <RecomText>Recommended</RecomText>
-            <ArrowNavigation>
-              <ArrowButton
-                onClick={handlePrevious}
-                disabled={visibleStart === 0}
-                style={{ opacity: visibleStart === 0 ? 0.2 : 1 }}
-              >
-                <img src={chevronleft} alt="Previous" />
-              </ArrowButton>
-              <ArrowButton
-                onClick={handleNext}
-                disabled={visibleEnd >= filteredBooks.length || loading}
-                style={{
-                  opacity:
-                    visibleEnd >= filteredBooks.length || loading ? 0.2 : 1,
-                }}
-              >
-                <img src={chevronright} alt="Next" />
-              </ArrowButton>
-            </ArrowNavigation>
-          </RecommendedBlock>
-          <BookList>
-            {loading && filteredBooks.length === 0 ? (
-              <Loader />
-            ) : (
-              filteredBooks.slice(visibleStart, visibleEnd).map(book => (
-                <BookItem key={book._id} onClick={() => handleBookClick(book)}>
-                  {book.imageUrl ? (
-                    <BookCover src={book.imageUrl} alt={book.title} />
-                  ) : (
-                    <BookCover
-                      src={placeholderImage}
-                      alt="Book cover is not available"
-                    />
-                  )}
-                  <BookBlock>
-                    <BookTitle>{book.title}</BookTitle>
-                    <BookAuthor>{book.author}</BookAuthor>
-                  </BookBlock>
-                </BookItem>
-              ))
-            )}
-          </BookList>
-        </RecommendedSection>
+        <Sidebar
+          onApplyFilters={handleApplyFilters}
+          filterTitle={filterTitle}
+          setFilterTitle={setFilterTitle}
+          filterAuthor={filterAuthor}
+          setFilterAuthor={setFilterAuthor}
+        />
+        <RecommendedBooks
+          filteredBooks={filteredBooks}
+          visibleStart={visibleStart}
+          visibleEnd={visibleEnd}
+          handlePrevious={handlePrevious}
+          handleNext={handleNext}
+          handleBookClick={handleBookClick}
+          loading={loading}
+        />
       </BodySection>
       {selectedBook && <BookModal book={selectedBook} onClose={closeModal} />}
     </Container>
