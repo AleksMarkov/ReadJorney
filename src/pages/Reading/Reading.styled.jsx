@@ -67,8 +67,9 @@ export const SidebarSection = styled.div`
     width: 704px;
     height: 336px;
     flex-direction: row;
-    padding: 32px;
-    gap: 40px;
+    justify-content: space-between;
+    padding: 32px 16px 16px 32px;
+    gap: 20px;
   }
 
   @media (max-width: 768px) {
@@ -213,8 +214,10 @@ export const WorkoutSection = styled.div`
   align-items: center;
 
   @media (max-width: 1440px) {
-    width: 305px;
+    width: 321px;
     height: 272px;
+    padding: 0px;
+    align-items: flex-start;
   }
   @media (max-width: 768px) {
     width: 295px;
@@ -236,6 +239,12 @@ export const WorkoutTitle = styled.h3`
   color: var(--white);
   text-align: left;
   margin-bottom: 14px;
+
+  @media (max-width: 1440px) {
+    align-items: flex-start;
+    width: 305px;
+    margin-bottom: 16px;
+  }
 
   @media (max-width: 768px) {
     width: 295px;
@@ -551,10 +560,20 @@ export const PieBlock = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  // margin-top: 20px;
 
   &:hover {
     cursor: pointer;
+  }
+
+  @media (max-width: 1440px) {
+    width: 321px;
+    height: 252px;
+  }
+
+  @media (max-width: 768px) {
+    width: 295px;
+    height: 211px;
   }
 `;
 
@@ -566,6 +585,16 @@ export const PieChart = styled.img`
 
   &:hover {
     cursor: pointer;
+  }
+
+  @media (max-width: 1440px) {
+    width: 136px;
+    height: 136px;
+  }
+
+  @media (max-width: 768px) {
+    width: 116px;
+    height: 116px;
   }
 `;
 
@@ -584,6 +613,16 @@ export const ChartWrapper = styled.div`
     line-height: 20px;
     letter-spacing: -0.02em;
     color: #f9f9f9;
+  }
+
+  @media (max-width: 1440px) {
+    width: 138px;
+    height: 138px;
+  }
+
+  @media (max-width: 768px) {
+    width: 116px;
+    height: 116px;
   }
 `;
 
