@@ -38,6 +38,7 @@ import {
   Pages,
   Quoteoftheday,
   WorkoutStep1,
+  RecomTime,
 } from './Reading.styled';
 import redcircule from '../../assets/svg/redsircule.svg';
 import redsguare from '../../assets/svg/redsquare.svg';
@@ -339,6 +340,9 @@ const Reading = () => {
         <RecommendedSection>
           <RecommendedBlock>
             <RecomText>My reading</RecomText>
+            <RecomTime>
+              {`${readBook.timeLeftToRead.hours} hours and ${readBook.timeLeftToRead.minutes} minutes left`}
+            </RecomTime>
           </RecommendedBlock>
           {readBookStatus === 'loading' && <p>Loading book...</p>}
           {readBookStatus === 'succeeded' && readBook && (

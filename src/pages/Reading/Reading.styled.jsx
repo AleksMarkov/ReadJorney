@@ -1,5 +1,4 @@
 //Reading.styled.jsx
-//Reading.styled.jsx
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -354,7 +353,7 @@ export const RecommendedBlock = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: start;
+  align-items: end;
   margin-bottom: 44px;
 
   @media (max-width: 1440px) {
@@ -385,6 +384,26 @@ export const RecomText = styled.div`
     line-height: 20px;
     font-size: 20px;
     line-height: 20px;
+  }
+`;
+
+export const RecomTime = styled.div`
+  width: 168px;
+  height: 18px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+  text-align: right;
+  color: #686868;
+
+  @media (max-width: 1440px) {
+  }
+
+  @media (max-width: 768px) {
+    height: 16px;
+    font-size: 12px;
+    line-height: 16px;
   }
 `;
 
