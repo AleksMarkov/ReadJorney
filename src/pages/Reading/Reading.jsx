@@ -80,7 +80,7 @@ const Reading = () => {
   const readBook = useSelector(selectReadBook);
   const readBookStatus = useSelector(selectReadBookStatus);
   const progress = useSelector(selectProgress);
-
+  const [showTimeLeft, setShowTimeLeft] = useState(false);
   const schema = createReadSchema(readBook?.totalPages || 1);
   const {
     register,
@@ -135,6 +135,7 @@ const Reading = () => {
           if (parseInt(data.page, 10) === readBook.totalPages) {
             setIsBookReadPopupVisible(true);
           }
+          setShowTimeLeft(true);
         } else {
           setNotification(response.message);
         }
@@ -234,7 +235,21 @@ const Reading = () => {
   }, [bookId, dispatch]);
 
   if (!readBook) {
-    return <p>Loading book...</p>;
+    return (
+      <p
+        style={{
+          fontStyle: 'normal',
+          fontWeight: '500',
+          fontSize: '14px',
+          lineHeight: '18px',
+          textAlign: 'center',
+          color: '#fff',
+        }}
+      >
+        {' '}
+        Loading book...
+      </p>
+    );
   }
 
   return (
@@ -340,11 +355,30 @@ const Reading = () => {
         <RecommendedSection>
           <RecommendedBlock>
             <RecomText>My reading</RecomText>
-            <RecomTime>
-              {`${readBook.timeLeftToRead.hours} hours and ${readBook.timeLeftToRead.minutes} minutes left`}
-            </RecomTime>
+            {showTimeLeft && readBook.timeLeftToRead?.hours !== undefined && (
+              <RecomTime>
+                {`${readBook.timeLeftToRead.hours} hours `}
+                {readBook.timeLeftToRead.minutes !== undefined &&
+                  `${readBook.timeLeftToRead.minutes} minutes `}
+                {'left'}
+              </RecomTime>
+            )}
           </RecommendedBlock>
-          {readBookStatus === 'loading' && <p>Loading book...</p>}
+          {readBookStatus === 'loading' && (
+            <p
+              style={{
+                fontStyle: 'normal',
+                fontWeight: '500',
+                fontSize: '14px',
+                lineHeight: '18px',
+                textAlign: 'center',
+                color: '#fff',
+              }}
+            >
+              {' '}
+              Loading book...
+            </p>
+          )}
           {readBookStatus === 'succeeded' && readBook && (
             <BookItem>
               {readBook.imageUrl ? (
