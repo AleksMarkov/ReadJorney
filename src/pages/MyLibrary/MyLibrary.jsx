@@ -1,60 +1,14 @@
 //MyLibrary.jsx
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import Header from '../../pages/Header/Header';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import Loader from '../../components/Loader/Loader';
 import Notification from '../../components/Notification/Notification';
 import BookModalRead from '../../components/MyLibrary/BookModalRead/BookModalRead';
 import BookAddedPopup from '../../components/MyLibrary/BookAddedPopup/BookAddedPopup';
-import {
-  addBookToUserLibrary,
-  fetchUserBooks,
-} from '../../services/bookAddService';
-import {
-  Container,
-  BodySection,
-  RecommendedSection,
-  SidebarSection,
-  FiltersSection,
-  FilteText,
-  InputWrapper,
-  NumberInput,
-  ApplyButton,
-  WorkoutSection,
-  WorkoutTitle,
-  MyLibraryBlok,
-  MyLibraryLink,
-  Arrow,
-  RecBookList,
-  RecBookItem,
-  RecBookCover,
-  RecBookTitle,
-  RecBookAuthor,
-  RecBookBlock,
-  RecommendedBlock,
-  RecomText,
-  BookList,
-  BookItem,
-  BookCover,
-  BookBlock,
-  BookTitle,
-  BookAuthor,
-  EmptyMessageWrapper,
-  EmptyMessageIcon,
-  EmptyMessageText,
-  ErrorMessage,
-  TextBlock,
-  DelBlock,
-  FilterContainer,
-  FilterButton,
-  FilterDropdown,
-  FilterOption,
-} from './MyLibrary.styled';
-import leftarrow from '../../assets/svg/login.svg';
-import deleteIcon from '../../assets/svg/delete.svg';
+import BookDeletePopup from '../../components/MyLibrary/BookDeletePopup/BookDeletePopup';
+import SidebarSection from '../../components/MyLibrary/SidebarSection/SidebarSection';
+import RecommendedSection from '../../components/MyLibrary/RecommendedSection/RecommendedSection';
+import { Container, BodySection } from './MyLibrary.styled';
 import { AuthContext } from '../../context/AuthContext';
 import { BookContext } from '../../context/BookContext';
 import {
@@ -63,12 +17,11 @@ import {
   selectUserBooks,
 } from '../../redux/userBooksSlice';
 import { selectBookLS } from '../../redux/bookLSSlice';
-import bookSchema from '../../schemas/bookSchema';
-import BookDeletePopup from '../../components/MyLibrary/BookDeletePopup/BookDeletePopup';
+import {
+  addBookToUserLibrary,
+  fetchUserBooks,
+} from '../../services/bookAddService';
 import { deleteBookFromUserLibrary } from '../../services/bookDeleteService';
-import chevronDown from '../../assets/svg/chevronDown.svg';
-import chevronUp from '../../assets/svg/chevronUpp.svg';
-import placeholderImage from '../../assets/images/tor.jpg';
 
 const MyLibrary = () => {
   const { user } = useContext(AuthContext);
@@ -83,21 +36,7 @@ const MyLibrary = () => {
   const [bookToDelete, setBookToDelete] = useState(null);
   const [filteredBooks, setFilteredBooks] = useState(userBooks);
   const [notification, setNotification] = useState(null);
-  const [filterVisible, setFilterVisible] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('All books');
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm({
-    resolver: yupResolver(bookSchema),
-  });
-
-  const toggleFilter = () => {
-    setFilterVisible(!filterVisible);
-  };
 
   const filterBooks = useCallback(
     filter => {
@@ -116,19 +55,9 @@ const MyLibrary = () => {
     [userBooks]
   );
 
-  const selectFilterOption = option => {
-    setSelectedFilter(option);
-    setFilterVisible(false);
-    filterBooks(option);
-  };
-
   const handleBookClick = book => {
     setSelectedBook(book);
     setIsModalVisible(true);
-  };
-
-  const handleRecBookClick = book => {
-    reset(book);
   };
 
   const handleCloseModal = () => {
@@ -166,7 +95,6 @@ const MyLibrary = () => {
       );
       if (result.success) {
         setNotification(result.data.message);
-
         dispatch(deleteUserBook(bookToDelete._id));
       } else {
         setNotification(result.message);
@@ -200,155 +128,15 @@ const MyLibrary = () => {
       )}
       <Header />
       <BodySection>
-        <SidebarSection>
-          <FiltersSection>
-            <FilteText>{'Create your library:'}</FilteText>
-            <form onSubmit={handleSubmit(handleAddBook)}>
-              <InputWrapper>
-                <NumberInput
-                  type="text"
-                  name="title"
-                  placeholder="Book title"
-                  {...register('title')}
-                />
-                {errors.title && (
-                  <ErrorMessage>{errors.title.message}</ErrorMessage>
-                )}
-              </InputWrapper>
-              <InputWrapper>
-                <NumberInput
-                  type="text"
-                  name="author"
-                  placeholder="The author"
-                  {...register('author')}
-                />
-                {errors.author && (
-                  <ErrorMessage>{errors.author.message}</ErrorMessage>
-                )}
-              </InputWrapper>
-              <InputWrapper>
-                <NumberInput
-                  type="text"
-                  name="totalPages"
-                  placeholder="Number of pages"
-                  {...register('totalPages')}
-                />
-                {errors.totalPages && (
-                  <ErrorMessage>{errors.totalPages.message}</ErrorMessage>
-                )}
-              </InputWrapper>
-              <ApplyButton type="submit">Add book</ApplyButton>
-            </form>
-          </FiltersSection>
-          <WorkoutSection>
-            <WorkoutTitle>Recommended books</WorkoutTitle>
-            <RecBookList>
-              {loading && userBooks.length === 0 ? (
-                <Loader />
-              ) : (
-                bookLS.slice(0, 3).map(book => (
-                  <RecBookItem
-                    key={book._id}
-                    onClick={() => handleRecBookClick(book)}
-                  >
-                    {book.imageUrl ? (
-                      <RecBookCover src={book.imageUrl} alt={book.title} />
-                    ) : (
-                      <RecBookCover
-                        src={placeholderImage}
-                        alt="Book cover is not available"
-                      />
-                    )}
-                    <RecBookBlock>
-                      <RecBookTitle>{book.title}</RecBookTitle>
-                      <RecBookAuthor>{book.author}</RecBookAuthor>
-                    </RecBookBlock>
-                  </RecBookItem>
-                ))
-              )}
-            </RecBookList>
-            <Link to="/recommended">
-              <MyLibraryBlok>
-                <MyLibraryLink>Home</MyLibraryLink>
-                <Arrow src={leftarrow} alt="left arrow" />
-              </MyLibraryBlok>
-            </Link>
-          </WorkoutSection>
-        </SidebarSection>
-        <RecommendedSection>
-          <RecommendedBlock>
-            <RecomText>My library</RecomText>
-            <FilterContainer>
-              <FilterButton onClick={toggleFilter}>
-                {selectedFilter}
-                <img
-                  src={filterVisible ? chevronUp : chevronDown}
-                  alt={filterVisible ? 'chevron up' : 'chevron down'}
-                />
-              </FilterButton>
-              {filterVisible && (
-                <FilterDropdown>
-                  <FilterOption onClick={() => selectFilterOption('Unread')}>
-                    Unread
-                  </FilterOption>
-                  <FilterOption
-                    onClick={() => selectFilterOption('In progress')}
-                  >
-                    In progress
-                  </FilterOption>
-                  <FilterOption onClick={() => selectFilterOption('Done')}>
-                    Done
-                  </FilterOption>
-                  <FilterOption onClick={() => selectFilterOption('All books')}>
-                    All books
-                  </FilterOption>
-                </FilterDropdown>
-              )}
-            </FilterContainer>
-          </RecommendedBlock>
-          {loading ? (
-            <Loader />
-          ) : filteredBooks.length === 0 ? (
-            <EmptyMessageWrapper>
-              <EmptyMessageIcon />
-              <EmptyMessageText>
-                To start training, add <span>some of your books</span> or from
-                the recommended ones.
-              </EmptyMessageText>
-            </EmptyMessageWrapper>
-          ) : (
-            <BookList>
-              {filteredBooks.map(book => (
-                <BookItem key={book._id}>
-                  {book.imageUrl ? (
-                    <BookCover
-                      onClick={() => handleBookClick(book)}
-                      src={book.imageUrl}
-                      alt={book.title}
-                    />
-                  ) : (
-                    <BookCover
-                      onClick={() => handleBookClick(book)}
-                      src={placeholderImage}
-                      alt="Book cover is not available"
-                    />
-                  )}
-                  <BookBlock>
-                    <TextBlock>
-                      <BookTitle>{book.title}</BookTitle>
-                      <BookAuthor>{book.author}</BookAuthor>
-                    </TextBlock>
-                    <DelBlock
-                      src={deleteIcon}
-                      alt="red basket"
-                      onClick={() => handleDeleteClick(book)}
-                    />
-                  </BookBlock>
-                </BookItem>
-              ))}
-            </BookList>
-          )}
-        </RecommendedSection>
+        <SidebarSection onAddBook={handleAddBook} recommendedBooks={bookLS} />
+        <RecommendedSection
+          loading={loading}
+          filteredBooks={filteredBooks}
+          selectedFilter={selectedFilter}
+          onFilterChange={setSelectedFilter}
+          onBookClick={handleBookClick}
+          onDeleteClick={handleDeleteClick}
+        />
       </BodySection>
       {isModalVisible && (
         <BookModalRead book={selectedBook} onClose={handleCloseModal} />
