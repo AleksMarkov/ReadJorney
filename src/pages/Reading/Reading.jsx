@@ -90,6 +90,7 @@ const Reading = () => {
   });
 
   const handleApply = async data => {
+    handleViewChange('statistics');
     try {
       const token = localStorage.getItem('token');
       if (bookId && token) {

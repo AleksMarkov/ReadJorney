@@ -492,6 +492,10 @@ export const BookItem = styled.div`
   align-items: center;
   background-color: var(--lightblack);
   text-align: center;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const BookCover = styled.img`

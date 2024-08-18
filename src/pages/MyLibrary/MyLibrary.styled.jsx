@@ -315,6 +315,10 @@ export const RecBookCover = styled.img`
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 8px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const RecBookBlock = styled.div`
@@ -463,6 +467,10 @@ export const BookCover = styled.img`
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 8px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const BookBlock = styled.div`

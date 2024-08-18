@@ -328,6 +328,7 @@ const MyLibrary = () => {
                     />
                   ) : (
                     <BookCover
+                      onClick={() => handleBookClick(book)}
                       src={placeholderImage}
                       alt="Book cover is not available"
                     />
