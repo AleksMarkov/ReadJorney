@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/ReadJorney/static/css/main.03b7374c.css",
-    "main.js": "/ReadJorney/static/js/main.bbc22f14.js",
+    "main.js": "/ReadJorney/static/js/main.d69ca8b5.js",
     "static/js/767.dae3c996.chunk.js": "/ReadJorney/static/js/767.dae3c996.chunk.js",
     "static/js/253.942f8a56.chunk.js": "/ReadJorney/static/js/253.942f8a56.chunk.js",
     "static/js/836.ffe2b351.chunk.js": "/ReadJorney/static/js/836.ffe2b351.chunk.js",
     "static/js/599.cfd40644.chunk.js": "/ReadJorney/static/js/599.cfd40644.chunk.js",
-    "static/js/88.bc132e48.chunk.js": "/ReadJorney/static/js/88.bc132e48.chunk.js",
+    "static/js/988.fd4bacda.chunk.js": "/ReadJorney/static/js/988.fd4bacda.chunk.js",
     "static/js/143.fb63495d.chunk.js": "/ReadJorney/static/js/143.fb63495d.chunk.js",
     "static/js/905.e394250f.chunk.js": "/ReadJorney/static/js/905.e394250f.chunk.js",
     "static/js/448.77175800.chunk.js": "/ReadJorney/static/js/448.77175800.chunk.js",
@@ -39,18 +39,18 @@
     "static/media/Rectangle.svg": "/ReadJorney/static/media/Rectangle.f82a4fc7935f7ec2abd54d03c7c1f0e2.svg",
     "static/media/green.svg": "/ReadJorney/static/media/green.9b5e170c8e557294568effe6f61ebba2.svg",
     "main.03b7374c.css.map": "/ReadJorney/static/css/main.03b7374c.css.map",
-    "main.bbc22f14.js.map": "/ReadJorney/static/js/main.bbc22f14.js.map",
+    "main.d69ca8b5.js.map": "/ReadJorney/static/js/main.d69ca8b5.js.map",
     "767.dae3c996.chunk.js.map": "/ReadJorney/static/js/767.dae3c996.chunk.js.map",
     "253.942f8a56.chunk.js.map": "/ReadJorney/static/js/253.942f8a56.chunk.js.map",
     "836.ffe2b351.chunk.js.map": "/ReadJorney/static/js/836.ffe2b351.chunk.js.map",
     "599.cfd40644.chunk.js.map": "/ReadJorney/static/js/599.cfd40644.chunk.js.map",
-    "88.bc132e48.chunk.js.map": "/ReadJorney/static/js/88.bc132e48.chunk.js.map",
+    "988.fd4bacda.chunk.js.map": "/ReadJorney/static/js/988.fd4bacda.chunk.js.map",
     "143.fb63495d.chunk.js.map": "/ReadJorney/static/js/143.fb63495d.chunk.js.map",
     "905.e394250f.chunk.js.map": "/ReadJorney/static/js/905.e394250f.chunk.js.map",
     "448.77175800.chunk.js.map": "/ReadJorney/static/js/448.77175800.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.03b7374c.css",
-    "static/js/main.bbc22f14.js"
+    "static/js/main.d69ca8b5.js"
   ]
 }
