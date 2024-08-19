@@ -3,6 +3,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import authService from '../services/authService';
 import { setUserBooks, clearUserBooks } from '../redux/userBooksSlice';
+import { clearReadBook } from '../redux/readBookSlice';
 import bookService from '../services/bookService';
 
 export const AuthContext = createContext();
@@ -72,6 +73,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('refreshToken');
       setUser(null);
       dispatch(clearUserBooks());
+      dispatch(clearReadBook());
     }
   };
 
